@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitness1919", "Fitness1919\Fitness1919.csproj", "{1FEF4BD4-1787-4872-9CF8-AE1B5BED1431}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fitness1919", "Fitness1919\Fitness1919.csproj", "{1FEF4BD4-1787-4872-9CF8-AE1B5BED1431}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{9D49D4A9-4AD2-4F5B-A28E-03361E9F94FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{6B2F0FF8-B55F-4D83-8966-1AEAAF02B827}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +22,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1FEF4BD4-1787-4872-9CF8-AE1B5BED1431} = {6B2F0FF8-B55F-4D83-8966-1AEAAF02B827}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92B0E621-8B90-452B-BEB8-9E9A4ADEDFAC}
