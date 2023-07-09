@@ -39,7 +39,11 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Fitness1919 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; Fitness1919 - @ReleaseYear
+        @if (DateTime.UtcNow.Year != ReleaseYear)
+        {
+            @Html.Raw($" - {DateTime.UtcNow.Year}")
+        }
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

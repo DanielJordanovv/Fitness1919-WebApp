@@ -1,4 +1,4 @@
-namespace Fitness1919.Models
+namespace Fitness1919.Web.ViewModels.Home
 {
     public class ErrorViewModel
     {

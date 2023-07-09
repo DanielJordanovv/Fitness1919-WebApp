@@ -1,4 +1,4 @@
-﻿using Fitness1919.Models;
+﻿using Fitness1919.Web.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
