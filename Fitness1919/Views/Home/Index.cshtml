@@ -2,7 +2,59 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    body {
+        background-image: url('/images/Fitness1919Logo.jpg');
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-color: black;
+        color: yellow;
+        font-family: Arial, sans-serif;
+    }
+
+    .image-container {
+        text-align: right;
+    }
+
+    container {
+        display: flex;
+        align-items: center;
+    }
+
+    .text-container {
+        flex: 1;
+    }
+
+    .image-container {
+        text-align: right;
+    }
+
+    h1 {
+        
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    h6 {
+        font-size: 14px;
+        margin-bottom: 10px;
+        text-align: left;
+        font-family: "Good Times", "Courier New", monospace;
+    }
+</style>
+
+<div class="container">
+    <div class="text-container">
+        <div class="text-center">
+           @* <h1 class="display-4">Welcome</h1>
+            <h6 class="display-4">The best online shop for food supplements in Bulgaria!</h6>*@
+            <p></p>
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="https://s3.amazonaws.com/export.easil.com/6ec419c2-e4d7-4d7c-87a4-34db0af867e0/325f7e5eca4f312b20.png" alt="Image 1">
+    </div>
 </div>
