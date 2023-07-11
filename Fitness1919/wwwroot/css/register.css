@@ -1,0 +1,40 @@
+﻿h2 {
+    font-weight: 800;
+}
+
+body {
+    background-image: url('/images/Fitness1919Logo.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: black;
+    color: #8B8000;
+    font-family: Arial, sans-serif;
+}
+
+#registerSubmit {
+    background-color: #8B8000;
+    border-color: #8B8000;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.form-floating {
+    color: black;
+    font-weight: 700;
+    font-size: large;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-form {
+    max-width: 400px;
+}
