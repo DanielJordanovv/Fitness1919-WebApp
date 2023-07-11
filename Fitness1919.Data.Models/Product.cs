@@ -24,5 +24,8 @@ namespace Fitness1919.Data.Models
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; } = null!;
+        [ForeignKey(nameof(User))]
+        public Guid UserId { get; set; }
+        public virtual ApplicationUser User { get; set; } = null!;
     }
 }
