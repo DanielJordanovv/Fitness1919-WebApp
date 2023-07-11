@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Facebook;
 using Fitness1919.Data;
 using Fitness1919.Data.Models;
 using Microsoft.AspNetCore.Identity;
@@ -20,6 +21,12 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequireUppercase = false;
 
 }).AddEntityFrameworkStores<Fitness1919DbContext>();
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    options.AppId = "660433012640338";
+    options.AppSecret = "98e11f8c54c8d8426b02d41e20356143";
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

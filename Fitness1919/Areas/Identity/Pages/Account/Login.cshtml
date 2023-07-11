@@ -34,9 +34,10 @@
         max-width: 500px; /* Adjust the width as needed */
         width: 100%;
     }
-    .col-md-4{
-        width : 80%;
-        margin:auto;
+
+    .col-md-4 {
+        width: 80%;
+        margin: auto;
     }
 </style>
 
@@ -72,11 +73,13 @@
                             <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary" style="border-color: #8B8000; background-color: #8B8000; font-weight: bold ; color:black">Log in</button>
                         </div>
                         <div>
-                            <p>
-                                <a href='https://localhost:7023/Identity/Account/Register' class="w-100 btn btn-lg btn-primary" id="register" style="border-color: #8B8000; background-color: #8B8000; border-radius: 6px; color: black; text-decoration: none; font-weight: bold; margin-top:20px; ">
-                                    Create new account
-                                </a>
-                            </p>
+                            <a href='https://localhost:7023/Identity/Account/Register' class="w-100 btn btn-lg btn-primary" id="register" style="border-color: #8B8000; background-color: #8B8000; border-radius: 6px; color: black; text-decoration: none; font-weight: bold; margin-top:20px; ">
+                                Create new account
+                            </a>
+                            <p>Or log in with:</p>
+                            <a href="/Home/ExternalLogin?provider=Facebook">
+                                <img src="/images/f_logo_RGB-Blue_72.png" alt="Facebook Login" style="width: 30px; height: 30px;" />
+                            </a>
                         </div>
                     </form>
                 </section>
