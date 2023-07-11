@@ -16,7 +16,6 @@ namespace Fitness1919.Data
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
-        public DbSet<ApplicationUser> Users { get; set; } 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             Assembly configAssembly = Assembly.GetAssembly(typeof(Fitness1919DbContext)) ??
