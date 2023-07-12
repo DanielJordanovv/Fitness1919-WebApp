@@ -10,7 +10,7 @@
         public static class Contact
         {
             public const string PhoneNumberName = "Phone Number";
-            public const string PhoneNumberExpression = @"^+359\d{10}$";
+            public const string PhoneNumberExpression = @"\+359\d{9}";
             public const string EmailExpression = @"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$";
         }
         public static class Product
@@ -20,5 +20,11 @@
             public const int DescriptionMaxLength = 100;
             public const string PricePrecicison = "decimal(18,2)";
         }
+        public static class Brand
+        {
+            public const int NameMinLength = 2;
+            public const int NameMaxLength = 50;
+        }
+
     }
 }

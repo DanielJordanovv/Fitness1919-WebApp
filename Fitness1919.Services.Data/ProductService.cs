@@ -14,19 +14,20 @@ namespace Fitness1919.Services.Data
             this.context = context;
         }
 
-        public async Task AddAsync(ProductAddViewModel model)
+        public async Task AddAsync(Product model)
         {
-            var product = new ProductAddViewModel
+            var product = new Product
             {
                 Name = model.Name,
                 Description = model.Description,
                 Quantity = model.Quantity,
                 Price = model.Price,
                 img = model.img,
-                Category = model.Category
+                Category = model.Category,
+                Brand = model.Brand
             };
 
-            context.Add(product);
+            context.Products.Add(product);
             await context.SaveChangesAsync();
         }
 
@@ -39,7 +40,8 @@ namespace Fitness1919.Services.Data
                 Quantity = p.Quantity,
                 Price = p.Price,
                 img = p.img,
-                Category = p.Category.CategoryName
+                Category = p.Category.CategoryName,
+                 Brand = p.Brand.BrandName
             }).ToListAsync();
         }
 
@@ -78,6 +80,7 @@ namespace Fitness1919.Services.Data
                 productToUpdate.Price = model.Price;
                 productToUpdate.img = model.img;
                 productToUpdate.Category = model.Category;
+                productToUpdate.Brand = model.Brand;
             }
 
             await context.SaveChangesAsync();

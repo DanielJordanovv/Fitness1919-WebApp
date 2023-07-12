@@ -1,16 +1,15 @@
-﻿using Fitness1919.Data.Models;
-using Fitness1919.Services.Data.Interfaces;
-using Fitness1919.Web.ViewModels.Product;
+﻿using Fitness1919.Services.Data.Interfaces;
+using Fitness1919.Web.ViewModels.Contact;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Web.Controllers
 {
-    public class ProductsController : Controller
+    public class ContactsController : Controller
     {
-        private readonly IProductService service;
+        private readonly IContactService service;
 
-        public ProductsController(IProductService service)
+        public ContactsController(IContactService service)
         {
             this.service = service;
         }
@@ -27,13 +26,14 @@ namespace Fitness1919.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Product bindingModel)
+        public async Task<IActionResult> Create(ContactAddViewModel bindingModel)
         {
             if (ModelState.IsValid)
             {
                 await service.AddAsync(bindingModel);
                 return RedirectToAction(nameof(Index));
             }
+            RedirectToAction("Products/All");
             return View(bindingModel);
         }
 
@@ -50,14 +50,11 @@ namespace Fitness1919.Web.Controllers
                 return NotFound();
             }
 
-            var viewModel = new ProductUpdateViewModel
+            var viewModel = new ContactUpdateViewModel
             {
-                Name = product.Name,
-                Description = product.Description,
-                Quantity = product.Quantity,
-                img = product.img,
-                Category = product.Category,
-                Price = product.Price
+                PhoneNumber = product.PhoneNumber,
+                Address = product.Address,
+                Email = product.Email
             };
 
             return View(viewModel);
@@ -65,7 +62,7 @@ namespace Fitness1919.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, ProductUpdateViewModel bindingModel)
+        public async Task<IActionResult> Edit(string id, ContactUpdateViewModel bindingModel)
         {
             if (id != bindingModel.Id)
             {
@@ -80,7 +77,7 @@ namespace Fitness1919.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(bindingModel.Id))
+                    if (!ContactExists(bindingModel.Id))
                     {
                         return NotFound();
                     }
@@ -101,21 +98,17 @@ namespace Fitness1919.Web.Controllers
                 return NotFound();
             }
 
-            var product = await service.GetProductAsync(id);
-            if (product == null)
+            var contact = await service.GetProductAsync(id);
+            if (contact == null)
             {
                 return NotFound();
             }
 
-            var viewModel = new ProductAddViewModel
+            var viewModel = new ContactAddViewModel
             {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Quantity = product.Quantity,
-                img = product.img,
-                Category = product.Category.CategoryName,
-                Price = product.Price
+               PhoneNumber=contact.PhoneNumber,
+               Address = contact.Address,
+               Email = contact.Address
             };
 
             return View(viewModel);
@@ -128,9 +121,9 @@ namespace Fitness1919.Web.Controllers
             await service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
-        public bool ProductExists(string id)
+        public bool ContactExists(string id)
         {
-            return service.ProductExistsAsync(id);
+            return service.ContactExistsAsync(id);
         }
     }
 }

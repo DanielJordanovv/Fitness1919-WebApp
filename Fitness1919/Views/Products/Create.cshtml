@@ -1,5 +1,5 @@
-﻿@using Fitness1919.Web.ViewModels.Product
-@model ProductAddViewModel
+﻿@using Fitness1919.Data.Models
+@model Product
 
 @{
     ViewData["Title"] = "Create";
@@ -42,6 +42,11 @@
                 <label asp-for="Category" class="control-label"></label>
                 <input asp-for="Category" class="form-control" />
                 <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
             </div>
             
             <div class="form-group">

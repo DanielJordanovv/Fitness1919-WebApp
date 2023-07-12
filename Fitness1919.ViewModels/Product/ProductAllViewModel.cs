@@ -9,5 +9,6 @@
         public decimal Price { get; set; }
         public string img { get; set; } = null!;
         public string Category { get; set; } = null!;
+        public string Brand { get; set; } = null!;
     }
 }

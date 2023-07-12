@@ -23,5 +23,6 @@ namespace Fitness1919.Web.ViewModels.Product
         [Column(TypeName = PricePrecicison)]
         public decimal Price { get; set; }
         public string Category { get; set; } = null!;
+        public string Brand { get; set; } = null!;
     }
 }

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Fitness1919.Data
 {
-    public class Fitness1919DbContext : IdentityDbContext<ApplicationUser,IdentityRole<Guid>,Guid>
+    public class Fitness1919DbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public Fitness1919DbContext(DbContextOptions<Fitness1919DbContext> options)
             : base(options)
@@ -16,6 +16,7 @@ namespace Fitness1919.Data
         {
         }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
@@ -25,6 +26,12 @@ namespace Fitness1919.Data
                                       Assembly.GetExecutingAssembly();
             builder.ApplyConfigurationsFromAssembly(configAssembly);
             base.OnModelCreating(builder);
+
+            //builder.Entity<ApplicationUser>()
+            //    .HasOne(u => u.ShoppingCart)
+            //    .WithOne(sc => sc.User)
+            //    .HasForeignKey<ShoppingCart>(sc => sc.Id)
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
