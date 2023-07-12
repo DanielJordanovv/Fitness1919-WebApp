@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fitness1919.Data.Models;
+using Fitness1919.Web.ViewModels.Product;
 
 namespace Fitness1919.Services.Data.Interfaces
 {
-    internal interface IProductService
+    public interface IProductService
     {
+        Task<IEnumerable<ProductAddViewModel>> AllAsync();
+        Task AddAsync(ProductAddViewModel model);
+        Task UpdateAsync(string id, ProductUpdateViewModel model);
+        Task DeleteAsync(string id);
+        Task<Product> GetProductAsync(string id);
+        bool ProductExistsAsync(string id);
     }
 }

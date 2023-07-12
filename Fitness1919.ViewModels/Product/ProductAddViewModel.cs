@@ -2,11 +2,10 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using static Fitness1919.Common.EntityValidationConstants.Product;
 
-namespace Fitness1919.Data.Models
+namespace Fitness1919.Web.ViewModels.Product
 {
-    public class Product
+    public class ProductAddViewModel
     {
-        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; } = null!;
         [Required]
@@ -19,15 +18,10 @@ namespace Fitness1919.Data.Models
         [Required]
         public int Quantity { get; set; }
         [Required]
+        public string img { get; set; } = null!;
+        [Required]
         [Column(TypeName = PricePrecicison)]
         public decimal Price { get; set; }
-        [Required]
-        public string img { get; set; } = null!;
-        [ForeignKey(nameof(Category))]
-        public int CategoryId { get; set; }
-        public virtual Category Category { get; set; } = null!;
-        [ForeignKey(nameof(User))]
-        public Guid UserId { get; set; }
-        public virtual ApplicationUser User { get; set; } = null!;
+        public string Category { get; set; } = null!;
     }
 }

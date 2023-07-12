@@ -3,6 +3,8 @@ using Fitness1919.Data;
 using Fitness1919.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Fitness1919.Services.Data.Interfaces;
+using Fitness1919.Services.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +28,8 @@ builder.Services.AddAuthentication().AddFacebook(options =>
     options.AppId = "660433012640338";
     options.AppSecret = "98e11f8c54c8d8426b02d41e20356143";
 });
-
+builder.Services.AddRazorPages();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

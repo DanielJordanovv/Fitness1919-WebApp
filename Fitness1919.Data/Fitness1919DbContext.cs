@@ -12,6 +12,9 @@ namespace Fitness1919.Data
             : base(options)
         {
         }
+        public Fitness1919DbContext()
+        {
+        }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Product> Products { get; set; }
