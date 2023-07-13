@@ -35,6 +35,7 @@ namespace Fitness1919.Services.Data.Interfaces
         {
             return await context.Contacts.Select(p => new ContactAllViewModel
             {
+                Id = p.Id,
                 PhoneNumber = p.PhoneNumber,
                 Email = p.Email,
                 Address = p.Address,

@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<Fitness1919DbContext>(options =>
-    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Fitness1919.Web")));
+    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Fitness1919")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
