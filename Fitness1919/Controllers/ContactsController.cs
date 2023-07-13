@@ -31,7 +31,7 @@ namespace Fitness1919.Web.Controllers
             if (ModelState.IsValid)
             {
                 await service.AddAsync(bindingModel);
-                return RedirectToAction("Contacts/Index");
+                return RedirectToAction("Index" , "Contacts");
             }
             return View(bindingModel);
         }

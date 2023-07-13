@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Web.Controllers
 {
-    public class BrandsCotroller : Controller
+    public class BrandsController : Controller
     {
         private readonly IBrandService service;
 
-        public BrandsCotroller(IBrandService service)
+        public BrandsController(IBrandService service)
         {
             this.service = service;
         }
@@ -31,7 +31,7 @@ namespace Fitness1919.Web.Controllers
             if (ModelState.IsValid)
             {
                 await service.AddAsync(bindingModel);
-                return RedirectToAction("Brands/Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(bindingModel);
         }
