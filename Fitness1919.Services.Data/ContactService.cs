@@ -77,9 +77,5 @@ namespace Fitness1919.Services.Data.Interfaces
 
             await context.SaveChangesAsync();
         }
-        public bool ContactExistsAsync(string id)
-        {
-            return context.Contacts.Any(e => e.Id == id);
-        }
     }
 }
