@@ -1,23 +1,23 @@
 ﻿using Fitness1919.Services.Data.Interfaces;
-using Fitness1919.Web.ViewModels.Contact;
+using Fitness1919.Web.ViewModels.Brand;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Web.Controllers
 {
-    public class ContactsController : Controller
+    public class BrandsCotroller : Controller
     {
-        private readonly IContactService service;
+        private readonly IBrandService service;
 
-        public ContactsController(IContactService service)
+        public BrandsCotroller(IBrandService service)
         {
             this.service = service;
         }
 
         public async Task<IActionResult> Index()
         {
-            var contacts = await service.AllAsync();
-            return View(contacts);
+            var brands = await service.AllAsync();
+            return View(brands);
         }
 
         public IActionResult Create()
@@ -26,34 +26,27 @@ namespace Fitness1919.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ContactAddViewModel bindingModel)
+        public async Task<IActionResult> Create(BrandAddViewModel bindingModel)
         {
             if (ModelState.IsValid)
             {
                 await service.AddAsync(bindingModel);
-                return RedirectToAction("Contacts/Index");
+                return RedirectToAction("Brands/Index");
             }
             return View(bindingModel);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            var brand = await service.GetBrandAsync(id);
+            if (brand == null)
             {
                 return NotFound();
             }
 
-            var contact = await service.GetContactAsync(id);
-            if (contact == null)
+            var viewModel = new BrandUpdateViewModel
             {
-                return NotFound();
-            }
-
-            var viewModel = new ContactUpdateViewModel
-            {
-                PhoneNumber = contact.PhoneNumber,
-                Address = contact.Address,
-                Email = contact.Email
+                BrandName = brand.BrandName
             };
 
             return View(viewModel);
@@ -61,7 +54,7 @@ namespace Fitness1919.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, ContactUpdateViewModel bindingModel)
+        public async Task<IActionResult> Edit(int id, BrandUpdateViewModel bindingModel)
         {
             if (id != bindingModel.Id)
             {
@@ -76,7 +69,7 @@ namespace Fitness1919.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContactExists(bindingModel.Id))
+                    if (!BrandExists(bindingModel.Id))
                     {
                         return NotFound();
                     }
@@ -90,24 +83,17 @@ namespace Fitness1919.Web.Controllers
             return View(bindingModel);
         }
 
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            var brand = await service.GetBrandAsync(id);
+            if (brand == null)
             {
                 return NotFound();
             }
 
-            var contact = await service.GetContactAsync(id);
-            if (contact == null)
+            var viewModel = new BrandAddViewModel
             {
-                return NotFound();
-            }
-
-            var viewModel = new ContactAddViewModel
-            {
-               PhoneNumber=contact.PhoneNumber,
-               Address = contact.Address,
-               Email = contact.Address
+                BrandName = brand.BrandName
             };
 
             return View(viewModel);
@@ -115,14 +101,14 @@ namespace Fitness1919.Web.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
-        public bool ContactExists(string id)
+        public bool BrandExists(int id)
         {
-            return service.ContactExistsAsync(id);
+            return service.BrandExistsAsync(id);
         }
     }
 }

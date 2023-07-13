@@ -10,14 +10,14 @@ namespace Fitness1919.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; } = null!;
         [Required]
-        [MinLength(NameMinLength)]
-        [MaxLength(NameMaxLength)]
+        [MinLength(NameMinLength,ErrorMessage = "The name must be at least 2 letters long.")]
+        [MaxLength(NameMaxLength, ErrorMessage = "The name max lenght is 50 letters.")]
         public string Name { get; set; } = null!;
         [Required]
-        [MaxLength(DescriptionMaxLength)]
+        [MaxLength(DescriptionMaxLength, ErrorMessage = "The description max lenght is 100.")]
         public string? Description { get; set; }
         [Required]
-        [Range(0,100)]
+        [Range(QuantityMinRange,QuantityMaxRange, ErrorMessage = "The quantity must be between 0 and 100.")]
         public int Quantity { get; set; }
         [Required]
         [Column(TypeName = PricePrecicison)]

@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<Fitness1919DbContext>(options =>
-    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Fitness1919")));
+    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Fitness1919.Web")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
@@ -31,6 +31,7 @@ builder.Services.AddAuthentication().AddFacebook(options =>
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

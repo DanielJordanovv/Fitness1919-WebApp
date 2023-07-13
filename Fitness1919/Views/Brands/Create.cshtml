@@ -1,0 +1,17 @@
+﻿@using Fitness1919.Web.ViewModels.Brand
+@model BrandAddViewModel
+@{
+    ViewData["Title"] = "Create Brand";
+}
+
+<h1>Create Brand</h1>
+
+<form asp-controller="Brands" asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="BrandName">BrandName:</label>
+        <input asp-for="BrandName" class="form-control" />
+        <span asp-validation-for="BrandName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary" style="border-color: #8B8000; background-color: #8B8000; font-weight: bold ; color:black">Create</button>
+    <a asp-controller="Brands" asp-action="Index" class="btn btn-secondary" style="border-color: #8B8000; background-color: #8B8000; font-weight: bold ; color:black">Cancel</a>
+</form>

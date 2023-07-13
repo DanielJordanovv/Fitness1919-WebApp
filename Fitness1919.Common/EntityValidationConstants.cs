@@ -19,6 +19,8 @@
             public const int NameMaxLength = 50;
             public const int DescriptionMaxLength = 100;
             public const string PricePrecicison = "decimal(18,2)";
+            public const int QuantityMinRange = 0;
+            public const int QuantityMaxRange = 100;
         }
         public static class Brand
         {

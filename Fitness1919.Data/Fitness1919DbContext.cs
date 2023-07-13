@@ -26,12 +26,6 @@ namespace Fitness1919.Data
                                       Assembly.GetExecutingAssembly();
             builder.ApplyConfigurationsFromAssembly(configAssembly);
             base.OnModelCreating(builder);
-
-            //builder.Entity<ApplicationUser>()
-            //    .HasOne(u => u.ShoppingCart)
-            //    .WithOne(sc => sc.User)
-            //    .HasForeignKey<ShoppingCart>(sc => sc.Id)
-            //    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
