@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Fitness1919.Data.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static Fitness1919.Common.EntityValidationConstants.Product;
 
@@ -22,7 +23,7 @@ namespace Fitness1919.Web.ViewModels.Product
         [Required]
         [Column(TypeName = PricePrecicison)]
         public decimal Price { get; set; }
-        public string Category { get; set; } = null!;
-        public string Brand { get; set; } = null!;
+        public Category Category { get; set; } = null!;
+        public Brand Brand { get; set; } = null!;
     }
 }

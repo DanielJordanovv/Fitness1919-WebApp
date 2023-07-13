@@ -20,7 +20,7 @@ namespace Fitness1919.Services.Data.Interfaces
 
         public async Task AddAsync(ContactAddViewModel model)
         {
-            var contact = new ContactAddViewModel
+            var contact = new Contact
             {
                PhoneNumber = model.PhoneNumber,
                Email = model.Email,
@@ -31,9 +31,9 @@ namespace Fitness1919.Services.Data.Interfaces
             await context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ContactAddViewModel>> AllAsync()
+        public async Task<IEnumerable<ContactAllViewModel>> AllAsync()
         {
-            return await context.Contacts.Select(p => new ContactAddViewModel
+            return await context.Contacts.Select(p => new ContactAllViewModel
             {
                 PhoneNumber = p.PhoneNumber,
                 Email = p.Email,
@@ -51,14 +51,14 @@ namespace Fitness1919.Services.Data.Interfaces
             }
         }
 
-        public async Task<Contact> GetProductAsync(string id)
+        public async Task<Contact> GetContactAsync(string? id)
         {
 
             Contact? contact = await context.Contacts.FindAsync(id);
             return contact;
         }
 
-        public bool ProductExistsAsync(string id)
+        public bool ContactExistsAsync(string id)
         {
             return context.Contacts.Any(e => e.Id == id);
         }

@@ -44,7 +44,7 @@ namespace Fitness1919.Web.Controllers
                 return NotFound();
             }
 
-            var product = await service.GetProductAsync(id);
+            var product = await service.GetContactAsync(id);
             if (product == null)
             {
                 return NotFound();
@@ -98,7 +98,7 @@ namespace Fitness1919.Web.Controllers
                 return NotFound();
             }
 
-            var contact = await service.GetProductAsync(id);
+            var contact = await service.GetContactAsync(id);
             if (contact == null)
             {
                 return NotFound();

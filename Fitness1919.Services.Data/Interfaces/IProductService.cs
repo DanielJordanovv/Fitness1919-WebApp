@@ -5,8 +5,8 @@ namespace Fitness1919.Services.Data.Interfaces
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductAddViewModel>> AllAsync();
-        Task AddAsync(Product model);
+        Task<IEnumerable<ProductAllViewModel>> AllAsync();
+        Task AddAsync(ProductAddViewModel model);
         Task UpdateAsync(string id, ProductUpdateViewModel model);
         Task DeleteAsync(string id);
         Task<Product> GetProductAsync(string id);

@@ -14,7 +14,7 @@ namespace Fitness1919.Services.Data
             this.context = context;
         }
 
-        public async Task AddAsync(Product model)
+        public async Task AddAsync(ProductAddViewModel model)
         {
             var product = new Product
             {
@@ -26,14 +26,13 @@ namespace Fitness1919.Services.Data
                 Category = model.Category,
                 Brand = model.Brand
             };
-
             context.Products.Add(product);
             await context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ProductAddViewModel>> AllAsync()
+        public async Task<IEnumerable<ProductAllViewModel>> AllAsync()
         {
-            return await context.Products.Select(p => new ProductAddViewModel
+            return await context.Products.Select(p => new ProductAllViewModel
             {
                 Name = p.Name,
                 Description = p.Description,

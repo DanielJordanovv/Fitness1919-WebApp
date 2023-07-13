@@ -1,4 +1,5 @@
-﻿using Fitness1919.Data.Models;
+﻿using Fitness1919.Data;
+using Fitness1919.Data.Models;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ namespace Fitness1919.Web.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductService service;
+        private readonly Fitness1919DbContext context;
 
         public ProductsController(IProductService service)
         {
@@ -23,16 +25,23 @@ namespace Fitness1919.Web.Controllers
 
         public IActionResult Create()
         {
+            var categories = context.Categories.ToList();
+            var brands = context.Brands.ToList();
+
+            ViewBag.Categories = categories;
+            ViewBag.Brands = brands;
+
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Product bindingModel)
+        public async Task<IActionResult> Create(ProductAddViewModel bindingModel)
         {
             if (ModelState.IsValid)
             {
                 await service.AddAsync(bindingModel);
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction("Index", "Home"); 
             }
             return View(bindingModel);
         }
@@ -114,7 +123,8 @@ namespace Fitness1919.Web.Controllers
                 Description = product.Description,
                 Quantity = product.Quantity,
                 img = product.img,
-                Category = product.Category.CategoryName,
+                Category = product.Category,
+                Brand = product.Brand,
                 Price = product.Price
             };
 
