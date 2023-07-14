@@ -1,0 +1,18 @@
+﻿@using Fitness1919.Web.ViewModels.Category
+@model CategoryAddViewModel
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-controller="Categories" asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="CategoryName">Name:</label>
+        <input asp-for="CategoryName" class="form-control" />
+        <span asp-validation-for="CategoryName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-controller="Categories" asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
