@@ -18,29 +18,30 @@ namespace Fitness1919.Services.Data
         {
             var product = new Product
             {
+                Id = model.Id,
                 Name = model.Name,
                 Description = model.Description,
                 Quantity = model.Quantity,
                 Price = model.Price,
                 img = model.img,
-                Category = model.Category,
-                Brand = model.Brand
+                CategoryId = model.CategoryId,
+                BrandId = model.BrandId
             };
             context.Products.Add(product);
-            await context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ProductAllViewModel>> AllAsync()
         {
             return await context.Products.Select(p => new ProductAllViewModel
             {
+                Id = p.Id,
                 Name = p.Name,
                 Description = p.Description,
                 Quantity = p.Quantity,
                 Price = p.Price,
                 img = p.img,
                 Category = p.Category.CategoryName,
-                 Brand = p.Brand.BrandName
+                Brand = p.Brand.BrandName
             }).ToListAsync();
         }
 
@@ -61,28 +62,29 @@ namespace Fitness1919.Services.Data
             return product;
         }
 
-        public  bool ProductExistsAsync(string id)
+        public bool ProductExistsAsync(string id)
         {
             return context.Products.Any(e => e.Id == id);
         }
 
         public async Task UpdateAsync(string id, ProductUpdateViewModel model)
         {
-            var productToUpdate = await context.Products.FindAsync(id);
+            throw new NotImplementedException();
+            //var productToUpdate = await context.Products.FindAsync(id);
 
-            if (productToUpdate != null)
-            {
-                productToUpdate.Id = id;
-                productToUpdate.Name = model.Name;
-                productToUpdate.Description = model.Description;
-                productToUpdate.Quantity = model.Quantity;
-                productToUpdate.Price = model.Price;
-                productToUpdate.img = model.img;
-                productToUpdate.Category = model.Category;
-                productToUpdate.Brand = model.Brand;
-            }
+            //if (productToUpdate != null)
+            //{
+            //    productToUpdate.Id = id;
+            //    productToUpdate.Name = model.Name;
+            //    productToUpdate.Description = model.Description;
+            //    productToUpdate.Quantity = model.Quantity;
+            //    productToUpdate.Price = model.Price;
+            //    productToUpdate.img = model.img;
+            //    productToUpdate.Category = model.Category;
+            //    productToUpdate.Brand = model.Brand;
+            //}
 
-            await context.SaveChangesAsync();
+            //await context.SaveChangesAsync();
         }
     }
 }

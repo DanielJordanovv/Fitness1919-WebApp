@@ -20,9 +20,10 @@ namespace Fitness1919.Data.Models
         [Range(QuantityMinRange,QuantityMaxRange, ErrorMessage = "The quantity must be between 0 and 100.")]
         public int Quantity { get; set; }
         [Required]
-        [Column(TypeName = PricePrecicison)]
+        [Range(typeof(decimal), PriceMinValue, PriceMaxValue)]
         public decimal Price { get; set; }
         [Required]
+        [MaxLength(ImageUrlMaxLength)]
         public string img { get; set; } = null!;
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }

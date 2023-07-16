@@ -10,11 +10,14 @@ namespace Fitness1919.Web.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductService service;
-        private readonly Fitness1919DbContext context;
+        private readonly ICategoryService categoryService;
+        private readonly IBrandService brandService;
 
-        public ProductsController(IProductService service)
+        public ProductsController(IProductService service, ICategoryService categoryService, IBrandService brandService)
         {
             this.service = service;
+            this.categoryService = categoryService;
+            this.brandService = brandService;
         }
 
         public async Task<IActionResult> Index()
@@ -23,53 +26,78 @@ namespace Fitness1919.Web.Controllers
             return View(products);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var categories = context.Categories.ToList();
-            var brands = context.Brands.ToList();
+            var productFromModel = new ProductAddViewModel()
+            {
+                Categories = await this.categoryService.AllAsync(),
+                Brands = await this.brandService.AllAsync()
+            };
 
-            ViewBag.Categories = categories;
-            ViewBag.Brands = brands;
-
-            return View();
+            return View(productFromModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductAddViewModel bindingModel)
         {
-            if (ModelState.IsValid)
+            bool categoryExists =
+                this.categoryService.CategoryExistsAsync(bindingModel.CategoryId);
+            bool brandExists =
+                this.brandService.BrandExistsAsync(bindingModel.BrandId);
+            if (!categoryExists)
             {
-                await service.AddAsync(bindingModel);
-
-                return RedirectToAction("Index", "Home"); 
+                this.ModelState.AddModelError(nameof(bindingModel.CategoryId), "Selected category does not exist!");
             }
-            return View(bindingModel);
+            if (!brandExists)
+            {
+                this.ModelState.AddModelError(nameof(bindingModel.BrandId), "Selected brand does not exist!");
+            }
+            if (!this.ModelState.IsValid)
+            {
+                bindingModel.Categories = await this.categoryService.AllAsync();
+                bindingModel.Brands = await this.brandService.AllAsync();
+                return this.View(bindingModel);
+            }
+            try
+            {
+                var product = service.AddAsync(bindingModel);
+                return this.RedirectToAction("Index", "Products");
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to add your new product! Please try again later !");
+                bindingModel.Categories = await this.categoryService.AllAsync();
+                bindingModel.Brands = await this.brandService.AllAsync();
+
+                return this.View(bindingModel);
+            }
         }
 
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            throw new NotImplementedException();
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var product = await service.GetProductAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+            //var product = await service.GetProductAsync(id);
+            //if (product == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var viewModel = new ProductUpdateViewModel
-            {
-                Name = product.Name,
-                Description = product.Description,
-                Quantity = product.Quantity,
-                img = product.img,
-                Category = product.Category,
-                Price = product.Price
-            };
+            //var viewModel = new ProductUpdateViewModel
+            //{
+            //    Name = product.Name,
+            //    Description = product.Description,
+            //    Quantity = product.Quantity,
+            //    img = product.img,
+            //    Category = product.Category,
+            //    Price = product.Price
+            //};
 
-            return View(viewModel);
+            //return View(viewModel);
         }
 
         [HttpPost]
@@ -123,8 +151,8 @@ namespace Fitness1919.Web.Controllers
                 Description = product.Description,
                 Quantity = product.Quantity,
                 img = product.img,
-                Category = product.Category,
-                Brand = product.Brand,
+                //Category = product.Category,
+                //Brand = product.Brand,
                 Price = product.Price
             };
 

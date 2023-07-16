@@ -1,4 +1,6 @@
 ﻿using Fitness1919.Data.Models;
+using Fitness1919.Web.ViewModels.Brand;
+using Fitness1919.Web.ViewModels.Category;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static Fitness1919.Common.EntityValidationConstants.Product;
@@ -7,6 +9,11 @@ namespace Fitness1919.Web.ViewModels.Product
 {
     public class ProductUpdateViewModel
     {
+        public ProductUpdateViewModel()
+        {
+            this.Categories = new HashSet<CategoryAllViewModel>();
+            this.Brands = new HashSet<BrandAllViewModel>();
+        }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; } = null!;
         [Required]
@@ -19,12 +26,17 @@ namespace Fitness1919.Web.ViewModels.Product
         [Required]
         [Range(QuantityMinRange, QuantityMaxRange, ErrorMessage = "The quantity must be between 0 and 100.")]
         public int Quantity { get; set; }
+       // [Required]
+        [Display(Name = "Image url")]
+        public string? img { get; set; } //= null!;
         [Required]
-        public string img { get; set; } = null!;
-        [Required]
-        [Column(TypeName = PricePrecicison)]
+        [Range(typeof(decimal), PriceMinValue, PriceMaxValue)]
         public decimal Price { get; set; }
-        public Data.Models.Category Category { get; set; } = null!;
-        public Data.Models.Brand Brand { get; set; } = null!;
+        [Display(Name = "Category")]
+        public int CategoryId { get; set; }
+        [Display(Name = "Brand")]
+        public int BrandId { get; set; }
+        public IEnumerable<CategoryAllViewModel> Categories { get; set; }
+        public IEnumerable<BrandAllViewModel> Brands { get; set; }
     }
 }

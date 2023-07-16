@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Services.Data;
+using Microsoft.AspNetCore.Mvc;
+using Fitness1919.Web.Infrastructure.ModelBinders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +35,13 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddControllersWithViews();
+builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+                });
 
 var app = builder.Build();
 

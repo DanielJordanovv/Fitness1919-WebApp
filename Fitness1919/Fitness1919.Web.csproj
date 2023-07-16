@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-Fitness1919-70BD482A-38AD-4DBC-9024-1A10C5F3C990</UserSecretsId>
   </PropertyGroup>
@@ -31,6 +30,7 @@
     <ProjectReference Include="..\Fitness1919.Data\Fitness1919.Data.csproj" />
     <ProjectReference Include="..\Fitness1919.Services.Data\Fitness1919.Services.Data.csproj" />
     <ProjectReference Include="..\Fitness1919.ViewModels\Fitness1919.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\Fitness1919.Web.Infrastructure.ModelBinders\Fitness1919.Web.Infrastructure.ModelBinders.csproj" />
   </ItemGroup>
 
 </Project>
