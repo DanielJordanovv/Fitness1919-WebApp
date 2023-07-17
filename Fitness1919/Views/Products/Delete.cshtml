@@ -1,40 +1,35 @@
-﻿@*@using Fitness1919.Web.ViewModels.Product
+﻿@using Fitness1919.Web.ViewModels.Product
 @model ProductAddViewModel
 
 @{
-    ViewData["Title"] = "Delete Product";
+    ViewData["Title"] = "Delete";
 }
 
-<h1>Delete Product</h1>
+<h1>Delete</h1>
 
-<p>Are you sure you want to delete the following product?</p>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt> <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt> <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt> <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt> <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.img)
+        </dt> <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </dt> <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BrandId)
+        </dt>
+    </dl>
 
-<div>
-    <strong>Name:</strong> @Model.Name
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
 </div>
-<div>
-    <strong>Description:</strong> @Model.Description
-</div>
-<div>
-    <strong>Quantity:</strong> @Model.Quantity
-</div>
-<div>
-    <strong>Price:</strong> @Model.Price
-</div>
-<div>
-    <strong>Image:</strong> @Model.img
-</div>
-<div>
-    <strong>Category:</strong> @Model.Category
-</div>
-<div>
-    <strong>Brand:</strong> @Model.Brand
-</div>
-
-<form asp-controller="Product" asp-action="Delete" method="post">
-    <input type="hidden" asp-for="Id" />
-
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <a asp-controller="Product" asp-action="All" class="btn btn-secondary">Cancel</a>
-</form>
-*@

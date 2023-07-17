@@ -22,13 +22,14 @@ namespace Fitness1919.Web.ViewModels.Product
         public string Name { get; set; } = null!;
         [Required]
         [MaxLength(DescriptionMaxLength, ErrorMessage = "The description max lenght is 100.")]
-        public string? Description { get; set; }
+        public string Description { get; set; }
         [Required]
         [Range(QuantityMinRange, QuantityMaxRange, ErrorMessage = "The quantity must be between 0 and 100.")]
         public int Quantity { get; set; }
-       // [Required]
+        [Required]
         [Display(Name = "Image url")]
-        public string? img { get; set; } //= null!;
+        [MaxLength(ImageUrlMaxLength)]
+        public string img { get; set; } = null!;
         [Required]
         [Range(typeof(decimal), PriceMinValue, PriceMaxValue)]
         public decimal Price { get; set; }

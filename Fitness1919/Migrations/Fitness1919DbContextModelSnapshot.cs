@@ -180,7 +180,8 @@ namespace Fitness1919.Web.Migrations
 
                     b.Property<string>("img")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
 
                     b.HasKey("Id");
 

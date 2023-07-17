@@ -1,9 +1,6 @@
-﻿using Fitness1919.Data;
-using Fitness1919.Data.Models;
-using Fitness1919.Services.Data.Interfaces;
+﻿using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Web.Controllers
 {
@@ -60,7 +57,7 @@ namespace Fitness1919.Web.Controllers
             }
             try
             {
-                var product = service.AddAsync(bindingModel);
+                await service.CreateAsync(bindingModel);
                 return this.RedirectToAction("Index", "Products");
             }
             catch (Exception)
@@ -73,62 +70,52 @@ namespace Fitness1919.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> Edit(string id)
+        [HttpGet]
+        public async Task<IActionResult> Edit()
         {
-            throw new NotImplementedException();
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
+            var productFromModel = new ProductUpdateViewModel()
+            {
+                Categories = await this.categoryService.AllAsync(),
+                Brands = await this.brandService.AllAsync()
+            };
 
-            //var product = await service.GetProductAsync(id);
-            //if (product == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var viewModel = new ProductUpdateViewModel
-            //{
-            //    Name = product.Name,
-            //    Description = product.Description,
-            //    Quantity = product.Quantity,
-            //    img = product.img,
-            //    Category = product.Category,
-            //    Price = product.Price
-            //};
-
-            //return View(viewModel);
+            return View(productFromModel);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, ProductUpdateViewModel bindingModel)
         {
-            if (id != bindingModel.Id)
+            bool categoryExists =
+                this.categoryService.CategoryExistsAsync(bindingModel.CategoryId);
+            bool brandExists =
+                this.brandService.BrandExistsAsync(bindingModel.BrandId);
+            if (!categoryExists)
             {
-                return NotFound();
+                this.ModelState.AddModelError(nameof(bindingModel.CategoryId), "Selected category does not exist!");
             }
+            if (!brandExists)
+            {
+                this.ModelState.AddModelError(nameof(bindingModel.BrandId), "Selected brand does not exist!");
+            }
+            if (!this.ModelState.IsValid)
+            {
+                bindingModel.Categories = await this.categoryService.AllAsync();
+                bindingModel.Brands = await this.brandService.AllAsync();
+                return this.View(bindingModel);
+            }
+            try
+            {
+                await service.UpdateAsync(id,bindingModel);
+                return this.RedirectToAction("Index", "Products");
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to add your new product! Please try again later !");
+                bindingModel.Categories = await this.categoryService.AllAsync();
+                bindingModel.Brands = await this.brandService.AllAsync();
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await service.UpdateAsync(id, bindingModel);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(bindingModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return this.View(bindingModel);
             }
-            return View(bindingModel);
         }
 
         public async Task<IActionResult> Delete(string id)
@@ -150,10 +137,10 @@ namespace Fitness1919.Web.Controllers
                 Name = product.Name,
                 Description = product.Description,
                 Quantity = product.Quantity,
+                Price = product.Price,
                 img = product.img,
-                //Category = product.Category,
-                //Brand = product.Brand,
-                Price = product.Price
+                CategoryId = product.CategoryId,
+                BrandId = product.BrandId
             };
 
             return View(viewModel);

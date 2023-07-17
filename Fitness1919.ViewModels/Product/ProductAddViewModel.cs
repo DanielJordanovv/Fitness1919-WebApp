@@ -22,7 +22,7 @@ namespace Fitness1919.Web.ViewModels.Product
         public string Name { get; set; } = null!;
         [Required]
         [MaxLength(DescriptionMaxLength, ErrorMessage = "The description max lenght is 100.")]
-        public string? Description { get; set; }
+        public string Description { get; set; }
         [Required]
         [Range(QuantityMinRange, QuantityMaxRange, ErrorMessage = "The quantity must be between 0 and 100.")]
         public int Quantity { get; set; }

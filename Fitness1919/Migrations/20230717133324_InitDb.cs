@@ -222,7 +222,7 @@ namespace Fitness1919.Web.Migrations
                     Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    img = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    img = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: false),
                     ShoppingCartId = table.Column<string>(type: "nvarchar(450)", nullable: true)
