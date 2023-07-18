@@ -21,7 +21,7 @@ namespace Fitness1919.Services.Data
                BrandName = model.BrandName
             };
 
-            context.Add(brand);
+            await context.AddAsync(brand);
             await context.SaveChangesAsync();
         }
 

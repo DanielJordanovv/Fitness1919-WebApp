@@ -1,10 +1,9 @@
 ﻿@using Fitness1919.Web.ViewModels.Contact
 @model IEnumerable<ContactAllViewModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All Contacts";
 }
-
-<h1>Index</h1>
+<h1>All Contacts</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -44,3 +43,53 @@
 }
     </tbody>
 </table>
+<style>
+    body {
+  background-image:url('/images/Fitness1919Logo.jpg');
+ background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
+  color: yellow; /* Default text color */
+}
+p{
+    text-align:center;
+}
+h1{
+    text-align:center;
+}
+
+/* Table styles */
+.table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
+  color:yellow;
+}
+
+/* Button styles */
+a {
+  color: yellow; /* Default text color */
+  background-color: transparent; /* Transparent background for buttons */
+  padding: 4px 8px;
+  text-decoration: none;
+  border: 1px solid yellow; /* Add a border to indicate the button */
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+a:hover {
+  background-color: yellow; /* Change the background color on hover */
+  color: black; /* Change the text color on hover */
+}
+
+/* Additional styles if needed */
+h1 {
+  color: yellow;
+}
+</style>

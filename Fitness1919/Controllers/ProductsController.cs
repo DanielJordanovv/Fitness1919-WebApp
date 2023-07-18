@@ -1,5 +1,6 @@
 ﻿using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Product;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fitness1919.Web.Controllers
@@ -71,15 +72,34 @@ namespace Fitness1919.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(string id)
         {
-            var productFromModel = new ProductUpdateViewModel()
-            {
-                Categories = await this.categoryService.AllAsync(),
-                Brands = await this.brandService.AllAsync()
-            };
 
-            return View(productFromModel);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await service.GetProductAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new ProductUpdateViewModel
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Quantity = product.Quantity,
+                Price = product.Price,
+                img = product.img,
+                CategoryId = product.CategoryId,
+                BrandId = product.BrandId
+            };
+            viewModel.Categories = await categoryService.AllAsync();
+            viewModel.Brands = await brandService.AllAsync();
+
+            return View(viewModel);
         }
 
         [HttpPost]

@@ -27,7 +27,7 @@ namespace Fitness1919.Services.Data.Interfaces
                Address = model.Address,
             };
 
-            context.Add(contact);
+            await context.AddAsync(contact);
             await context.SaveChangesAsync();
         }
 

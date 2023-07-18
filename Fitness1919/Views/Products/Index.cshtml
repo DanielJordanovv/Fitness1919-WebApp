@@ -52,8 +52,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.img)
+            <td> 
+                <img src = "@Html.DisplayFor(modelItem=> item.img)" alt="Image" width="100px"/>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Category)
@@ -62,7 +62,7 @@
                 @Html.DisplayFor(modelItem => item.Brand)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">Edit</a> 
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

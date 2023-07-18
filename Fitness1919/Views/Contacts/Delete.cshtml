@@ -12,29 +12,130 @@
     <h4>Product</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Address)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Address)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+<style>
+    body {
+  background-image: url('/images/Fitness1919Logo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
+  color: yellow;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+  color: yellow;
+  margin-top: 20px;
+}
+
+h4 {
+  color: yellow;
+}
+
+hr {
+  border-color: yellow;
+}
+
+.row {
+  margin-bottom: 10px;
+}
+
+.col-sm-2 {
+  font-weight: bold;
+}
+
+.col-sm-10 {
+  color: yellow;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 4px 8px;
+  text-decoration: none;
+  border: 1px solid yellow;
+  border-radius: 4px;
+  background-color: yellow;
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-danger {
+  background-color: red;
+  color: white;
+}
+
+.btn-primary {
+  background-color: yellow; /* Make "Back to List" yellow */
+  color: black;
+}
+
+.btn:hover {
+  background-color: yellow; /* Change the background color to yellow on hover */
+  color: black;
+}
+
+/* Additional styles for the "Back to List" link */
+a.btn-primary.btn {
+  margin-right: 5px; /* Add some spacing between the buttons */
+}
+
+a.btn-primary.btn:hover {
+  background-color: black; /* Keep the background black on hover */
+  color: yellow; /* Keep the text yellow on hover */
+}
+
+/* Ensure the link color is yellow */
+a {
+  color: yellow;
+}
+
+/* Ensure visited link color is yellow */
+a:visited {
+  color: yellow;
+}
+
+/* Ensure link color remains yellow on hover */
+a:hover {
+  color: yellow;
+}
+
+/* Ensure active link color is yellow */
+a:active {
+  color: yellow;
+}
+
+/* Ensure link color is yellow when focused */
+a:focus {
+  color: yellow;
+}
+</style>

@@ -34,6 +34,7 @@ namespace Fitness1919.Services.Data
         {
             return await context.Products.Select(p => new ProductAllViewModel
             {
+                Id = p.Id,
                 Name = p.Name,
                 Description = p.Description,
                 Quantity = p.Quantity,

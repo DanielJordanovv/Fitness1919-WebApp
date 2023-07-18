@@ -43,3 +43,97 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<style>
+    body {
+  background-image: url('/images/Fitness1919Logo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
+  color: yellow;
+  font-family: Arial, sans-serif; /* Added a default font family */
+}
+
+p {
+  text-align: center;
+}
+
+h1, h4 {
+  text-align: center;
+  color: yellow;
+}
+
+/* Table styles */
+.table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
+  color: yellow;
+  border: 1px solid yellow; /* Added a border for table cells */
+}
+
+/* Button styles */
+a {
+  color: yellow;
+  background-color: transparent;
+  padding: 4px 8px;
+  text-decoration: none;
+  border: 1px solid yellow;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover {
+  background-color: yellow;
+  color: black;
+}
+
+/* Additional styles if needed */
+.row {
+  display: flex; /* Added to align form and list side by side */
+  justify-content: center;
+}
+
+.col-md-4 {
+  max-width: 400px; /* Set a max-width for the form */
+  padding: 20px;
+  border: 1px solid yellow; /* Added a border to the form */
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid yellow;
+  border-radius: 4px;
+  color: yellow;
+  background-color: black;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: yellow;
+  color: black;
+}
+
+.btn-primary:hover {
+  background-color: black;
+  color: yellow;
+}
+
+/* Additional styles for validation messages */
+.text-danger {
+  color: red;
+}
+</style>
