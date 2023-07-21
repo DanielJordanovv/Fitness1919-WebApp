@@ -4,10 +4,13 @@
     ViewData["Title"] = "All Contacts";
 }
 <h1>All Contacts</h1>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -24,72 +27,101 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
     </tbody>
 </table>
+<h3>Or come to our physical store:</h3>
+<div id="map-container-google-3" class="z-depth-1-half map-container-3">
+    <iframe src="https://maps.google.com/maps?q=pernik&t=k&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+            style="border:0" allowfullscreen></iframe>
+</div>
 <style>
+    h3{
+        text-align:center;
+    }
     body {
-  background-image:url('/images/Fitness1919Logo.jpg');
- background-repeat: no-repeat;
-  background-size: cover;
-  background-color: black;
-  color: yellow; /* Default text color */
-}
-p{
-    text-align:center;
-}
-h1{
-    text-align:center;
-}
+        background-image: url('/images/Fitness1919Logo.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: black;
+        color: yellow; /* Default text color */
+    }
 
-/* Table styles */
-.table {
-  margin: 20px auto;
-  border-collapse: collapse;
-  width: 80%;
-}
+    p {
+        text-align: center;
+    }
 
-.table th,
-.table td {
-  padding: 8px;
-  text-align: left;
-  color:yellow;
-}
+    h1 {
+        text-align: center;
+    }
 
-/* Button styles */
-a {
-  color: yellow; /* Default text color */
-  background-color: transparent; /* Transparent background for buttons */
-  padding: 4px 8px;
-  text-decoration: none;
-  border: 1px solid yellow; /* Add a border to indicate the button */
-  border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
-}
+    /* Table styles */
+    .table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+    }
 
-a:hover {
-  background-color: yellow; /* Change the background color on hover */
-  color: black; /* Change the text color on hover */
-}
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            color: yellow;
+        }
 
-/* Additional styles if needed */
-h1 {
-  color: yellow;
-}
+    /* Button styles */
+    a {
+        color: yellow; /* Default text color */
+        background-color: transparent; /* Transparent background for buttons */
+        padding: 4px 8px;
+        text-decoration: none;
+        border: 1px solid yellow; /* Add a border to indicate the button */
+        border-radius: 4px;
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+    }
+
+        a:hover {
+            background-color: yellow; /* Change the background color on hover */
+            color: black; /* Change the text color on hover */
+        }
+
+    /* Additional styles if needed */
+    h1 {
+        color: yellow;
+    }
+
+    .map-container-3 {
+        overflow: hidden;
+        padding-bottom: 56.25%;
+        position: relative;
+        height: 0;
+    }
+
+        .map-container-3 iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
 </style>
