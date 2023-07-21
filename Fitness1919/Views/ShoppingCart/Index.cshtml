@@ -1,0 +1,29 @@
+﻿@using Fitness1919.Web.ViewModels.ShoppingCart
+@model ShoppingCartViewModel
+
+<h1>Shopping Cart</h1>
+
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var product in Model.Products)
+    {
+        <tr>
+            <td>@product.Name</td>
+            <td>@product.Quantity</td>
+            <td>@product.Price</td>
+            <td>
+                <form asp-controller="ShoppingCart" asp-action="RemoveFromCart" method="post">
+                    <input type="hidden" name="productId" value="@product.Id" />
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<h3>Total Price: @Model.Products.Sum(p => p.Price * p.Quantity)</h3>

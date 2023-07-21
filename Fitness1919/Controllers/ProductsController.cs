@@ -2,6 +2,7 @@
 using Fitness1919.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Fitness1919.Web.Controllers
 {
@@ -10,14 +11,24 @@ namespace Fitness1919.Web.Controllers
         private readonly IProductService service;
         private readonly ICategoryService categoryService;
         private readonly IBrandService brandService;
+        private readonly IShoppingCartService shoppingCartService;
 
-        public ProductsController(IProductService service, ICategoryService categoryService, IBrandService brandService)
+        public ProductsController(IProductService service, ICategoryService categoryService, IBrandService brandService, IShoppingCartService shoppingCartService)
         {
             this.service = service;
             this.categoryService = categoryService;
             this.brandService = brandService;
+            this.shoppingCartService = shoppingCartService;
         }
+        [HttpPost]
+        public async Task<IActionResult> AddToCart(string productId, int quantity)
+        {
+            Guid userId = GetUserId();
 
+            await shoppingCartService.AddProductToCartAsync(userId, productId, quantity);
+
+            return RedirectToAction("Index", "ShoppingCart");
+        }
         public async Task<IActionResult> Index()
         {
             var products = await service.AllAsync();
@@ -176,6 +187,18 @@ namespace Fitness1919.Web.Controllers
         public bool ProductExists(string id)
         {
             return service.ProductExistsAsync(id);
+        }
+        private Guid GetUserId()
+        {
+            string userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (Guid.TryParse(userIdString, out Guid userId))
+            {
+                return userId;
+            }
+            else
+            {
+                throw new InvalidOperationException("User ID not found or invalid.");
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Fitness1919.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; } = null!;
         [Required]
-        public DateTime PruchaseDate { get; set; }
+        public DateTime PurchaseDate { get; set; }
         [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
         public virtual ApplicationUser User { get; set; } = null!;
