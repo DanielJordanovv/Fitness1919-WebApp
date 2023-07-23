@@ -33,10 +33,22 @@
                 </div>
             </div>
         </nav>
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-            <img src="/images/Home.png" alt="Fitness1919" style="width: 50px; height: 50px;">
-        </a>
     </header>
+  <div class="page-content">
+    <div class="left-container">
+        <div class="leftside">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Fitness1919" style="width: 40px; height: 40px; background-color:yellow;">
+        </a>
+        <a asp-controller="Contacts" asp-action="Index">
+            <img src="https://cdn-icons-png.flaticon.com/512/46/46646.png" alt="Contacts" style="width: 40px; height: 40px; background-color:yellow;" /> 
+        </a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">
+            <img src="https://icons.veryicon.com/png/o/education-technology/radio-and-tv-cloud/about-us-22.png" alt="Privacy" style="width: 40px; height: 40px; background-color:yellow;" />
+        </a>
+    </div>
+    </div>
+</div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

@@ -1,5 +1,8 @@
-﻿<h2>Calorie Intake Recommendation:</h2>
-<p>Your daily calorie intake should be approximately: <strong>@ViewBag.CaloriesPerDay</strong> calories.</p>
+﻿@{
+    ViewData["Title"] = "Calorie Intake Recommendation";
+}
+
+@ViewBag.CaloriesPerDay
  <style>
         body {
             background-image: url("/images/Fitness1919logo.jpg");

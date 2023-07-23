@@ -80,9 +80,9 @@ namespace Fitness1919.Services.Data
                 productToUpdate.img = model.img;
                 productToUpdate.CategoryId = model.CategoryId;
                 productToUpdate.BrandId = model.BrandId;
-            }
 
-            await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

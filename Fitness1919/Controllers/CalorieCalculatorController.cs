@@ -17,7 +17,7 @@ namespace Fitness1919.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Index", model);
+                return BadRequest(ModelState);
             }
 
             double bmr = Math.Ceiling(CalculateBMR(model.Gender, model.Age, model.Height, model.Weight));
@@ -26,8 +26,7 @@ namespace Fitness1919.Web.Controllers
 
             double targetCalories = Math.Ceiling(CalculateTargetCalories(tdee, model.Goal));
 
-            ViewBag.CaloriesPerDay = targetCalories;
-            return View("Result");
+            return Content($"Your daily calorie intake should be approximately: {targetCalories} calories.");
         }
 
         private double CalculateBMR(string gender, int age, double height, double weight)
