@@ -1,0 +1,86 @@
+﻿@using Fitness1919.Web.ViewModels.CalorieCalculator
+@model CalorieCalculatorViewModel
+
+<h2>Calorie Calculator</h2>
+<form asp-controller="CalorieCalculator" asp-action="Calculate" method="post">
+    <label>Gender:</label>
+    <input type="radio" name="Gender" value="male" checked> Male
+    <input type="radio" name="Gender" value="female"> Female
+    <br />
+    <label>Age:</label>
+    <input type="number" name="Age" value="@Model.Age" required>
+    <br />
+    <label>Height (cm):</label>
+    <input type="number" name="Height" value="@Model.Height" required>
+    <br />
+    <label>Weight (kg):</label>
+    <input type="number" name="Weight" value="@Model.Weight" required>
+    <br />
+    <label>Weekly Training Days:</label>
+    <input type="number" name="WeeklyTrainingDays" value="@Model.WeeklyTrainingDays" required>
+    <br />
+    <label>Goal:</label>
+    <select asp-for="Goal" required>
+        <option value="gain">Gain 1kg a week.</option>
+        <option value="lose">Lose 1kg a week.</option>
+        <option value="maintain">Keep the same weight.</option>
+    </select>
+    <br />
+    <input type="submit" value="Calculate">
+</form>
+<style>
+body {
+ background-image: url("/images/Fitness1919logo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: yellow;
+  font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+  color: yellow;
+  text-align:center;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid yellow;
+  border-radius: 5px;
+  background-color: black;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="number"], input[type="submit"], select {
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 2px solid yellow;
+  border-radius: 3px;
+  background-color: black;
+  color: yellow;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
+
+#result {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#result strong {
+  color: yellow;
+}
+
+.field-validation-error {
+  color: red;
+  display: block;
+  margin-top: 5px;
+}
+</style>

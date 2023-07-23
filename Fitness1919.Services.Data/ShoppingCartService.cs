@@ -102,6 +102,23 @@ namespace Fitness1919.Services.Data
                     await context.SaveChangesAsync();
                 }
             }
+        } 
+        public async Task RemoveOneProductQuantityFromCartAsync(string cartId, string productId)
+        {
+            var cart = await context.ShoppingCarts
+                .Include(sc => sc.Products)
+                .FirstOrDefaultAsync(sc => sc.Id == cartId);
+
+            if (cart != null)
+            {
+                var product = cart.Products.FirstOrDefault(p => p.Id == productId);
+
+                if (product != null)
+                {
+                    cart.Products.Remove(product);
+                    await context.SaveChangesAsync();
+                }
+            }
         }
 
         public async Task<decimal> CalculateTotalPriceAsync(string cartId)
