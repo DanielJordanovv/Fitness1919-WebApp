@@ -8,16 +8,16 @@
     <input type="radio" name="Gender" value="female"> Female
     <br />
     <label>Age:</label>
-    <input type="number" name="Age" value="@Model.Age" required>
+    <input type="number" min="0" max="110" name="Age" value="@Model.Age" required>
     <br />
     <label>Height (cm):</label>
-    <input type="number" name="Height" value="@Model.Height" required>
+    <input type="number" min="100" max="250" name="Height" value="@Model.Height" required>
     <br />
     <label>Weight (kg):</label>
-    <input type="number" name="Weight" value="@Model.Weight" required>
+    <input type="number" name="Weight" min="0" max="250" value="@Model.Weight" required>
     <br />
-    <label>Weekly Training Days:</label>
-    <input type="number" name="WeeklyTrainingDays" value="@Model.WeeklyTrainingDays" required>
+    <label class= "TrainingDays">Weekly Training Days:</label>
+    <input type="number" min="0" max="7" name="WeeklyTrainingDays" value="@Model.WeeklyTrainingDays" required>
     <br />
     <label>Goal:</label>
     <select asp-for="Goal" required>
@@ -39,20 +39,17 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(function () {
-        // Handle form submission with AJAX
         $('#calorieForm').submit(function (event) {
-            event.preventDefault(); // Prevent the form from submitting normally
+            event.preventDefault(); 
 
             $.ajax({
                 url: '@Url.Action("Calculate", "CalorieCalculator")',
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function (result) {
-                    // Update the content with the returned partial view
                     $('#calorieForm').after(result);
                 },
                 error: function (xhr) {
-                    // Handle errors, if any
                     alert('An error occurred while calculating the calories. Please try again.');
                 }
             });

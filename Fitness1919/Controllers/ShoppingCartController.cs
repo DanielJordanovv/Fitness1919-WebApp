@@ -1,4 +1,5 @@
 ﻿using Fitness1919.Services.Data.Interfaces;
+using Fitness1919.Web.ViewModels.ShoppingCart;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -38,6 +39,30 @@ namespace Fitness1919.Web.Controllers
             return RedirectToAction("Index", "Products"); 
         }
 
+      [HttpGet]
+        public IActionResult Checkout()
+        {
+            return View(new CheckoutViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Checkout(CheckoutViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Guid userId = GetUserId();
+                await shoppingCartService.CheckoutAsync(userId, model);
+
+                return RedirectToAction("ThankYou", "ShoppingCart");
+            }
+            return View(model);
+        }
+
+
+        public IActionResult ThankYou()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> RemoveFromCart(string productId)
         {

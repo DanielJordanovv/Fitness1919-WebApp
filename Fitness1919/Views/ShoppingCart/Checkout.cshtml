@@ -1,0 +1,24 @@
+﻿@using Fitness1919.Web.ViewModels.ShoppingCart
+@model CheckoutViewModel
+
+<h2>Checkout</h2>
+
+@using (Html.BeginForm("Checkout", "ShoppingCart", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(m => m.Address)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.TextBoxFor(m => m.PhoneNumber)
+    </div>
+
+    <input type="submit" value="Place Order" />
+}

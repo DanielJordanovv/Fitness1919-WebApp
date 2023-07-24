@@ -42,7 +42,7 @@
                     <a asp-action="Delete" asp-controller="Products" asp-route-id="@item.Id">Delete</a>
                     <form asp-action="AddToCart" asp-controller="Products" method="post">
                         <input type="hidden" name="productId" value="@item.Id" />
-                        <label for="quantity">Quantity:</label>
+                       @* <label for="quantity">Quantity:</label>*@
                         <input type="number" name="quantity" value="1" min="1" required />
                         <button type="submit">Add to Cart</button>
                     </form>

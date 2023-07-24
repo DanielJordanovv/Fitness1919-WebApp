@@ -14,6 +14,20 @@ namespace Fitness1919.Services.Data
         {
             context = dbContext;
         }
+        public async Task<Product> GetProductAsync(string productId)
+        {
+            return await context.Products.FindAsync(productId);
+        }
+
+        public async Task UpdateProductQuantityAsync(string productId, int quantity)
+        {
+            var product = await context.Products.FindAsync(productId);
+            if (product != null)
+            {
+                product.Quantity = quantity;
+                await context.SaveChangesAsync();
+            }
+        }
 
         public async Task<ShoppingCartViewModel> GetShoppingCartAsync(Guid userId)
         {
@@ -66,15 +80,15 @@ namespace Fitness1919.Services.Data
                 .Include(sc => sc.Products)
                 .FirstOrDefaultAsync(sc => sc.UserId == userId);
 
-            var product = await context.Products.FindAsync(productId);
+            var product = await context.Products.AsNoTracking().FirstOrDefaultAsync(p => p.Id == productId);
 
             if (cart != null && product != null)
             {
-                var cartProduct = cart.Products.FirstOrDefault(p => p.Id == productId);
+                var cartProduct = cart.Products.FirstOrDefault(p => p.Id == product.Id);
 
                 if (cartProduct != null)
                 {
-                    cartProduct.Quantity += quantity;
+                    cartProduct.Quantity = quantity;
                 }
                 else
                 {
@@ -102,7 +116,7 @@ namespace Fitness1919.Services.Data
                     await context.SaveChangesAsync();
                 }
             }
-        } 
+        }
         public async Task RemoveOneProductQuantityFromCartAsync(string cartId, string productId)
         {
             var cart = await context.ShoppingCarts
@@ -135,5 +149,41 @@ namespace Fitness1919.Services.Data
 
             return 0;
         }
+
+        public async Task CheckoutAsync(Guid userId, CheckoutViewModel model)
+        {
+            var cart = await context.ShoppingCarts
+        .Include(sc => sc.Products)
+        .FirstOrDefaultAsync(sc => sc.UserId == userId);
+
+            if (cart != null)
+            {
+                foreach (var product in cart.Products)
+                {
+                    var productInDb = await context.Products.FirstOrDefaultAsync(x => x.Id == product.Id);
+
+                    if (productInDb != null)
+                    {
+                        if (productInDb.Quantity >= product.Quantity)
+                        {
+                            productInDb.Quantity -= product.Quantity;
+
+                            if (productInDb.Quantity == 0)
+                            {
+                                productInDb.Quantity = 0;
+                            }
+                        }
+                        else
+                        {
+                            product.Quantity = productInDb.Quantity;
+                        }
+                    }
+                }
+
+                cart.Products.Clear();
+                await context.SaveChangesAsync();
+            }
+        }
+
     }
 }

@@ -25,5 +25,5 @@
         </tr>
     }
 </table>
-<button type="submit">Checkout</button>
+<a asp-controller="ShoppingCart" asp-action="Checkout" class="btn btn-primary">Checkout</a>
 <h3>Total Price: @Model.Products.Sum(p => p.Price * p.Quantity)</h3>
