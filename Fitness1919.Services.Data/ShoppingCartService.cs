@@ -77,27 +77,35 @@ namespace Fitness1919.Services.Data
         public async Task AddProductToCartAsync(Guid userId, string productId, int quantity)
         {
             var cart = await context.ShoppingCarts
-                .Include(sc => sc.Products)
-                .FirstOrDefaultAsync(sc => sc.UserId == userId);
+                 .Include(sc => sc.Products)
+                 .FirstOrDefaultAsync(sc => sc.UserId == userId);
 
-            var product = await context.Products.AsNoTracking().FirstOrDefaultAsync(p => p.Id == productId);
-
+            var product = await context.Products.FirstOrDefaultAsync(p => p.Id == productId);
+            var productQuantity = product.Quantity;
             if (cart != null && product != null)
             {
-                var cartProduct = cart.Products.FirstOrDefault(p => p.Id == product.Id);
-
-                if (cartProduct != null)
+                var cartProduct = new Product
                 {
-                    cartProduct.Quantity = quantity;
+                    Id = productId,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Quantity = quantity,
+                    Price = product.Price,
+                    img = product.img,
+                    CategoryId = product.CategoryId,
+                    BrandId = product.BrandId,
+                };
+                context.Entry(cartProduct).State = EntityState.Detached;
+                if (cart.Products.Contains(cartProduct))
+                {
+                    cartProduct.Quantity += quantity;
                 }
                 else
                 {
-                    cart.Products.Add(product);
-                    product.Quantity = quantity;
+                    cart.Products.Add(cartProduct); 
                 }
-
-                await context.SaveChangesAsync();
             }
+            await context.SaveChangesAsync();
         }
 
         public async Task RemoveProductFromCartAsync(string cartId, string productId)
@@ -167,11 +175,6 @@ namespace Fitness1919.Services.Data
                         if (productInDb.Quantity >= product.Quantity)
                         {
                             productInDb.Quantity -= product.Quantity;
-
-                            if (productInDb.Quantity == 0)
-                            {
-                                productInDb.Quantity = 0;
-                            }
                         }
                         else
                         {
