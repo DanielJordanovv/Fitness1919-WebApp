@@ -80,7 +80,7 @@ namespace Fitness1919.Services.Data
                  .Include(sc => sc.Products)
                  .FirstOrDefaultAsync(sc => sc.UserId == userId);
 
-            var product = await context.Products.FirstOrDefaultAsync(p => p.Id == productId);
+            var product = await context.Products.FindAsync(productId);
             var productQuantity = product.Quantity;
             if (cart != null && product != null)
             {

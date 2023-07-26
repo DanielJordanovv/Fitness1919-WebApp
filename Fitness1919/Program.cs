@@ -38,6 +38,7 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 builder.Services
                 .AddControllersWithViews()
                 .AddMvcOptions(options =>

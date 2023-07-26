@@ -29,6 +29,14 @@
             public const int NameMinLength = 2;
             public const int NameMaxLength = 50;
         }
-
+        public static class FeedBack
+        {
+            public const int NameMinLength = 2;
+            public const int NameMaxLength = 50; 
+            public const int CityMinLength = 2;
+            public const int CityMaxLength = 20;
+            public const int DescriptionMinLength = 2;
+            
+        }
     }
 }

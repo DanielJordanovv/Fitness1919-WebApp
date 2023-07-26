@@ -1,0 +1,109 @@
+﻿@using Fitness1919.Web.ViewModels.Feedback
+@model IEnumerable<FeedbackAllViewModel>
+@{
+    ViewData["Title"] = "All Feedbacks";
+}
+<h1>All Contacts</h1>
+<a asp-action="Create">Create New</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedBackDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeedBackDescription)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<style>
+    h3 {
+        text-align: center;
+    }
+
+    body {
+        background-image: url('/images/Fitness1919Logo.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: black;
+        color: yellow; 
+    }
+
+    p {
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            color: yellow;
+        }
+
+    a {
+        color: yellow; 
+        background-color: transparent; 
+        padding: 4px 8px;
+        text-decoration: none;
+        border: 1px solid yellow; 
+        border-radius: 4px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        a:hover {
+            background-color: yellow;
+            color: black; 
+        }
+
+    h1 {
+        color: yellow;
+    }
+
+    .map-container-3 {
+        overflow: hidden;
+        padding-bottom: 56.25%;
+        position: relative;
+        height: 0;
+    }
+
+        .map-container-3 iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+</style>
