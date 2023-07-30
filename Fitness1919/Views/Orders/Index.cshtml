@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>All Orders</title>
+</head>
+<body>
+    <h1>All Orders</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Created On</th> 
+                <th>Order Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.CreatedOn</td> 
+                    <td>@order.OrderPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
