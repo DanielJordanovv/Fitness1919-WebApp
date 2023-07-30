@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Guards" Version="2.1.19292.12" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Fitness1919.Common\Fitness1919.Common.csproj" />
     <ProjectReference Include="..\Fitness1919.Data.Models\Fitness1919.Data.Models.csproj" />
     <ProjectReference Include="..\Fitness1919.Data\Fitness1919.Data.csproj" />

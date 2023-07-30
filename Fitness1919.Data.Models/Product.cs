@@ -6,6 +6,10 @@ namespace Fitness1919.Data.Models
 {
     public class Product
     {
+        public Product()
+        {
+            this.ShoppingCartProducts = new HashSet<ShoppingCart>();
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; } = null!;
@@ -22,6 +26,7 @@ namespace Fitness1919.Data.Models
         [Required]
         [Range(typeof(decimal), PriceMinValue, PriceMaxValue)]
         public decimal Price { get; set; }
+        public bool IsDeleted { get; set; }
         [Required]
         [MaxLength(ImageUrlMaxLength)]
         public string img { get; set; } = null!;
@@ -31,5 +36,6 @@ namespace Fitness1919.Data.Models
         [ForeignKey(nameof(Brand))]
         public int BrandId { get; set; }
         public virtual Brand Brand { get; set; } = null!;
+        public virtual ICollection<ShoppingCart> ShoppingCartProducts { get; set; }
     }
 }

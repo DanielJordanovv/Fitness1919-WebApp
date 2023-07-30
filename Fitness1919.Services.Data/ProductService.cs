@@ -32,7 +32,7 @@ namespace Fitness1919.Services.Data
 
         public async Task<IEnumerable<ProductAllViewModel>> AllAsync()
         {
-            return await context.Products.Select(p => new ProductAllViewModel
+            return await context.Products.Where(x => !x.IsDeleted).Select(p => new ProductAllViewModel
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -50,7 +50,7 @@ namespace Fitness1919.Services.Data
             var product = await context.Products.FindAsync(id);
             if (product != null)
             {
-                context.Products.Remove(product);
+                product.IsDeleted = true;
                 await context.SaveChangesAsync();
             }
         }
@@ -58,13 +58,13 @@ namespace Fitness1919.Services.Data
         public async Task<Product> GetProductAsync(string id)
         {
 
-            Product product = await context.Products.FindAsync(id);
+            Product product = await context.Products.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
             return product;
         }
 
         public bool ProductExistsAsync(string id)
         {
-            return context.Products.Any(e => e.Id == id);
+            return context.Products.Any(e => e.Id == id && !e.IsDeleted);
         }
 
         public async Task UpdateAsync(string id, ProductUpdateViewModel model)

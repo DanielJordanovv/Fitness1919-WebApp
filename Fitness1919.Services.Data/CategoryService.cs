@@ -34,16 +34,6 @@ namespace Fitness1919.Services.Data
             }).ToListAsync();
         }
 
-        public async Task DeleteAsync(int id)
-        {
-            var category = await context.Categories.FindAsync(id);
-            if (category != null)
-            {
-                context.Categories.Remove(category);
-                await context.SaveChangesAsync();
-            }
-        }
-
         public async Task<Category> GetCategoryAsync(int id)
         {
 

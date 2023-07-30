@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Fitness1919.Web.Migrations
+namespace Fitness1919.Data.Migrations
 {
     [DbContext(typeof(Fitness1919DbContext))]
-    [Migration("20230721133325_Initial")]
-    partial class Initial
+    [Migration("20230730143727_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -149,6 +149,56 @@ namespace Fitness1919.Web.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("Fitness1919.Data.Models.Feedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("City")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("FeedBackDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FeedbackSubbmitTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Feedbacks");
+                });
+
+            modelBuilder.Entity("Fitness1919.Data.Models.Order", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("OrderPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("Fitness1919.Data.Models.Product", b =>
                 {
                     b.Property<string>("Id")
@@ -166,6 +216,9 @@ namespace Fitness1919.Web.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -176,9 +229,6 @@ namespace Fitness1919.Web.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
-
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("img")
                         .IsRequired()
@@ -191,8 +241,6 @@ namespace Fitness1919.Web.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ShoppingCartId");
-
                     b.ToTable("Products");
                 });
 
@@ -202,17 +250,33 @@ namespace Fitness1919.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("IsCheckout")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShoppingCarts");
+                    b.ToTable("ShoppingCartProducts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -350,6 +414,17 @@ namespace Fitness1919.Web.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Fitness1919.Data.Models.Order", b =>
+                {
+                    b.HasOne("Fitness1919.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Fitness1919.Data.Models.Product", b =>
                 {
                     b.HasOne("Fitness1919.Data.Models.Brand", "Brand")
@@ -364,10 +439,6 @@ namespace Fitness1919.Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Fitness1919.Data.Models.ShoppingCart", null)
-                        .WithMany("Products")
-                        .HasForeignKey("ShoppingCartId");
-
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
@@ -375,11 +446,21 @@ namespace Fitness1919.Web.Migrations
 
             modelBuilder.Entity("Fitness1919.Data.Models.ShoppingCart", b =>
                 {
+                    b.HasOne("Fitness1919.Data.Models.Order", null)
+                        .WithMany("ShoppingCarts")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("Fitness1919.Data.Models.Product", "Product")
+                        .WithMany("ShoppingCartProducts")
+                        .HasForeignKey("ProductId");
+
                     b.HasOne("Fitness1919.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Product");
 
                     b.Navigation("User");
                 });
@@ -445,9 +526,14 @@ namespace Fitness1919.Web.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Fitness1919.Data.Models.ShoppingCart", b =>
+            modelBuilder.Entity("Fitness1919.Data.Models.Order", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("ShoppingCarts");
+                });
+
+            modelBuilder.Entity("Fitness1919.Data.Models.Product", b =>
+                {
+                    b.Navigation("ShoppingCartProducts");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,17 +3,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fitness1919.Data.Models
 {
-    public class ShoppingCart
+    public class Order
     {
+        public Order()
+        {
+            this.ShoppingCarts = new HashSet<ShoppingCart>();
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
-        public string ProductId { get; set; }
-        public virtual Product Product { get; set; }
-        public DateTime PurchaseDate { get; set; }
-        public int Quantity { get; set; }
-        public bool IsCheckout { get; set; }
+        public DateTime CreatedOn { get; set; }
+        [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
+        public decimal OrderPrice { get; set; }
+        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }
 }

@@ -16,13 +16,19 @@ namespace Fitness1919.Web.Controllers
             this.productService = productService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             Guid userId = GetUserId();
-            var cart = await shoppingCartService.GetShoppingCartAsync(userId);
+            var cart = shoppingCartService.GetShoppingCartAsync(userId);
             return View(cart);
         }
-
+        [HttpPost]
+        public async Task<IActionResult> RemoveAllProducts()
+        {
+            Guid userId = GetUserId();
+            await shoppingCartService.RemoveAllProducts(userId);
+            return RedirectToAction("Index", "ShoppingCart");
+        }
         [HttpPost]
         public async Task<IActionResult> AddToCart(string productId, int quantity)
         {
@@ -34,12 +40,11 @@ namespace Fitness1919.Web.Controllers
                 return NotFound();
             }
 
-            var cart = await shoppingCartService.GetShoppingCartAsync(userId);
             await shoppingCartService.AddProductToCartAsync(userId, productId, quantity);
-            return RedirectToAction("Index", "Products"); 
+            return RedirectToAction("Index", "Products");
         }
 
-      [HttpGet]
+        [HttpGet]
         public IActionResult Checkout()
         {
             return View(new CheckoutViewModel());
@@ -51,26 +56,21 @@ namespace Fitness1919.Web.Controllers
             if (ModelState.IsValid)
             {
                 Guid userId = GetUserId();
-                await shoppingCartService.CheckoutAsync(userId, model);
+                await shoppingCartService.CheckoutAsync(userId);
 
                 return RedirectToAction("ThankYou", "ShoppingCart");
             }
-            return View(model);
-        }
-
-
-        public IActionResult ThankYou()
-        {
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> RemoveFromCart(string productId)
-        {
-            Guid userId = GetUserId();
-            var cart = await shoppingCartService.GetShoppingCartAsync(userId);
-            await shoppingCartService.RemoveProductFromCartAsync(cart.CartId, productId);
-            return RedirectToAction("Index" , "ShoppingCart");
-        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> RemoveFromCart(string productId)
+        //{
+        //    Guid userId = GetUserId();
+        //    var cart = await shoppingCartService.GetShoppingCartAsync(userId);
+        //    await shoppingCartService.RemoveProductFromCartAsync(cart.CartId, productId);
+        //    return RedirectToAction("Index" , "ShoppingCart");
+        //}
 
         private Guid GetUserId()
         {

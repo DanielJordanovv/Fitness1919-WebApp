@@ -83,29 +83,6 @@ namespace Fitness1919.Web.Controllers
             return View(bindingModel);
         }
 
-        public async Task<IActionResult> Delete(int id)
-        {
-            var category = await service.GetCategoryAsync(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            var viewModel = new CategoryAddViewModel
-            {
-                CategoryName = category.CategoryName
-            };
-
-            return View(viewModel);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            await service.DeleteAsync(id);
-            return RedirectToAction(nameof(Index));
-        }
         public bool CategoryExists(int id)
         {
             return service.CategoryExistsAsync(id);

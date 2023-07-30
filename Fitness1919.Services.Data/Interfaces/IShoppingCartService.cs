@@ -5,12 +5,10 @@ namespace Fitness1919.Services.Data.Interfaces
 {
     public interface IShoppingCartService
     {
-        Task<Product> GetProductAsync(string productId);
-        Task UpdateProductQuantityAsync(string productId, int quantity);
-        Task<ShoppingCartViewModel> GetShoppingCartAsync(Guid userId);
+        ShoppingCartViewModel GetShoppingCartAsync(Guid userId);
         Task AddProductToCartAsync(Guid userId, string productId, int quantity);
-        Task RemoveProductFromCartAsync(string cartId, string productId);
-        Task<decimal> CalculateTotalPriceAsync(string cartId);
-        Task CheckoutAsync(Guid userId, CheckoutViewModel model);
+        Task RemoveProductFromCartAsync(Guid userId, string productId);
+        Task CheckoutAsync(Guid userId);
+        Task RemoveAllProducts(Guid userId);
     }
 }
