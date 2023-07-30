@@ -27,8 +27,7 @@ namespace Fitness1919.Services.Data
 
             if (product == null)
             {
-                //TODO Custom exc
-                throw new NotFoundShoppingCartException();
+                throw new ProductNotFoundException();
             }
             if (cart == null)
             {
@@ -65,7 +64,7 @@ namespace Fitness1919.Services.Data
 
             if (cart == null)
             {
-                throw new Exception();
+                throw new NotFoundShoppingCartException();
             }
             var order = new Order
             {
@@ -114,9 +113,17 @@ namespace Fitness1919.Services.Data
             await context.SaveChangesAsync();
         }
 
-        public Task RemoveProductFromCartAsync(Guid userId, string productId)
+        public async Task RemoveProductFromCartAsync(Guid userId, string productId)
         {
-            throw new NotImplementedException();
+            Guard.ArgumentNotNull(userId, nameof(userId));
+            Guard.ArgumentNotNull(productId, nameof(productId));
+            var cart = context.ShoppingCartProducts.Where(c => c.UserId == userId && !c.IsCheckout);
+            if (cart != null)
+            {
+                var productToRemove = await cart.FirstOrDefaultAsync(x => x.ProductId == productId);
+                context.ShoppingCartProducts.Remove(productToRemove);
+            }
+            await context.SaveChangesAsync();
         }
     }
 }

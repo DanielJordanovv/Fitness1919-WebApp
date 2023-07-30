@@ -63,14 +63,13 @@ namespace Fitness1919.Web.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> RemoveFromCart(string productId)
-        //{
-        //    Guid userId = GetUserId();
-        //    var cart = await shoppingCartService.GetShoppingCartAsync(userId);
-        //    await shoppingCartService.RemoveProductFromCartAsync(cart.CartId, productId);
-        //    return RedirectToAction("Index" , "ShoppingCart");
-        //}
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromCart(string productId)
+        {
+            Guid userId = GetUserId();
+            await shoppingCartService.RemoveProductFromCartAsync(userId, productId);
+            return RedirectToAction("Index", "ShoppingCart");
+        }
 
         private Guid GetUserId()
         {
