@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using static Fitness1919.Common.EntityValidationConstants.ApplicationUser;
 
 namespace Fitness1919.Data.Models
 {
@@ -8,8 +10,13 @@ namespace Fitness1919.Data.Models
         {
             this.Id = Guid.NewGuid();
         }
-        //public string FullName { get; set; }
-        //public string PhoneNumber { get; set; }
-        //public string Address { get; set; }
+        [Required]
+        [MinLength(FirstNameMinLength)]
+        [MaxLength(FirstNameMaxLength)]
+        public string FirstName { get; set; }
+        [Required]
+        [MinLength(LastNameMinLength)]
+        [MaxLength(LastNameMaxLength)]
+        public string LastName { get; set; }
     }
 }

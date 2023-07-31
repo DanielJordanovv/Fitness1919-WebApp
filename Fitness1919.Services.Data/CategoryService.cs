@@ -37,7 +37,7 @@ namespace Fitness1919.Services.Data
         public async Task<Category> GetCategoryAsync(int id)
         {
 
-            Category? category = await context.Categories.FindAsync(id);
+            Category category = await context.Categories.FindAsync(id);
             return category;
         }
 

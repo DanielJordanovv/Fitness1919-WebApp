@@ -52,10 +52,10 @@ namespace Fitness1919.Services.Data.Interfaces
             }
         }
 
-        public async Task<Contact> GetContactAsync(string? id)
+        public async Task<Contact> GetContactAsync(string id)
         {
 
-            Contact? contact = await context.Contacts.FindAsync(id);
+            Contact contact = await context.Contacts.FindAsync(id);
             return contact;
         }
 

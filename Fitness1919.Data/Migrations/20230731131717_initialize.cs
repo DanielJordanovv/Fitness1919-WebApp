@@ -4,7 +4,7 @@
 
 namespace Fitness1919.Data.Migrations
 {
-    public partial class Initialize : Migration
+    public partial class initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,38 @@ namespace Fitness1919.Data.Migrations
                 name: "Id",
                 table: "ShoppingCartProducts",
                 type: "nvarchar(450)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AlterColumn<decimal>(
+                name: "Price",
+                table: "Products",
+                type: "decimal(18,6)",
+                nullable: false,
+                oldClrType: typeof(decimal),
+                oldType: "decimal(18,2)");
+
+            migrationBuilder.AlterColumn<decimal>(
+                name: "OrderPrice",
+                table: "Orders",
+                type: "decimal(18,6)",
+                nullable: false,
+                oldClrType: typeof(decimal),
+                oldType: "decimal(18,2)");
+
+            migrationBuilder.AddColumn<string>(
+                name: "FirstName",
+                table: "AspNetUsers",
+                type: "nvarchar(15)",
+                maxLength: 15,
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<string>(
+                name: "LastName",
+                table: "AspNetUsers",
+                type: "nvarchar(15)",
+                maxLength: 15,
                 nullable: false,
                 defaultValue: "");
 
@@ -67,6 +99,14 @@ namespace Fitness1919.Data.Migrations
                 name: "Id",
                 table: "ShoppingCartProducts");
 
+            migrationBuilder.DropColumn(
+                name: "FirstName",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "LastName",
+                table: "AspNetUsers");
+
             migrationBuilder.AlterColumn<string>(
                 name: "ProductId",
                 table: "ShoppingCartProducts",
@@ -76,6 +116,22 @@ namespace Fitness1919.Data.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(450)",
                 oldNullable: true);
+
+            migrationBuilder.AlterColumn<decimal>(
+                name: "Price",
+                table: "Products",
+                type: "decimal(18,2)",
+                nullable: false,
+                oldClrType: typeof(decimal),
+                oldType: "decimal(18,6)");
+
+            migrationBuilder.AlterColumn<decimal>(
+                name: "OrderPrice",
+                table: "Orders",
+                type: "decimal(18,2)",
+                nullable: false,
+                oldClrType: typeof(decimal),
+                oldType: "decimal(18,6)");
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_ShoppingCartProducts",

@@ -25,7 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModelBinders", "ModelBinders", "{2E4344C2-EFF2-41AD-BCDF-BF6EF0F20A93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitness1919.Web.Infrastructure.ModelBinders", "Fitness1919.Web.Infrastructure.ModelBinders\Fitness1919.Web.Infrastructure.ModelBinders.csproj", "{86044237-ECD4-4DFD-A0FE-CDA898A639F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fitness1919.Web.Infrastructure.ModelBinders", "Fitness1919.Web.Infrastructure.ModelBinders\Fitness1919.Web.Infrastructure.ModelBinders.csproj", "{86044237-ECD4-4DFD-A0FE-CDA898A639F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{0AF00C58-EA4F-437C-A409-A5EDDCDF0173}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitness1919.Web.Infrastructure.Extensions", "Fitness1919.Web.Infrastructure.Extensions\Fitness1919.Web.Infrastructure.Extensions.csproj", "{D75CC0DB-5536-4B8A-86E4-046D0C130B5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +65,10 @@ Global
 		{86044237-ECD4-4DFD-A0FE-CDA898A639F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86044237-ECD4-4DFD-A0FE-CDA898A639F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86044237-ECD4-4DFD-A0FE-CDA898A639F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D75CC0DB-5536-4B8A-86E4-046D0C130B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D75CC0DB-5536-4B8A-86E4-046D0C130B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D75CC0DB-5536-4B8A-86E4-046D0C130B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D75CC0DB-5536-4B8A-86E4-046D0C130B5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +81,8 @@ Global
 		{AB164DB1-163D-4140-9799-D1EA90881608} = {4324B60A-0813-4B38-A07B-119144E637EA}
 		{2E4344C2-EFF2-41AD-BCDF-BF6EF0F20A93} = {28B00205-533A-4019-B4DA-A6693D1C75A5}
 		{86044237-ECD4-4DFD-A0FE-CDA898A639F1} = {2E4344C2-EFF2-41AD-BCDF-BF6EF0F20A93}
+		{0AF00C58-EA4F-437C-A409-A5EDDCDF0173} = {28B00205-533A-4019-B4DA-A6693D1C75A5}
+		{D75CC0DB-5536-4B8A-86E4-046D0C130B5C} = {0AF00C58-EA4F-437C-A409-A5EDDCDF0173}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92B0E621-8B90-452B-BEB8-9E9A4ADEDFAC}

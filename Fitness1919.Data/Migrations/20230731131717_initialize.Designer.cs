@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitness1919.Data.Migrations
 {
     [DbContext(typeof(Fitness1919DbContext))]
-    [Migration("20230730143727_Initialize")]
-    partial class Initialize
+    [Migration("20230731131717_initialize")]
+    partial class initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,16 @@ namespace Fitness1919.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -187,7 +197,7 @@ namespace Fitness1919.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("OrderPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,6)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -225,7 +235,7 @@ namespace Fitness1919.Data.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,6)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");

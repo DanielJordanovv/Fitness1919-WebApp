@@ -6,7 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Services.Data;
 using Microsoft.AspNetCore.Mvc;
+using static Fitness1919.Common.GeneralApplicationConstants;
 using Fitness1919.Web.Infrastructure.ModelBinders;
+using Fitness1919.Web.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,12 +28,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
 
-}).AddEntityFrameworkStores<Fitness1919DbContext>();
-builder.Services.AddAuthentication().AddFacebook(options =>
-{
-    options.AppId = "660433012640338";
-    options.AppSecret = "98e11f8c54c8d8426b02d41e20356143";
-});
+})
+     .AddRoles<IdentityRole<Guid>>()
+    .AddEntityFrameworkStores<Fitness1919DbContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IContactService, ContactService>();
@@ -47,6 +46,12 @@ builder.Services
                     options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
                     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 });
+builder.Services.AddRecaptchaService();
+
+builder.Services.ConfigureApplicationCookie(cfg =>
+{
+    cfg.LoginPath = "/User/Login";
+});
 
 var app = builder.Build();
 
@@ -69,6 +74,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.SeedAdministrator(AdminEmail);
 
 app.MapControllerRoute(
     name: "default",

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Griesoft.AspNetCore.ReCaptcha" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.19" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.20" />
@@ -30,6 +31,7 @@
     <ProjectReference Include="..\Fitness1919.Data\Fitness1919.Data.csproj" />
     <ProjectReference Include="..\Fitness1919.Services.Data\Fitness1919.Services.Data.csproj" />
     <ProjectReference Include="..\Fitness1919.ViewModels\Fitness1919.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\Fitness1919.Web.Infrastructure.Extensions\Fitness1919.Web.Infrastructure.Extensions.csproj" />
     <ProjectReference Include="..\Fitness1919.Web.Infrastructure.ModelBinders\Fitness1919.Web.Infrastructure.ModelBinders.csproj" />
   </ItemGroup>
 

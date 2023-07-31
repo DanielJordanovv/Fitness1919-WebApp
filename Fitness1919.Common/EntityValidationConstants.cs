@@ -36,7 +36,15 @@
             public const int CityMinLength = 2;
             public const int CityMaxLength = 20;
             public const int DescriptionMinLength = 2;
-            
+        }
+        public static class ApplicationUser
+        {
+            public const int FirstNameMinLength = 1;
+            public const int FirstNameMaxLength = 15;
+            public const int LastNameMinLength = 1;
+            public const int LastNameMaxLength = 15;
+            public const int PasswordMinLength = 1;
+            public const int PasswordMaxLength = 25;
         }
     }
 }

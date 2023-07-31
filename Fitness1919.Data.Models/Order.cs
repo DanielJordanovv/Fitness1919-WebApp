@@ -16,6 +16,7 @@ namespace Fitness1919.Data.Models
         [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
+        [Column(TypeName = "decimal(18, 6)")]
         public decimal OrderPrice { get; set; }
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }

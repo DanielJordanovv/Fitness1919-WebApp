@@ -37,7 +37,7 @@ namespace Fitness1919.Services.Data
         public async Task<Brand> GetBrandAsync(int id)
         {
 
-            Brand? brand = await context.Brands.FindAsync(id);
+            Brand brand = await context.Brands.FindAsync(id);
             return brand;
         }
 

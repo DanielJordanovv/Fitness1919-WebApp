@@ -24,7 +24,7 @@ namespace Fitness1919.Data.Models
         [Range(QuantityMinRange,QuantityMaxRange, ErrorMessage = "The quantity must be between 0 and 100.")]
         public int Quantity { get; set; }
         [Required]
-        [Range(typeof(decimal), PriceMinValue, PriceMaxValue)]
+        [Column(TypeName = "decimal(18, 6)")]
         public decimal Price { get; set; }
         public bool IsDeleted { get; set; }
         [Required]
