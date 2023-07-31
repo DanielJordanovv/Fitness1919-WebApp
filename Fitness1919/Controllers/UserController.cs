@@ -4,6 +4,7 @@ using Griesoft.AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using static Fitness1919.Common.NotificationMessagesConstants;
 
 namespace Fitness1919.Web.Controllers
 {
@@ -88,6 +89,7 @@ namespace Fitness1919.Web.Controllers
 
             if (!result.Succeeded)
             {
+                TempData[ErrorMessage] = "There was an error while attempting to login!. Try again later!";
                 return View(model);
             }
 
