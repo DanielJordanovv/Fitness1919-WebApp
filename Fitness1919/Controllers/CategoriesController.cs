@@ -1,10 +1,12 @@
 ﻿using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Category;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class CategoriesController:Controller
     {
         private readonly ICategoryService service;

@@ -6,6 +6,7 @@ using System.Security.Claims;
 
 namespace Fitness1919.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ProductsController : Controller
     {
         private readonly IProductService service;
@@ -20,6 +21,7 @@ namespace Fitness1919.Web.Controllers
             this.brandService = brandService;
             this.shoppingCartService = shoppingCartService;
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> AddToCart(string productId, int quantity)
         {
@@ -29,6 +31,7 @@ namespace Fitness1919.Web.Controllers
 
             return RedirectToAction("Index", "ShoppingCart");
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var products = await service.AllAsync();

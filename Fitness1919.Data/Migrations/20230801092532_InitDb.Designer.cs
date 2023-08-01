@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitness1919.Data.Migrations
 {
     [DbContext(typeof(Fitness1919DbContext))]
-    [Migration("20230730140506_init")]
-    partial class init
+    [Migration("20230801092532_InitDb")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,16 @@ namespace Fitness1919.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -187,10 +197,7 @@ namespace Fitness1919.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("OrderPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("decimal(18,6)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -227,11 +234,8 @@ namespace Fitness1919.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,6)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -247,21 +251,23 @@ namespace Fitness1919.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("OrderId");
-
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Fitness1919.Data.Models.ShoppingCart", b =>
                 {
-                    b.Property<string>("ProductId")
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsCheckout")
                         .HasColumnType("bit");
+
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
@@ -269,7 +275,14 @@ namespace Fitness1919.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductId", "UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("UserId");
 
@@ -436,10 +449,6 @@ namespace Fitness1919.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Fitness1919.Data.Models.Order", null)
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId");
-
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
@@ -447,11 +456,13 @@ namespace Fitness1919.Data.Migrations
 
             modelBuilder.Entity("Fitness1919.Data.Models.ShoppingCart", b =>
                 {
+                    b.HasOne("Fitness1919.Data.Models.Order", null)
+                        .WithMany("ShoppingCarts")
+                        .HasForeignKey("OrderId");
+
                     b.HasOne("Fitness1919.Data.Models.Product", "Product")
                         .WithMany("ShoppingCartProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.HasOne("Fitness1919.Data.Models.ApplicationUser", "User")
                         .WithMany()
@@ -527,7 +538,7 @@ namespace Fitness1919.Data.Migrations
 
             modelBuilder.Entity("Fitness1919.Data.Models.Order", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Fitness1919.Data.Models.Product", b =>

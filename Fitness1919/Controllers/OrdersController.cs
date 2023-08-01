@@ -1,9 +1,11 @@
 ﻿using Fitness1919.Services.Data.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace Fitness1919.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class OrdersController : Controller
     {
         private readonly IOrderService service;
@@ -16,6 +18,7 @@ namespace Fitness1919.Web.Controllers
             var orders = await service.All();
             return View(orders);
         }
+        [AllowAnonymous]
         public async Task<IActionResult> MyOrders()
         {
             Guid userId = GetUserId();

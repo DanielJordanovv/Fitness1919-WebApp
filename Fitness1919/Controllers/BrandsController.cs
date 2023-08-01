@@ -1,10 +1,12 @@
 ﻿using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Brand;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class BrandsController : Controller
     {
         private readonly IBrandService service;

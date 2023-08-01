@@ -1,10 +1,12 @@
 ﻿using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.ShoppingCart;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace Fitness1919.Web.Controllers
 {
+    [Authorize]
     public class ShoppingCartController : Controller
     {
         private readonly IShoppingCartService shoppingCartService;

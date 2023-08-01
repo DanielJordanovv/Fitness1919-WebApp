@@ -2,6 +2,7 @@
 using Fitness1919.Data.Models;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Product;
+using Guards;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Services.Data
@@ -16,6 +17,7 @@ namespace Fitness1919.Services.Data
 
         public async Task CreateAsync(ProductAddViewModel model)
         {
+            Guard.ArgumentNotNull(model, nameof(model));
             var product = new Product
             {
                 Name = model.Name,
@@ -47,17 +49,16 @@ namespace Fitness1919.Services.Data
 
         public async Task DeleteAsync(string id)
         {
+            Guard.ArgumentNotNull(id, nameof(id));
             var product = await context.Products.FindAsync(id);
-            if (product != null)
-            {
-                product.IsDeleted = true;
-                await context.SaveChangesAsync();
-            }
+            Guard.ArgumentNotNull(product, nameof(product));
+            product.IsDeleted = true;
+            await context.SaveChangesAsync();
         }
 
         public async Task<Product> GetProductAsync(string id)
         {
-
+            Guard.ArgumentNotNull(id, nameof(id));
             Product product = await context.Products.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
             return product;
         }

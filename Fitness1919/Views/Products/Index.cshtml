@@ -6,10 +6,12 @@
 }
 
 <h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-controller="Products" asp-action="Create">Create New</a>
+    </p>
+}
 
 <table class="table">
     <thead>
@@ -38,11 +40,13 @@
                 <td>@Html.DisplayFor(modelItem => item.Category)</td>
                 <td>@Html.DisplayFor(modelItem => item.Brand)</td>
                 <td>
-                    <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Delete" asp-controller="Products" asp-route-id="@item.Id">Delete</a>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Delete" asp-controller="Products" asp-route-id="@item.Id">Delete</a>
+                    }
                     <form asp-action="AddToCart" asp-controller="Products" method="post">
                         <input type="hidden" name="productId" value="@item.Id" />
-                       @* <label for="quantity">Quantity:</label>*@
                         <input type="number" name="quantity" value="1" min="1" required />
                         <button type="submit">Add to Cart</button>
                     </form>
