@@ -4,7 +4,7 @@
     ViewData["Title"] = "All Contacts";
 }
 <h1>All Contacts</h1>
-@if (User.IsInRole("Administratior"))
+@if (this.User.IsInRole("Administratior"))
 {
     <p>
         <a asp-action="Create">Create New</a>

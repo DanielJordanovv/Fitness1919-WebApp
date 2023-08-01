@@ -2,6 +2,7 @@
 using Fitness1919.Data.Models;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Order;
+using Guards;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Services.Data
@@ -26,6 +27,7 @@ namespace Fitness1919.Services.Data
 
         public async Task<IEnumerable<MyOrdersViewModel>> My(string customerId)
         {
+             Guard.ArgumentNotNull(customerId, nameof(customerId));
             return await context.Orders.Where(x=>x.UserId.ToString() == customerId).Select(p => new MyOrdersViewModel
             {
                 Id = p.Id,

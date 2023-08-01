@@ -65,25 +65,27 @@ namespace Fitness1919.Services.Data
 
         public bool ProductExistsAsync(string id)
         {
+            Guard.ArgumentNotNull(id, nameof(id));
             return context.Products.Any(e => e.Id == id && !e.IsDeleted);
         }
 
         public async Task UpdateAsync(string id, ProductUpdateViewModel model)
         {
+            Guard.ArgumentNotNull(id, nameof(id));
+            Guard.ArgumentNotNull(model, nameof(model));
             var productToUpdate = await context.Products.FindAsync(id);
 
-            if (productToUpdate != null)
-            {
-                productToUpdate.Name = model.Name;
-                productToUpdate.Description = model.Description;
-                productToUpdate.Quantity = model.Quantity;
-                productToUpdate.Price = model.Price;
-                productToUpdate.img = model.img;
-                productToUpdate.CategoryId = model.CategoryId;
-                productToUpdate.BrandId = model.BrandId;
+            Guard.ArgumentNotNull(productToUpdate, nameof(productToUpdate));
+            productToUpdate.Name = model.Name;
+            productToUpdate.Description = model.Description;
+            productToUpdate.Quantity = model.Quantity;
+            productToUpdate.Price = model.Price;
+            productToUpdate.img = model.img;
+            productToUpdate.CategoryId = model.CategoryId;
+            productToUpdate.BrandId = model.BrandId;
 
-                await context.SaveChangesAsync();
-            }
+            await context.SaveChangesAsync();
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using Fitness1919.Data.Models;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Feedback;
+using Guards;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Services.Data
@@ -15,6 +16,7 @@ namespace Fitness1919.Services.Data
         }
         public async Task AddAsync(FeedbackAddViewModel model)
         {
+            Guard.ArgumentNotNull(model, nameof(model));
             var feedback = new Feedback
             {
                 FullName = model.FullName,

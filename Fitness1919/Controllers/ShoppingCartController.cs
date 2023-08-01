@@ -25,6 +25,7 @@ namespace Fitness1919.Web.Controllers
             return View(cart);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveAllProducts()
         {
             Guid userId = GetUserId();
@@ -32,6 +33,7 @@ namespace Fitness1919.Web.Controllers
             return RedirectToAction("Index", "ShoppingCart");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToCart(string productId, int quantity)
         {
             Guid userId = GetUserId();
@@ -53,6 +55,7 @@ namespace Fitness1919.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout(CheckoutViewModel model)
         {
             if (ModelState.IsValid)
@@ -66,6 +69,7 @@ namespace Fitness1919.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveFromCart(string productId)
         {
             Guid userId = GetUserId();

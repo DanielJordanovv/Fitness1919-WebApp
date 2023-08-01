@@ -23,6 +23,7 @@ namespace Fitness1919.Web.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToCart(string productId, int quantity)
         {
             Guid userId = GetUserId();
@@ -117,6 +118,7 @@ namespace Fitness1919.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, ProductUpdateViewModel bindingModel)
         {
             bool categoryExists =

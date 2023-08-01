@@ -2,11 +2,12 @@
 using Fitness1919.Data.Models;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Brand;
+using Guards;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Services.Data
 {
-    public class BrandService:IBrandService
+    public class BrandService : IBrandService
     {
         private readonly Fitness1919DbContext context;
         public BrandService(Fitness1919DbContext context)
@@ -16,9 +17,10 @@ namespace Fitness1919.Services.Data
 
         public async Task AddAsync(BrandAddViewModel model)
         {
+            Guard.ArgumentNotNull(model, nameof(model));
             var brand = new Brand
             {
-               BrandName = model.BrandName
+                BrandName = model.BrandName
             };
 
             await context.AddAsync(brand);
@@ -36,25 +38,26 @@ namespace Fitness1919.Services.Data
 
         public async Task<Brand> GetBrandAsync(int id)
         {
-
+            Guard.ArgumentNotNull(id, nameof(id));
             Brand brand = await context.Brands.FindAsync(id);
             return brand;
         }
 
         public bool BrandExistsAsync(int id)
         {
+            Guard.ArgumentNotNull(id, nameof(id));
             return context.Brands.Any(e => e.Id == id);
         }
 
         public async Task UpdateAsync(int id, BrandUpdateViewModel model)
         {
+            Guard.ArgumentNotNull(id, nameof(id));
+            Guard.ArgumentNotNull(model, nameof(model));
             var brandToUpdate = await context.Brands.FindAsync(id);
 
-            if (brandToUpdate != null)
-            {
-                brandToUpdate.Id = id;
-                brandToUpdate.BrandName = model.BrandName;
-            }
+            Guard.ArgumentNotNull(brandToUpdate, nameof(brandToUpdate));
+            brandToUpdate.Id = id;
+            brandToUpdate.BrandName = model.BrandName;
             await context.SaveChangesAsync();
         }
     }

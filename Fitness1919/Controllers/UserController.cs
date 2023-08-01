@@ -77,6 +77,7 @@ namespace Fitness1919.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginFormModel model)
         {
             if (!ModelState.IsValid)

@@ -2,6 +2,7 @@
 using Fitness1919.Data.Models;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Category;
+using Guards;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fitness1919.Services.Data
@@ -16,6 +17,7 @@ namespace Fitness1919.Services.Data
 
         public async Task AddAsync(CategoryAddViewModel model)
         {
+            Guard.ArgumentNotNull(model, nameof(model));
             var category = new Category
             {
                 CategoryName = model.CategoryName
@@ -36,25 +38,25 @@ namespace Fitness1919.Services.Data
 
         public async Task<Category> GetCategoryAsync(int id)
         {
-
+            Guard.ArgumentNotNull(id, nameof(id));
             Category category = await context.Categories.FindAsync(id);
             return category;
         }
 
         public bool CategoryExistsAsync(int id)
         {
+            Guard.ArgumentNotNull(id, nameof(id));
             return context.Categories.Any(e => e.Id == id);
         }
 
         public async Task UpdateAsync(int id, CategoryUpdateViewModel model)
         {
+            Guard.ArgumentNotNull(id, nameof(id));
+            Guard.ArgumentNotNull(model, nameof(model));
             var categoryToUpdate = await context.Categories.FindAsync(id);
-
-            if (categoryToUpdate != null)
-            {
-                categoryToUpdate.Id = id;
-                categoryToUpdate.CategoryName = model.CategoryName;
-            }
+            Guard.ArgumentNotNull(categoryToUpdate, nameof(categoryToUpdate));
+            categoryToUpdate.Id = id;
+            categoryToUpdate.CategoryName = model.CategoryName;
             await context.SaveChangesAsync();
         }
     }

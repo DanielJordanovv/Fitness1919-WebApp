@@ -13,6 +13,7 @@ namespace Fitness1919.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Calculate([Bind("Gender, Age, Height, Weight, WeeklyTrainingDays, Goal")] CalorieCalculatorViewModel model)
         {
             if (!ModelState.IsValid)
