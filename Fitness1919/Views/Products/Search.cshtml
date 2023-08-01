@@ -1,0 +1,47 @@
+﻿@using Fitness1919.Web.ViewModels.Product
+@model IEnumerable<ProductAllViewModel>
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h1>Search Results</h1>
+
+<form method="get">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="search" placeholder="Search products..." value="@ViewBag.SearchTerm">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    @if (!string.IsNullOrEmpty(product.img))
+                    {
+                        <img src="@Url.Content(product.img)" class="card-img-top" alt="Product Image">
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.Description</p>
+                        <p class="card-text">Category: @product.Category</p>
+                        <p class="card-text">Brand: @product.Brand</p>
+                        <p class="card-text">Price: $@product.Price</p>
+                        <p class="card-text">Quantity: @product.Quantity</p>
+                        <a href="@Url.Action("AddToCart", "Products", new { id = product.Id })" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No products found.</p>
+}

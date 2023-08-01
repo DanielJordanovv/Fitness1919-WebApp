@@ -76,16 +76,32 @@ namespace Fitness1919.Services.Data
             var productToUpdate = await context.Products.FindAsync(id);
 
             Guard.ArgumentNotNull(productToUpdate, nameof(productToUpdate));
-            productToUpdate.Name = model.Name;
-            productToUpdate.Description = model.Description;
-            productToUpdate.Quantity = model.Quantity;
-            productToUpdate.Price = model.Price;
-            productToUpdate.img = model.img;
-            productToUpdate.CategoryId = model.CategoryId;
-            productToUpdate.BrandId = model.BrandId;
+                productToUpdate.Name = model.Name;
+                productToUpdate.Description = model.Description;
+                productToUpdate.Quantity = model.Quantity;
+                productToUpdate.Price = model.Price;
+                productToUpdate.img = model.img;
+                productToUpdate.CategoryId = model.CategoryId;
+                productToUpdate.BrandId = model.BrandId;
 
-            await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
+            
+        }
 
+        public async Task<IEnumerable<ProductAllViewModel>> AllSearchedAsync(string search)
+        {
+            Guard.ArgumentNotNull(search, nameof(search));
+            return await context.Products.Where(x => !x.IsDeleted && x.Name.ToLower().Contains(search.ToLower())).Select(p => new ProductAllViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Quantity = p.Quantity,
+                Price = p.Price,
+                img = p.img,
+                Category = p.Category.CategoryName,
+                Brand = p.Brand.BrandName
+            }).ToListAsync();
         }
     }
 }

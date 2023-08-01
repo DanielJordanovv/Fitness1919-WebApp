@@ -11,22 +11,28 @@
 </head>
 <body>
     <header>
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Categories</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
                     </ul>
+                    <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search", "Products")">
+                        <div class="search_text_box">
+                            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search products..." value="@ViewBag.SearchTerm">
+                        </div>
+                        <div class="search_button">
+                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                        </div>
+                    </form>
+
                     <div class="login-container">
                         <partial name="_LoginPartial" />
                     </div>
@@ -34,29 +40,32 @@
             </div>
         </nav>
     </header>
-  <div class="page-content">
-    <div class="left-container">
-        <div class="leftside">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Fitness1919" style="width: 40px; height: 40px; background-color:#FFD700;">
-        </a>
-        <a asp-controller="Contacts" asp-action="Index">
-            <img src="https://cdn-icons-png.flaticon.com/512/46/46646.png" alt="Contacts" style="width: 40px; height: 40px; background-color:#FFD700;" /> 
-        </a>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">
-            <img src="https://icons.veryicon.com/png/o/education-technology/radio-and-tv-cloud/about-us-22.png" alt="Privacy" style="width: 40px; height: 40px; background-color:#FFD700;" />
-        </a> 
-        <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
-            <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" style="width: 40px; height: 40px; background-color:#FFD700;" />
-        </a>
+
+    <div class="page-content">
+        <div class="left-container">
+            <div class="leftside">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Fitness1919" style="width: 40px; height: 40px; background-color:#FFD700;">
+                </a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Index">
+                    <img src="https://cdn-icons-png.flaticon.com/512/46/46646.png" alt="Contacts" style="width: 40px; height: 40px; background-color:#FFD700;" />
+                </a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">
+                    <img src="https://icons.veryicon.com/png/o/education-technology/radio-and-tv-cloud/about-us-22.png" alt="Privacy" style="width: 40px; height: 40px; background-color:#FFD700;" />
+                </a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
+                    <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" style="width: 40px; height: 40px; background-color:#FFD700;" />
+                </a>
+            </div>
+        </div>
     </div>
-    </div>
-</div>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; Fitness1919 - @ReleaseYear
@@ -65,7 +74,7 @@
                 @Html.Raw($" - {DateTime.UtcNow.Year}")
             }
         </div>
-       
+
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -73,4 +82,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-

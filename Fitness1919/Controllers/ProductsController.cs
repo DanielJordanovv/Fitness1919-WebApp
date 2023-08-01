@@ -38,6 +38,16 @@ namespace Fitness1919.Web.Controllers
             var products = await service.AllAsync();
             return View(products);
         }
+        [AllowAnonymous]
+        public async Task<IActionResult> Search(string search)
+        {
+            if (search != null)
+            {
+                var products = await service.AllSearchedAsync(search);
+                return View(products);
+            }
+            return View();
+        }
 
         public async Task<IActionResult> Create()
         {
@@ -141,7 +151,7 @@ namespace Fitness1919.Web.Controllers
             }
             try
             {
-                await service.UpdateAsync(id,bindingModel);
+                await service.UpdateAsync(id, bindingModel);
                 return this.RedirectToAction("Index", "Products");
             }
             catch (Exception)
