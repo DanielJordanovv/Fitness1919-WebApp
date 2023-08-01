@@ -47,6 +47,11 @@ namespace Fitness1919.Web.Controllers
             await shoppingCartService.AddProductToCartAsync(userId, productId, quantity);
             return RedirectToAction("Index", "Products");
         }
+        [HttpGet]
+        public IActionResult ThankYou()
+        {
+            return View();
+        }
 
         [HttpGet]
         public IActionResult Checkout()

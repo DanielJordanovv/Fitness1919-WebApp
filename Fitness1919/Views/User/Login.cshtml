@@ -9,17 +9,23 @@
 <div class="row">
     <div class="col-md-4 offset-md-4">
         <section>
+             <div class="tempdata">
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <p>@TempData["ErrorMessage"]</p>
+                    }
+                </div>
             <form id="account" method="post">
                 <h2>Use a local account to log in.</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating mb-2">
-                    <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <input asp-for="Email" class="form-control" type="email" autocomplete="username" aria-required="true" />
                     <label asp-for="Email" class="form-label"></label>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-floating">
-                    <input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <input asp-for="Password" class="form-control" type="password" autocomplete="current-password" aria-required="true" />
                     <label asp-for="Password" class="form-label"></label>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
@@ -40,10 +46,18 @@
                     </p>
                 </div>
             </form>
+
         </section>
     </div>
 </div>
+<style>
+    .tempdata p {
+        color: red;
+        text-align: center;
+        font-size: 12px;
+    }
+</style>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }

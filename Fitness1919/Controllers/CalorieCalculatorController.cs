@@ -27,8 +27,6 @@ namespace Fitness1919.Web.Controllers
 
             double targetCalories = Math.Ceiling(CalculateTargetCalories(tdee, model.Goal));
 
-            ViewBag[targetCalories] = targetCalories;
-
             return Content($"Your daily calorie intake should be approximately: {targetCalories} calories.");
         }
 

@@ -12,46 +12,52 @@
         <a asp-controller="Products" asp-action="Create">Create New</a>
     </p>
 }
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Image</th>
-            <th>Category</th>
-            <th>Brand</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (TempData["ErrorMessage"] != null)
+{
+    <p>@TempData["ErrorMessage"]</p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                <td>
-                    <img src="@item.img" alt="Image" width="100" />
-                </td>
-                <td>@Html.DisplayFor(modelItem => item.Category)</td>
-                <td>@Html.DisplayFor(modelItem => item.Brand)</td>
-                <td>
-                    @if (this.User.IsInRole("Administrator"))
-                    {
-                        <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">Edit</a>
-                        <a asp-action="Delete" asp-controller="Products" asp-route-id="@item.Id">Delete</a>
-                    }
-                    <form asp-action="AddToCart" asp-controller="Products" method="post">
-                        <input type="hidden" name="productId" value="@item.Id" />
-                        <input type="number" name="quantity" value="1" min="1" required />
-                        <button type="submit">Add to Cart</button>
-                    </form>
-                </td>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td>
+                        <img src="@item.img" alt="Image" width="100" />
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                    <td>
+                        @if (this.User.IsInRole("Administrator"))
+                        {
+                            <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">Edit</a>
+                            <a asp-action="Delete" asp-controller="Products" asp-route-id="@item.Id">Delete</a>
+                        }
+                        <form asp-action="AddToCart" asp-controller="Products" method="post">
+                            <input type="hidden" name="productId" value="@item.Id" />
+                            <input type="number" name="quantity" value="1" min="1" required />
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

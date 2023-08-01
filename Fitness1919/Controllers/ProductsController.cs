@@ -3,6 +3,7 @@ using Fitness1919.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static Fitness1919.Common.NotificationMessagesConstants;
 
 namespace Fitness1919.Web.Controllers
 {
@@ -41,12 +42,17 @@ namespace Fitness1919.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Search(string search)
         {
-            if (search != null)
+            if (String.IsNullOrEmpty(search))
             {
-                var products = await service.AllSearchedAsync(search);
-                return View(products);
+                return RedirectToAction("Index");
             }
-            return View();
+            var products = await service.AllSearchedAsync(search);
+            if (products.Count() > 0)
+            {
+                return View("Index", products);
+            }
+            TempData[ErrorMessage] = "No products were found!";
+            return View("Index");
         }
 
         public async Task<IActionResult> Create()
