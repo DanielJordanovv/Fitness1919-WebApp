@@ -105,7 +105,7 @@ namespace Fitness1919.Web.Controllers
                 return NotFound();
             }
 
-            var viewModel = new ContactAddViewModel
+            var viewModel = new ContactDeleteViewModel
             {
                PhoneNumber=contact.PhoneNumber,
                Address = contact.Address,

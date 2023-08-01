@@ -7,18 +7,18 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><img src="https://cdn-icons-png.flaticon.com/512/3106/3106773.png" width ="30" height = "30"/></a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                <button type="submit" class="nav-link btn btn-link text-dark"><img src="https://cdn-icons-png.flaticon.com/512/152/152534.png" width="30" height="30"/></button>
             </form>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login"><img src="https://cdn-icons-png.flaticon.com/512/5509/5509636.png" width="30" height="30"/></a>
         </li>
     }
 </ul>

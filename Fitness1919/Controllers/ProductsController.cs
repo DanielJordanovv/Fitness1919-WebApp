@@ -167,7 +167,7 @@ namespace Fitness1919.Web.Controllers
                 return NotFound();
             }
 
-            var viewModel = new ProductAddViewModel
+            var viewModel = new ProductDeleteViewModel
             {
                 Id = product.Id,
                 Name = product.Name,
