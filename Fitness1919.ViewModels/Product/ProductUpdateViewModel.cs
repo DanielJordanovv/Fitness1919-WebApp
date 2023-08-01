@@ -17,22 +17,22 @@ namespace Fitness1919.Web.ViewModels.Product
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; } = null!;
         [Required]
-        [MinLength(NameMinLength, ErrorMessage = "The name must be at least 2 letters long.")]
-        [MaxLength(NameMaxLength, ErrorMessage = "The name max lenght is 50 letters.")]
+        [StringLength(NameMaxLength, ErrorMessage = NameErrorMessage, MinimumLength = NameMinLength)]
         public string Name { get; set; } = null!;
         [Required]
-        [MaxLength(DescriptionMaxLength, ErrorMessage = "The description max lenght is 100.")]
+        [MaxLength(DescriptionMaxLength, ErrorMessage = DescriptionErrorMessage)]
         public string Description { get; set; }
         [Required]
-        [Range(QuantityMinRange, QuantityMaxRange, ErrorMessage = "The quantity must be between 0 and 100.")]
+        [Range(QuantityMinRange, QuantityMaxRange, ErrorMessage = QuantityErrorMessage)]
         public int Quantity { get; set; }
+        [Required]
+        [Column(TypeName = PriceColumnType)]
+        [Range(typeof(decimal), PriceMinValue, PriceMaxValue, ErrorMessage = PriceErrorMessage)]
+        public decimal Price { get; set; }
         [Required]
         [Display(Name = "Image url")]
         [MaxLength(ImageUrlMaxLength)]
         public string img { get; set; } = null!;
-        [Required]
-        [Range(typeof(decimal), PriceMinValue, PriceMaxValue)]
-        public decimal Price { get; set; }
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
         [Display(Name = "Brand")]

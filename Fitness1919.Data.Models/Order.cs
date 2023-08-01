@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Fitness1919.Common.EntityValidationConstants.Order;
 
 namespace Fitness1919.Data.Models
 {
@@ -16,7 +17,9 @@ namespace Fitness1919.Data.Models
         [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
-        [Column(TypeName = "decimal(18, 6)")]
+        [Required]
+        [Column(TypeName = OrderPriceColumnType)]
+        [Range(typeof(decimal), OrderPriceMin, OrderPriceMax)]
         public decimal OrderPrice { get; set; }
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
     }

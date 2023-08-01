@@ -7,8 +7,7 @@ namespace Fitness1919.Web.ViewModels.Category
     {
         public int Id { get; set; }
         [Required]
-        [MinLength(NameMinLength, ErrorMessage = "The name must be at least 2 letters long.")]
-        [MaxLength(NameMaxLength, ErrorMessage = "The max lenght of name is 50.")]
+        [StringLength(NameMaxLength, ErrorMessage = NameErrorMessage, MinimumLength = NameMinLength)]
         public string CategoryName { get; set; } = null!;
     }
 }

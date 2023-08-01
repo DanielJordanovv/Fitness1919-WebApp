@@ -1,5 +1,4 @@
-﻿using Fitness1919.Data.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fitness1919.Web.ViewModels.Order
 {

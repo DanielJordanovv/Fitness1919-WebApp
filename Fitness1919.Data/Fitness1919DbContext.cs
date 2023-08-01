@@ -27,6 +27,8 @@ namespace Fitness1919.Data
             Assembly configAssembly = Assembly.GetAssembly(typeof(Fitness1919DbContext)) ??
                                       Assembly.GetExecutingAssembly();
             builder.ApplyConfigurationsFromAssembly(configAssembly);
+            builder.Entity<Order>().Property(e => e.OrderPrice).HasPrecision(18, 6);
+
             base.OnModelCreating(builder);
         }
     }

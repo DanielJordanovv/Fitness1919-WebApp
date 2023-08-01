@@ -14,17 +14,17 @@ namespace Fitness1919.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; } = null!;
         [Required]
-        [MinLength(NameMinLength,ErrorMessage = "The name must be at least 2 letters long.")]
-        [MaxLength(NameMaxLength, ErrorMessage = "The name max lenght is 50 letters.")]
+        [StringLength(NameMaxLength, ErrorMessage = NameErrorMessage, MinimumLength = NameMinLength)]
         public string Name { get; set; } = null!;
         [Required]
-        [MaxLength(DescriptionMaxLength, ErrorMessage = "The description max lenght is 100.")]
+        [MaxLength(DescriptionMaxLength, ErrorMessage = DescriptionErrorMessage)]
         public string Description { get; set; }
         [Required]
-        [Range(QuantityMinRange,QuantityMaxRange, ErrorMessage = "The quantity must be between 0 and 100.")]
+        [Range(QuantityMinRange, QuantityMaxRange, ErrorMessage = QuantityErrorMessage)]
         public int Quantity { get; set; }
         [Required]
-        [Column(TypeName = "decimal(18, 6)")]
+        [Column(TypeName = PriceColumnType)]
+        [Range(typeof(decimal), PriceMinValue, PriceMaxValue, ErrorMessage = PriceErrorMessage)]
         public decimal Price { get; set; }
         public bool IsDeleted { get; set; }
         [Required]
