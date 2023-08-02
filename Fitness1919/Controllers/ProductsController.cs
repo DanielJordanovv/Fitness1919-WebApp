@@ -1,4 +1,6 @@
-﻿using Fitness1919.Services.Data.Interfaces;
+﻿using Fitness1919.Services.Data.Exceptions;
+using Fitness1919.Services.Data.Interfaces;
+using Fitness1919.Web.Controllers.Exceptions;
 using Fitness1919.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,11 +29,18 @@ namespace Fitness1919.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToCart(string productId, int quantity)
         {
-            Guid userId = GetUserId();
+            try
+            {
+                Guid userId = GetUserId();
 
-            await shoppingCartService.AddProductToCartAsync(userId, productId, quantity);
+                await shoppingCartService.AddProductToCartAsync(userId, productId, quantity);
 
-            return RedirectToAction("Index", "ShoppingCart");
+                return RedirectToAction("Index", "Products");
+            }
+            catch (Exception)
+            {
+                return View("Exceptions/ProductQuantityZeroOrNotFound");
+            }
         }
         [AllowAnonymous]
         public async Task<IActionResult> Index()

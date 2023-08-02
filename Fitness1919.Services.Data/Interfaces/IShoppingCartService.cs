@@ -8,7 +8,7 @@ namespace Fitness1919.Services.Data.Interfaces
         ShoppingCartViewModel GetShoppingCartAsync(Guid userId);
         Task AddProductToCartAsync(Guid userId, string productId, int quantity);
         Task RemoveProductFromCartAsync(Guid userId, string productId);
-        Task CheckoutAsync(Guid userId);
+        Task CheckoutAsync(Guid userId, CheckoutViewModel model);
         Task RemoveAllProducts(Guid userId);
     }
 }

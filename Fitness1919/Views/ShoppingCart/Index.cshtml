@@ -2,6 +2,10 @@
 @model ShoppingCartViewModel
 
 <h1>Shopping Cart</h1>
+@if(TempData["ErrorMessage"] != null)
+{
+    <p>@TempData["ErrorMessage"]</p>
+}
 @if (Model.Products.Count() == 0)
 {
     <p>No products in you cart!</p>

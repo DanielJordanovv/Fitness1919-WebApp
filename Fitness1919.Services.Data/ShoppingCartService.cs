@@ -25,7 +25,7 @@ namespace Fitness1919.Services.Data
             var cart = context.ShoppingCartProducts.FirstOrDefault(x => x.UserId == userId && x.ProductId == productId && !x.IsCheckout);
             var product = context.Products.FirstOrDefault(x => x.Id == productId);
 
-            if (product == null)
+            if (product == null || product.Quantity ==0)
             {
                 throw new ProductNotFoundException();
             }
@@ -55,7 +55,7 @@ namespace Fitness1919.Services.Data
             }
             await context.SaveChangesAsync();
         }
-        public async Task CheckoutAsync(Guid userId)
+        public async Task CheckoutAsync(Guid userId,CheckoutViewModel model)
         {
             Guard.ArgumentNotNull(userId, nameof(userId));
             var cart = context.ShoppingCartProducts
@@ -71,6 +71,9 @@ namespace Fitness1919.Services.Data
                 CreatedOn = DateTime.Now,
                 ShoppingCarts = cart.ToList(),
                 UserId = userId,
+                FullName = model.Name,
+                Address = model.Address,
+                PhoneNumber = model.PhoneNumber,
                 OrderPrice = cart.Select(x => x.Product.Price).Sum(),
             };
             foreach (var c in cart)

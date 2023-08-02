@@ -14,6 +14,16 @@ namespace Fitness1919.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public DateTime CreatedOn { get; set; }
+        [Required]
+        [StringLength(FullNameMaxLenght,ErrorMessage = FullNameMessage,MinimumLength =FullNameMinLenght)]
+        public string FullName { get; set; }
+        [Required]
+        [StringLength(AddressMaxLenght, ErrorMessage = AddressMessage, MinimumLength = AddressMaxLenght)]
+        public string Address { get; set; }
+        [Phone]
+        [Required]
+        [RegularExpression(PhoneNumberExpression,ErrorMessage =PhoneNumberErrorMessage)]
+        public string PhoneNumber { get; set; }
         [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
         public virtual ApplicationUser User { get; set; }

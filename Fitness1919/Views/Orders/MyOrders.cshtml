@@ -10,12 +10,14 @@
             <tr>
                 <th>Created On</th> 
                 <th>Order Price</th>
+                <td>User Email</td>
             </tr>
         </thead>
         <tbody>
             @foreach (var order in Model)
             {
                 <tr>
+                    <td>@User.Identity.Name</td>
                     <td>@order.CreatedOn</td> 
                     <td>@order.OrderPrice.ToString("f2")</td>
                 </tr>

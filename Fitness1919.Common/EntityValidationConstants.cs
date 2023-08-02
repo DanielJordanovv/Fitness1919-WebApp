@@ -73,6 +73,16 @@
             public const string OrderPriceMin = "0";
             public const string OrderPriceMax = "79228162514264337593543950335";
 
+            public const int FullNameMinLenght = 4;
+            public const int FullNameMaxLenght = 25;
+            public const string FullNameMessage = "The name should be between 4 and 25 letters long!";
+
+            public const int AddressMinLenght = 4;
+            public const int AddressMaxLenght = 25;
+            public const string AddressMessage = "The name should be between 4 and 25 letters long!";
+
+            public const string PhoneNumberExpression = @"\+359\d{9}";
+            public const string PhoneNumberErrorMessage = "The Phone number should be in the following format: +359 000 000 000";
         }
     }
 }
