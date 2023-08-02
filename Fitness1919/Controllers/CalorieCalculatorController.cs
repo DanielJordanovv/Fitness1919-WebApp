@@ -1,5 +1,6 @@
 ﻿using Fitness1919.Web.ViewModels.CalorieCalculator;
 using Microsoft.AspNetCore.Mvc;
+using static Fitness1919.Common.NotificationMessagesConstants;
 
 namespace Fitness1919.Web.Controllers
 {
@@ -8,7 +9,7 @@ namespace Fitness1919.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = new CalorieCalculatorViewModel(); 
+            var model = new CalorieCalculatorViewModel();
             return View(model);
         }
 
@@ -27,7 +28,9 @@ namespace Fitness1919.Web.Controllers
 
             double targetCalories = Math.Ceiling(CalculateTargetCalories(tdee, model.Goal));
 
-            return Content($"Your daily calorie intake should be approximately: {targetCalories} calories.");
+            ViewBag.CalorieIntake = $"Your daily calorie intake should be approximately: {targetCalories} calories.";
+
+            return View("Index");
         }
 
         private double CalculateBMR(string gender, int age, double height, double weight)
@@ -50,7 +53,7 @@ namespace Fitness1919.Web.Controllers
             double activityFactor = 1.2;
             if (weeklyTrainingDays >= 3 && weeklyTrainingDays <= 5)
             {
-                activityFactor = 1.55; 
+                activityFactor = 1.55;
             }
             else if (weeklyTrainingDays >= 6 && weeklyTrainingDays <= 7)
             {
@@ -67,13 +70,13 @@ namespace Fitness1919.Web.Controllers
             switch (goal)
             {
                 case "gain":
-                    targetCalories = tdee + 500; 
+                    targetCalories = tdee + 500;
                     break;
                 case "lose":
                     targetCalories = tdee - 500;
                     break;
                 case "maintain":
-                    targetCalories = tdee; 
+                    targetCalories = tdee;
                     break;
                 default:
                     targetCalories = tdee;

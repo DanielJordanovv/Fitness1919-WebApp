@@ -29,12 +29,7 @@
     <input type="submit" value="Calculate">
 </form>
 <h2>Calorie Intake Recommendation:</h2>
-@{
-    if (!string.IsNullOrEmpty(ViewBag.CaloriesPerDay))
-    {
-        <p>@ViewBag.CaloriesPerDay</p>
-    }
-}
+@ViewBag.CalorieIntake
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
