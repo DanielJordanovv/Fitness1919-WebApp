@@ -10,6 +10,9 @@ namespace Fitness1919.Web.ViewModels.Order
             this.ShoppingCarts = new HashSet<Fitness1919.Data.Models.ShoppingCart>();
         }
         public string Id { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
         public DateTime CreatedOn { get; set; }
         [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }

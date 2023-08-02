@@ -19,6 +19,9 @@ namespace Fitness1919.Services.Data
             return await context.Orders.Select(p => new AllOrdersViewModel
             {
                 Id = p.Id,
+                Name = p.FullName,
+                Address = p.Address,
+                PhoneNumber = p.PhoneNumber,
                 CreatedOn = p.CreatedOn,
                 OrderPrice = p.OrderPrice,
                 ShoppingCarts = p.ShoppingCarts
@@ -27,10 +30,13 @@ namespace Fitness1919.Services.Data
 
         public async Task<IEnumerable<MyOrdersViewModel>> My(string customerId)
         {
-             Guard.ArgumentNotNull(customerId, nameof(customerId));
-            return await context.Orders.Where(x=>x.UserId.ToString() == customerId).Select(p => new MyOrdersViewModel
+            Guard.ArgumentNotNull(customerId, nameof(customerId));
+            return await context.Orders.Where(x => x.UserId.ToString() == customerId).Select(p => new MyOrdersViewModel
             {
                 Id = p.Id,
+                Name = p.FullName,
+                Address = p.Address,
+                PhoneNumber = p.PhoneNumber,
                 CreatedOn = p.CreatedOn,
                 OrderPrice = p.OrderPrice,
                 ShoppingCarts = p.ShoppingCarts

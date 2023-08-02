@@ -25,7 +25,7 @@ else
             <tr>
                 <td>@product.Name</td>
                 <td>@product.Quantity</td>
-                <td>@product.Price</td>
+                <td>@product.Price.ToString("f2")</td>
                 <td>
                     <form asp-controller="ShoppingCart" asp-action="RemoveFromCart" method="post">
                         <input type="hidden" name="productId" value="@product.Id" />
@@ -40,5 +40,5 @@ else
     <form asp-controller="ShoppingCart" asp-action="RemoveAllProducts" method="post">
         <button type="submit">Remove All</button>
     </form>
-    <h3>Total Price: @Model.Products.Sum(p => p.Price * p.Quantity)</h3>
+    <h3>Total Price: @Model.Products.Sum(p => p.Price * p.Quantity).ToString("f2")</h3>
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitness1919.Data.Migrations
 {
     [DbContext(typeof(Fitness1919DbContext))]
-    [Migration("20230802114246_CreateDb")]
+    [Migration("20230802122802_CreateDb")]
     partial class CreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

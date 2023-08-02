@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Fitness1919.Web.ViewModels.Order
+@model IEnumerable<MyOrdersViewModel>
+<!DOCTYPE html>
 <html>
 <head>
     <title>My Orders</title>
@@ -8,16 +10,20 @@
     <table>
         <thead>
             <tr>
+                 <th>Full Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
                 <th>Created On</th> 
                 <th>Order Price</th>
-                <td>User Email</td>
             </tr>
         </thead>
         <tbody>
             @foreach (var order in Model)
             {
                 <tr>
-                    <td>@User.Identity.Name</td>
+                    <td>@order.Name</td>
+                    <td>@order.Address</td>
+                    <td>@order.PhoneNumber</td>
                     <td>@order.CreatedOn</td> 
                     <td>@order.OrderPrice.ToString("f2")</td>
                 </tr>
