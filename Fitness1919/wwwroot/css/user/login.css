@@ -1,5 +1,6 @@
 ﻿h2 {
     font-weight: 800;
+    text-align: center;
 }
 
 body {
@@ -9,17 +10,23 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-color: black;
-    color: #8B8000;
+    color: #FFD700;
     font-family: Arial, sans-serif;
 }
 
-#registerSubmit {
-    background-color: #8B8000;
-    border-color: #8B8000;
+.body {
+    width: 100%;
+    margin: auto;
+}
+
+#login-submit,
+#register-button {
     color: black;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 20px;
+    background-color: #FFD700;
+    border-color: #FFD700;
+    font-weight: 800;
+    border-radius: 30px; 
+    padding: 10px 20px; 
 }
 
 .form-floating {
@@ -36,5 +43,12 @@ body {
 }
 
 .register-form {
-    max-width: 400px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.tempdata p {
+    color: red;
+    text-align: center;
+    font-size: 12px;
 }

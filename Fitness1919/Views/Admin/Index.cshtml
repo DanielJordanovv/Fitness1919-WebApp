@@ -1,0 +1,33 @@
+﻿﻿<link rel="stylesheet" href="~/css/admin/AdminIndex.css" asp-append-version="true" />
+<link rel=”stylesheet” href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="nofollow" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <div class="admin-box">
+                <h2>Admin Panel</h2>
+                <div>
+                    <p>PRODUCTS</p>
+                    <a class="admin-button" asp-controller="Products" asp-action="Create">Create</a>
+                    <a class="admin-button" asp-controller="Products" asp-action="Index">Edit</a>
+                    <p class="seperator"></p>
+                    <p>CATEGORIES</p>
+                    <a class="admin-button" asp-controller="Categories" asp-action="Create">Create</a>
+                    <a class="admin-button" asp-controller="Categories" asp-action="Index">Edit</a>
+                    <p class="seperator"></p>
+                    <p>BRANDS</p>
+                    <a class="admin-button" asp-controller="Brands" asp-action="Create">Create</a>
+                    <a class="admin-button" asp-controller="Brands" asp-action="Index">Edit</a>
+                    <p class="seperator"></p>
+                    <p>CONTACTS</p>
+                    <a class="admin-button" asp-controller="Contacts" asp-action="Create">Create</a>
+                    <a class="admin-button" asp-controller="Contacts" asp-action="Index">Edit</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

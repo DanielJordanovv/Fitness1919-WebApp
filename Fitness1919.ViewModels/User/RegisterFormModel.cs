@@ -5,6 +5,7 @@ namespace Fitness1919.Web.ViewModels.User
 {
     public class RegisterFormModel
     {
+        public Guid UserId { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

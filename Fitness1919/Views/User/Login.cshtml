@@ -1,20 +1,18 @@
 ﻿@using Fitness1919.Web.ViewModels.User
 @model LoginFormModel
-
-@{
-    ViewData["Title"] = "Log in";
-}
-
+<link rel="stylesheet" href="~/css/user/login.css" asp-append-version="true" />
+<div class="body">
 <h1 class="text-center">@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4 offset-md-4">
         <section>
-             <div class="tempdata">
-                    @if (TempData["ErrorMessage"] != null)
-                    {
-                        <p>@TempData["ErrorMessage"]</p>
-                    }
-                </div>
+            <div class="tempdata">
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <p>@TempData["ErrorMessage"]</p>
+                }
+            </div>
+            <p></p>
             <form id="account" method="post">
                 <h2>Use a local account to log in.</h2>
                 <hr />
@@ -37,27 +35,19 @@
                         </label>
                     </div>
                 </div>
-                <div>
+                <div class="login-button">
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
                 </div>
-                <div>
-                    <p>
-                        <a asp-controller="User" asp-action="Register">Register as a new user</a>
-                    </p>
+                <p></p>
+                <div class="register-redirect">
+                    <button id="register-button" type="submit" class="w-100 btn btn-lg btn-primary" asp-controller="User" asp-action="Register">Register as a new User</button>
                 </div>
             </form>
 
         </section>
     </div>
 </div>
-<style>
-    .tempdata p {
-        color: red;
-        text-align: center;
-        font-size: 12px;
-    }
-</style>
-
+</div>
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
 }
