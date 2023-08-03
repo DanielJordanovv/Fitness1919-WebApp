@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="~/css/product/productsIndex.css">
 
 <h1>Products</h1>
+<p></p>
 @if (TempData["ErrorMessage"] != null)
 {
     <p>@TempData["ErrorMessage"]</p>
@@ -21,19 +22,24 @@ else
                 <img class="product-image" src="@item.img" alt="Image" />
                 <div class="product-description">@Html.DisplayFor(modelItem => item.Description)</div>
                 <div class="product-price">Price:@Html.DisplayFor(modelItem => item.Price)lv</div>
-
-                <form class="add-to-cart" asp-action="AddToCart" asp-controller="Products" method="post">
-                    <input type="hidden" name="productId" value="@item.Id" />
-                    <input type="number" name="quantity" value="1" min="1" required />
-                    <button type="submit">Add to Cart</button>
-                    @if (this.User.IsInRole("Administrator"))
+                <div>
+                    @if (this.User.Identity.IsAuthenticated)
                     {
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
+                        <form class="add-to-cart" asp-action="AddToCart" asp-controller="Products" method="post">
+                            <input type="hidden" name="productId" value="@item.Id" />
+                            <input type="number" name="quantity" value="1" min="1" required />
+                            <button type="submit">Add to Cart</button>
+                            @if (this.User.IsInRole("Administrator"))
+                            {
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            }
+
+                        </form>
                     }
-                </form>
+                </div>
             </div>
         }
     </div>

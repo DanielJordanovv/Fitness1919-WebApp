@@ -1,0 +1,26 @@
+﻿body {
+    background-color: black;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('/images/Fitness1919Logo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.center {
+   margin:auto;
+   text-align:center;
+}
+
+a {
+    color: #FFD700;
+    text-align: center;
+}
+
+    a:hover {
+        color: black;
+        margin-top: auto;
+    }

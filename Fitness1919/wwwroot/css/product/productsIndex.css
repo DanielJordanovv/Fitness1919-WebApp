@@ -1,5 +1,6 @@
-﻿h1{
-    text-align:center;
+﻿h1 {
+    text-align: center;
+    color: #FFD700;
 }
 body {
     background-color: black;
@@ -49,7 +50,7 @@ body {
     .add-to-cart input[name="quantity"] {
         width: 50px;
         height: 30px;
-        background-color: black;
+        background-color: transparent;
         color: #FFD700;
         padding: 5px;
         border: none;
