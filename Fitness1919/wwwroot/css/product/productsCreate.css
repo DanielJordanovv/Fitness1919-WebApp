@@ -1,0 +1,71 @@
+﻿body {
+    background-image: url('/images/Fitness1919Logo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    color: #FFD700;
+}
+
+p {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #FFD700;
+}
+
+.table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+    .table th,
+    .table td {
+        padding: 8px;
+        text-align: left;
+        color: #FFD700;
+    }
+
+a {
+    color: #FFD700;
+    background-color: transparent;
+    padding: 4px 8px;
+    text-decoration: none;
+    border: 1px solid #FFD700;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+    a:hover {
+        background-color: black;
+        color: #FFD700;
+        border-color: black;
+    }
+
+    button[type="submit"],
+    a.btn-secondary {
+        background-color: #FFD700;
+        color: black;
+        border-color: #FFD700;
+    }
+
+        button[type="submit"]:hover,
+        a.btn-secondary:hover {
+            background-color: black;
+            color: #FFD700;
+            border-color: black;
+        }
+
+label {
+    color: #FFD700;
+}
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #FFD700;
+    border-radius: 4px;
+    color: yellow;
+    background-color: black;
+}

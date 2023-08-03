@@ -1,0 +1,71 @@
+﻿h1{
+    text-align:center;
+}
+body {
+    background-color: black;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('/images/Fitness1919Logo.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.product-table {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+}
+
+.product-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #FFD700; 
+}
+
+.product-image {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-description {
+    margin-top: 10px;
+}
+
+.product-price {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.add-to-cart {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+    .add-to-cart input[name="quantity"] {
+        width: 50px;
+        height: 30px;
+        background-color: black;
+        color: #FFD700;
+        padding: 5px;
+        border: none;
+        text-align: center;
+    }
+
+    .add-to-cart button {
+        background-color: #FFD700; 
+        color: black;
+        padding: 0 15px;
+        height: 30px; 
+        border: none; 
+        cursor: pointer;
+    }
+
+        .add-to-cart button:hover {
+            background-color: black; 
+            color: #FFD700; 
+        }

@@ -10,13 +10,13 @@
 
 .left-container {
     display: flex;
-    flex-direction: row; /* Arrange icons horizontally */
-    align-items: flex-start; /* Align icons vertically in the middle */
+    flex-direction: row; 
+    align-items: flex-start; 
     padding: 1px;
-    background-color: #FFD700; /* Yellow background color */
-    border: 2px solid #FFD700; /* Yellow border color */
+    background-color: #FFD700; 
+    border: 2px solid #FFD700; 
     border-radius: 2px;
-    backdrop-filter: blur(5px); /* Optional: Apply a blur effect to the background */
+    backdrop-filter: blur(5px); 
 }
 
 .leftside {
@@ -42,11 +42,10 @@
             border-radius: 5px;
         }
 
-/* Additional styles to position the container at the top left of the page */
 .left-container {
     position: absolute;
-    top: 20px; /* Adjust the top position as needed */
-    left: 20px; /* Adjust the left position as needed */
+    top: 20px; 
+    left: 20px; 
 }
 
 
@@ -57,19 +56,19 @@
     height: 60px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 600px; /* Adjust this value as needed */
-    position: fixed; /* Changed to fixed */
-    top: 0; /* Added */
-    left: 0; /* Added */
-    right: 0; /* Added */
-    z-index: 100; /* Added */
+    max-width: 600px; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    z-index: 100; 
     display: flex;
-    justify-content: space-between; /* Changed to space-between */
+    justify-content: space-between; 
     align-items: center;
     padding: 0 20px;
     border-radius: 50px;
     overflow: hidden;
-    transition: top 0.3s; /* Added */
+    transition: top 0.3s; 
 }
 
 .navbar:before,
@@ -109,10 +108,10 @@
     background-color: #FFD700;
     padding: 10px;
     border-radius: 5px;
-    position: fixed; /* Changed to fixed */
-    top: 10px; /* Adjust this value as needed */
-    right: 10px; /* Adjust this value as needed */
-    z-index: 101; /* Added */
+    position: fixed;
+    top: 10px; 
+    right: 10px; 
+    z-index: 101;
 }
 
 .login-button {
@@ -135,9 +134,9 @@ ul {
 }
 
 .container {
-    margin-top: 60px; /* Adjust this value as needed */
+    margin-top: 60px; 
 }
 
 .navbar .navbar-brand {
-    margin-right: 0; /* Added */
+    margin-right: 0;
 }

@@ -39,7 +39,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                @if (User.Identity.IsAuthenticated)
+                @if (this.User.IsInRole("Administrator"))
                 {
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
