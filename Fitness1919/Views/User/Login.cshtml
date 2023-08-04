@@ -1,52 +1,59 @@
 ﻿@using Fitness1919.Web.ViewModels.User
 @model LoginFormModel
 <link rel="stylesheet" href="~/css/user/login.css" asp-append-version="true" />
-<div class="body">
-<h1 class="text-center">@ViewData["Title"]</h1>
+<link rel=”stylesheet” href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="nofollow" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+@if (TempData["ErrorMessage"] != null)
+{
+    <p>@TempData["ErrorMessage"]</p>
+}
 <div class="row">
-    <div class="col-md-4 offset-md-4">
+    <div class="col-md-4">
         <section>
-            <div class="tempdata">
-                @if (TempData["ErrorMessage"] != null)
-                {
-                    <p>@TempData["ErrorMessage"]</p>
-                }
-            </div>
-            <p></p>
-            <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-floating mb-2">
-                    <input asp-for="Email" class="form-control" type="email" autocomplete="username" aria-required="true" />
-                    <label asp-for="Email" class="form-label"></label>
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-floating">
-                    <input asp-for="Password" class="form-control" type="password" autocomplete="current-password" aria-required="true" />
-                    <label asp-for="Password" class="form-label"></label>
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div>
+            <div class="login-box">
+                <h2>Log in</h2>
+                <form id="account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <p></p>
+                    <p></p>
+                    <div class="user-box">
+                        <pre></pre>
+                        <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" />
+                        <pre></pre>
+                        <pre></pre>
+                        <label asp-for="Email" class="form-label"></label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="user-box">
+                        <pre></pre>
+                        <input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                        <pre></pre>
+                        <pre></pre>
+                        <label asp-for="Password" class="form-label"></label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
                     <div class="checkbox">
-                        <label asp-for="RememberMe" class="form-label">
+                        <label asp-for="RememberMe" class="remember-label">
                             <input class="form-check-input" asp-for="RememberMe" />
                             @Html.DisplayNameFor(m => m.RememberMe)
                         </label>
                     </div>
-                </div>
-                <div class="login-button">
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <p></p>
-                <div class="register-redirect">
-                    <button id="register-button" type="submit" class="w-100 btn btn-lg btn-primary" asp-controller="User" asp-action="Register">Register as a new User</button>
-                </div>
-            </form>
-
+                    <div>
+                        <button class="submit-button" id="login-submit" type="submit">Log in</button>
+                    </div>
+                    <div>
+                        <p class="register-question">Don't have an account?</p>
+                        <a class="register-button" asp-controller="User" asp-action="Register">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Register
+                        </a>
+                    </div>
+                </form>
+            </div>
         </section>
     </div>
-</div>
 </div>
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
