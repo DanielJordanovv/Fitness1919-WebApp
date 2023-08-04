@@ -1,58 +1,119 @@
-﻿body {
+﻿﻿html {
+    height: 100%;
+}
+
+
+body {
     background-image: url('/images/Fitness1919Logo.jpg');
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: contain;
     background-color: black;
-    color: #FFD700;
-    font-family: Arial, sans-serif;
 }
 
-h1.text-center {
-    font-weight: 800;
-    text-align: center;
+
+.register-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: black;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
 }
 
-h2 {
-    font-weight: 800;
-    text-align: center;
-}
 
-.row {
-    display: grid; 
-    place-items: center; 
-    height: 100vh; 
-}
+    .register-box h2 {
+        margin: 0 0 30px;
+        padding: 0;
+        color: #FFD700;
+        text-align: center;
+    }
 
-.col-md-4 {
-    max-width: 400px;
-    width: 100%;
-}
 
-.form-floating {
-    color: black;
-    font-weight: 700;
-    font-size: large;
-}
 
-.w-100.btn.btn-lg.btn-primary {
-    color: black;
-    background-color: #FFD700;
-    border-color: #FFD700;
-    font-weight: 800;
-    border-radius: 30px; 
-    padding: 10px 20px; 
-}
+    .register-box .user-box {
+        position: relative;
+    }
 
-.text-danger {
-    color: red;
-    text-align: center;
-    font-size: 12px;
-}
 
-.login-button {
-    margin-top: 10px; 
-    margin-bottom: 10px; 
-}
+        .register-box .user-box input:-webkit-autofill,
+        .register-box .user-box input:-webkit-autofill:hover,
+        .register-box .user-box input:-webkit-autofill:focus,
+        .register-box .user-box input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px black inset !important;
+            -webkit-text-fill-color: #FFD700 !important;
+            caret-color: #FFD700;
+        }
 
+        .register-box .user-box input {
+            width: 100%;
+            padding: 5px 0;
+            font-size: 16px;
+            color: #FFD700;
+            margin-bottom: 2px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background-color: transparent;
+            border-color: #FFD700;
+        }
+
+            .register-box .user-box input:focus {
+                box-shadow: 0 0 0 2px transparent !important;
+                border-bottom: 4px solid #ffb703;
+            }
+
+
+
+        .register-box .user-box label {
+            position: absolute;
+            font-weight: bold;
+            top: -18px;
+            left: 0;
+            padding: 10px 0;
+            font-size: 12px;
+            color: #FFD700;
+            pointer-events: none;
+            background-color: transparent;
+        }
+
+
+
+    .register-box .submit-button {
+        font-weight: bold;
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-decoration: none;
+        text-transform: uppercase;
+        margin-top: 30px;
+        letter-spacing: 1px;
+        border-color: #FFD700;
+        background-color: transparent;
+        text-align: center;
+        color: #FFD700;
+        font-weight: bold;
+        width: 200px;
+    }
+
+        .register-box .submit-button:hover {
+            border: none;
+            outline: none;
+            font-weight: bold;
+            background: #ffb703;
+            color: black;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #FFD700, 0 0 25px #FFD700, 0 0 50px #FFD700, 0 0 100px #FFD700;
+        }
+
+
+    .register-box form p {
+        margin-top: 10px;
+        margin-bottom: 2px;
+    }

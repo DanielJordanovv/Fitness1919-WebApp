@@ -1,41 +1,51 @@
 ﻿@using Fitness1919.Web.ViewModels.User
 @model RegisterFormModel
+
 <link rel="stylesheet" href="~/css/user/register.css" asp-append-version="true" />
-<h1 class="text-center">@ViewData["Title"]</h1>
+<link rel=”stylesheet” href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="nofollow" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
 <div class="row">
-    <div class="center">
-        <div class="col-md-4 offset-md-4">
+    <div class="col-md-4">
+        <div class="register-box">
+            <h2>Create a new account.</h2>
             <form id="registerForm" method="post">
-                <h2>Create a new account.</h2>
-                <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-floating mb-2">
+                <div class="user-box">
                     <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="Email" class="form-label"></label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <p></p>
+                <div class="user-box">
+                    <input asp-for="FirstName" class="form-control" aria-required="true" />
+                    <label asp-for="FirstName" class="form-label"></label>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <p></p>
+                <div class="user-box">
+                    <input asp-for="LastName" class="form-control" aria-required="true" />
+                    <label asp-for="LastName" class="form-label"></label>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <p></p>
+                <div class="user-box">
+                    <input asp-for="Email" class="form-control" aria-required="true" />
                     <label asp-for="Email"></label>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-                <div class="form-floating mb-2">
+                <p></p>
+                <div class="user-box">
                     <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" />
                     <label asp-for="Password"></label>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
-                <div class="form-floating mb-2">
+                <p></p>
+                <div class="user-box">
                     <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                     <label asp-for="ConfirmPassword"></label>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
-                <div class="form-floating mb-2">
-                    <input asp-for="FirstName" class="form-control" autocomplete="new-password" aria-required="true" />
-                    <label asp-for="FirstName"></label>
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-2">
-                    <input asp-for="LastName" class="form-control" autocomplete="new-password" aria-required="true" />
-                    <label asp-for="LastName"></label>
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-
-                <recaptcha-v3 form-id="registerForm" action="submit" class="w-100 btn btn-lg btn-primary">Register</recaptcha-v3>
+                <button class="submit-button" id="registerSubmit" type="submit">Register</button>
             </form>
         </div>
     </div>
