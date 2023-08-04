@@ -16,8 +16,11 @@ body {
 
 .product-table {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 20px;
+}
+.product-table {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .product-box {
@@ -26,8 +29,20 @@ body {
     color: #FFD700;
     width: 250px;
     height: 320px;
+    margin-bottom: 20px; /* Adjust this value to increase or decrease spacing */
 }
 
+/* Media query for screens with a maximum width of 768px */
+@media (max-width: 768px) {
+    .product-table {
+        justify-content: center;
+    }
+
+    /* Adjust the width to make the product box full screen horizontally */
+    .product-box {
+        width: calc(100% - 40px); /* Subtracting 40px to account for margin and padding */
+    }
+}
 .product-image {
     max-width: 100%;
     height: 200px;
