@@ -28,7 +28,14 @@ namespace Fitness1919.Services.Data
                 CategoryId = model.CategoryId,
                 BrandId = model.BrandId
             };
-            await context.Products.AddAsync(product);
+            if (context.Products.Any(x => x.Name == product.Name && x.Description == product.Description))
+            {
+                throw new Exception();
+            }
+            else
+            {
+                await context.Products.AddAsync(product);
+            }
             await context.SaveChangesAsync();
         }
 
@@ -76,16 +83,16 @@ namespace Fitness1919.Services.Data
             var productToUpdate = await context.Products.FindAsync(id);
 
             Guard.ArgumentNotNull(productToUpdate, nameof(productToUpdate));
-                productToUpdate.Name = model.Name;
-                productToUpdate.Description = model.Description;
-                productToUpdate.Quantity = model.Quantity;
-                productToUpdate.Price = model.Price;
-                productToUpdate.img = model.img;
-                productToUpdate.CategoryId = model.CategoryId;
-                productToUpdate.BrandId = model.BrandId;
+            productToUpdate.Name = model.Name;
+            productToUpdate.Description = model.Description;
+            productToUpdate.Quantity = model.Quantity;
+            productToUpdate.Price = model.Price;
+            productToUpdate.img = model.img;
+            productToUpdate.CategoryId = model.CategoryId;
+            productToUpdate.BrandId = model.BrandId;
 
-                await context.SaveChangesAsync();
-            
+            await context.SaveChangesAsync();
+
         }
 
         public async Task<IEnumerable<ProductAllViewModel>> AllSearchedAsync(string search)

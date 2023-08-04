@@ -3,6 +3,8 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
+<link rel="stylesheet" href="~/css/profile/profileManage.css" asp-append-version="true" />
+
 <ul class="nav nav-pills flex-column">
     <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
@@ -22,5 +24,6 @@
     @if (this.User.IsInRole("Administrator"))
     {
         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin Panel</a></li>
+        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Admin" asp-action="AllUsers">Users</a></li>
     }
 </ul>

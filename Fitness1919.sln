@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fitness1919.Web.Infrastruct
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{0AF00C58-EA4F-437C-A409-A5EDDCDF0173}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitness1919.Web.Infrastructure.Extensions", "Fitness1919.Web.Infrastructure.Extensions\Fitness1919.Web.Infrastructure.Extensions.csproj", "{D75CC0DB-5536-4B8A-86E4-046D0C130B5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fitness1919.Web.Infrastructure.Extensions", "Fitness1919.Web.Infrastructure.Extensions\Fitness1919.Web.Infrastructure.Extensions.csproj", "{D75CC0DB-5536-4B8A-86E4-046D0C130B5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

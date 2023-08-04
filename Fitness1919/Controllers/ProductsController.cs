@@ -66,13 +66,20 @@ namespace Fitness1919.Web.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var productFromModel = new ProductAddViewModel()
+            try
             {
-                Categories = await this.categoryService.AllAsync(),
-                Brands = await this.brandService.AllAsync()
-            };
+                var productFromModel = new ProductAddViewModel()
+                {
+                    Categories = await this.categoryService.AllAsync(),
+                    Brands = await this.brandService.AllAsync()
+                };
 
-            return View(productFromModel);
+                return View(productFromModel);
+            }
+            catch (Exception)
+            {
+                return View("Exceptions/ProductExists");
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

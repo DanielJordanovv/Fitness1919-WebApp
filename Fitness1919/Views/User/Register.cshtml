@@ -11,9 +11,15 @@
             <form id="registerForm" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="user-box">
-                    <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <input asp-for="Email" class="form-control" aria-required="true" />
                     <label asp-for="Email" class="form-label"></label>
                     <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <p></p>
+                 <div class="user-box">
+                    <input asp-for="UserName" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="UserName"></label>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
                 <p></p>
                 <div class="user-box">
@@ -26,12 +32,6 @@
                     <input asp-for="LastName" class="form-control" aria-required="true" />
                     <label asp-for="LastName" class="form-label"></label>
                     <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-                <p></p>
-                <div class="user-box">
-                    <input asp-for="Email" class="form-control" aria-required="true" />
-                    <label asp-for="Email"></label>
-                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <p></p>
                 <div class="user-box">

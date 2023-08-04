@@ -10,7 +10,10 @@ namespace Fitness1919.Web.ViewModels.User
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; } = null!;
-
+        [Required]
+        [StringLength(15, MinimumLength = 1,
+            ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
+        public string UserName { get; set; }
         [Required]
         [StringLength(PasswordMaxLength, MinimumLength = PasswordMinLength,
             ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]

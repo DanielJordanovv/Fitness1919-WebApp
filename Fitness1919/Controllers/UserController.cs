@@ -43,7 +43,7 @@ namespace Fitness1919.Web.Controllers
             };
 
             await userManager.SetEmailAsync(user, model.Email);
-            await userManager.SetUserNameAsync(user, model.Email);
+            await userManager.SetUserNameAsync(user, model.UserName);
 
             IdentityResult result =
                 await userManager.CreateAsync(user, model.Password);

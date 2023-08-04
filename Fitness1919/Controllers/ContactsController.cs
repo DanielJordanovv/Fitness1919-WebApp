@@ -30,12 +30,19 @@ namespace Fitness1919.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ContactAddViewModel bindingModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                await service.AddAsync(bindingModel);
-                return RedirectToAction("Index" , "Contacts");
+                if (ModelState.IsValid)
+                {
+                    await service.AddAsync(bindingModel);
+                    return RedirectToAction("Index", "Contacts");
+                }
+                return View(bindingModel);
             }
-            return View(bindingModel);
+            catch (Exception)
+            {
+                return View("Exceptions/ContactExists");
+            }
         }
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(string id)

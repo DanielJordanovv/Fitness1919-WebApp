@@ -22,8 +22,14 @@ namespace Fitness1919.Services.Data
             {
                 CategoryName = model.CategoryName
             };
-
-            await context.AddAsync(category);
+            if (context.Categories.Any(x => x.CategoryName == category.CategoryName))
+            {
+                throw new Exception();
+            }
+            else
+            {
+                await context.AddAsync(category);
+            }
             await context.SaveChangesAsync();
         }
 

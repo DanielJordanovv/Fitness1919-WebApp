@@ -7,7 +7,7 @@ namespace Fitness1919.Web.ViewModels.Contact
     public class ContactAddViewModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; } = null!;
+        public string Id { get; set; }
         [Required]
         [Display(Name = PhoneNumberName)]
         [RegularExpression(PhoneNumberExpression, ErrorMessage = PhoneNumberErrorMessage)]

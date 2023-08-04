@@ -1,0 +1,18 @@
+﻿﻿html {
+    background: linear-gradient(#141e30, #243b55);
+}
+
+body {
+    background-image: url('/images/Fitness1919Logo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+}
+
+div {
+    background: transparent;
+}
+
+h1 {
+    color: #fff;
+}

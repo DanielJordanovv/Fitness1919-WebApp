@@ -15,7 +15,7 @@ namespace Fitness1919.Web.ViewModels.Product
             this.Brands = new HashSet<BrandAllViewModel>();
         }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; } = null!;
+        public string Id { get; set; } 
         [Required]
         [StringLength(NameMaxLength, ErrorMessage = NameErrorMessage, MinimumLength = NameMinLength)]
         public string Name { get; set; } = null!;

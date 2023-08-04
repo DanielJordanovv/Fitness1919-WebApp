@@ -22,8 +22,14 @@ namespace Fitness1919.Services.Data
             {
                 BrandName = model.BrandName
             };
-
-            await context.AddAsync(brand);
+            if (context.Brands.Any(x => x.BrandName == brand.BrandName))
+            {
+                throw new Exception();
+            }
+            else
+            {
+                await context.AddAsync(brand);
+            }
             await context.SaveChangesAsync();
         }
 

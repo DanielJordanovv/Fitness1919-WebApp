@@ -5,18 +5,19 @@
     width: 100%;
 }
 .page-content {
-    position: relative;
+    margin:0;
+    padding:0;
 }
 
 .left-container {
     display: flex;
-    flex-direction: row; 
-    align-items: flex-start; 
+    flex-direction: row;
+    align-items: flex-start;
     padding: 1px;
-    background-color: #FFD700; 
-    border: 2px solid #FFD700; 
+    background-color: transparent;
+    border: transparent;
     border-radius: 2px;
-    backdrop-filter: blur(5px); 
+    backdrop-filter: blur(5px);
 }
 
 .leftside {
@@ -31,8 +32,8 @@
         text-decoration: none;
         color: inherit;
         margin-bottom: 10px;
-        padding: 8px;
-        border-radius: 5px;
+        padding: 1px;
+        border:none;
     }
 
         .leftside a img {
@@ -133,10 +134,3 @@ ul {
     top: 0;
 }
 
-.container {
-    margin-top: 60px; 
-}
-
-.navbar .navbar-brand {
-    margin-right: 0;
-}

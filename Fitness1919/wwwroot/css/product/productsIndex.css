@@ -23,7 +23,9 @@ body {
 .product-box {
     border: 1px solid #ccc;
     padding: 10px;
-    color: #FFD700; 
+    color: #FFD700;
+    width: 250px;
+    height: 320px;
 }
 
 .product-image {

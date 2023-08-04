@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Fitness1919.Web.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class CategoriesController:Controller
+    public class CategoriesController : Controller
     {
         private readonly ICategoryService service;
 
@@ -30,12 +30,20 @@ namespace Fitness1919.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoryAddViewModel bindingModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                await service.AddAsync(bindingModel);
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    await service.AddAsync(bindingModel);
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(bindingModel);
             }
-            return View(bindingModel);
+            catch (Exception)
+            {
+                return View("Exceptions/CategoryExists");
+            }
+
         }
 
         public async Task<IActionResult> Edit(int id)

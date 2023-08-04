@@ -1,4 +1,6 @@
-﻿@{
+﻿<link rel="stylesheet" href="~/css/profile/profileLayout.css" asp-append-version="true" />
+
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
     {
         Layout = parentLayout.ToString();
@@ -9,7 +11,6 @@
     }
 }
 
-<h1>Manage your account</h1>
 
 <div>
     <h2>Change your account settings</h2>

@@ -28,8 +28,14 @@ namespace Fitness1919.Services.Data.Interfaces
                 Email = model.Email,
                 Address = model.Address,
             };
-
-            await context.AddAsync(contact);
+            if (context.Contacts.Any(x => x.PhoneNumber == contact.PhoneNumber && x.Email == contact.Email && contact.Address == contact.Address))
+            {
+                throw new Exception();
+            }
+            else
+            {
+                await context.AddAsync(contact);
+            }
             await context.SaveChangesAsync();
         }
 

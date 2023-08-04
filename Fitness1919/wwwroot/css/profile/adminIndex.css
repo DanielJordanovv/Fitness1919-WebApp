@@ -1,0 +1,79 @@
+﻿﻿html {
+    height: 100%;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: linear-gradient(#141e30, #243b55);
+}
+
+
+.admin-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: #001C30;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+}
+
+
+    .admin-box h2 {
+        position: center;
+        margin: 0 0 30px;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+    }
+
+p {
+    margin-top: 5px;
+    margin-bottom: 2px;
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+}
+
+.admin-box .seperator {
+    position: center;
+    text-align: center;
+    margin: 0px;
+    border-style: solid;
+    border-color: #fff;
+    border-bottom: 2px;
+}
+
+.admin-box a {
+    font-weight: bold;
+    position: center;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #ffb703;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    margin-top: 0px;
+    margin-left: 5px;
+    letter-spacing: 2px;
+    border-style: solid;
+    border-color: #ffb703;
+    border-radius: 5px;
+    width: 150px;
+}
+
+    .admin-box a:hover {
+        font-weight: bold;
+        background: #ffb703;
+        color: black;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #ffb703, 0 0 25px #ffb703, 0 0 50px #ffb703, 0 0 100px #ffb703;
+    }
