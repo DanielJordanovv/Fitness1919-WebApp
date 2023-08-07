@@ -41,7 +41,9 @@ namespace Fitness1919.Web.Controllers
             }
             catch (Exception)
             {
-                return View("Exceptions/ContactExists");
+                TempData["ErrorMessage"] = "Same contact already exists!";
+                return View();
+                //return View("Exceptions/ContactExists");
             }
         }
         [Authorize(Roles = "Administrator")]
@@ -72,31 +74,40 @@ namespace Fitness1919.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, ContactUpdateViewModel bindingModel)
         {
-            if (id != bindingModel.Id)
+            try
             {
-                return NotFound();
-            }
+                if (id != bindingModel.Id)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    await service.UpdateAsync(id, bindingModel);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ContactExists(bindingModel.Id))
+                    try
                     {
-                        return NotFound();
+                        await service.UpdateAsync(id, bindingModel);
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!ContactExists(bindingModel.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                return View(bindingModel);
             }
-            return View(bindingModel);
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = "Same contact already exists!";
+                return View();
+            }
+            
         }
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(string id)

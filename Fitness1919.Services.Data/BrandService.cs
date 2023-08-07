@@ -64,6 +64,10 @@ namespace Fitness1919.Services.Data
             Guard.ArgumentNotNull(brandToUpdate, nameof(brandToUpdate));
             brandToUpdate.Id = id;
             brandToUpdate.BrandName = model.BrandName;
+            if (context.Brands.Any(x => x.BrandName == brandToUpdate.BrandName))
+            {
+                throw new Exception();
+            }
             await context.SaveChangesAsync();
         }
     }

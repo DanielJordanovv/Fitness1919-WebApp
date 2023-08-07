@@ -90,7 +90,10 @@ namespace Fitness1919.Services.Data
             productToUpdate.img = model.img;
             productToUpdate.CategoryId = model.CategoryId;
             productToUpdate.BrandId = model.BrandId;
-
+            if (context.Products.Any(x => x.Name == productToUpdate.Name && x.Description == productToUpdate.Description && x.Quantity == productToUpdate.Quantity))
+            {
+                throw new Exception();
+            }
             await context.SaveChangesAsync();
 
         }

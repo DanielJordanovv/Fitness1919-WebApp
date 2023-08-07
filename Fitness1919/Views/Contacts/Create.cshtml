@@ -1,11 +1,16 @@
 ﻿@using Fitness1919.Web.ViewModels.Contact
 @model ContactAddViewModel
 @{
-    ViewData["Title"] = "Create Product";
+    ViewData["Title"] = "Create Contact";
 }
 
-<h1>Create Product</h1>
-
+<h1>Create Contact</h1>
+@if(TempData["ErrorMessage"]!=null)
+{
+    <div class="alert alert-danger">
+        <p style="color:red;">@TempData["ErrorMessage"]</p>
+    </div>
+}
 <form asp-controller="Contacts" asp-action="Create" method="post">
     <div class="form-group">
         <label asp-for="PhoneNumber">PhoneNumber:</label>

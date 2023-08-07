@@ -9,12 +9,13 @@
 
 <h1>Products</h1>
 <p></p>
-@if (TempData["ErrorMessage"] != null)
+  @if (TempData["ErrorMessage"] != null)
 {
-    <p>@TempData["ErrorMessage"]</p>
+    <div class="alert alert-danger">
+        <p style="color:red;">@TempData["ErrorMessage"]</p>
+    </div>
 }
-else
-{
+
     <div class="product-table">
         @foreach (var item in Model)
         {
@@ -43,4 +44,4 @@ else
             </div>
         }
     </div>
-}
+  

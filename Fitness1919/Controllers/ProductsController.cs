@@ -39,7 +39,9 @@ namespace Fitness1919.Web.Controllers
             }
             catch (Exception)
             {
-                return View("Exceptions/ProductQuantityZeroOrNotFound");
+                TempData["ErrorMessage"] = "The product's quantity is 0 or its not found!";
+                return RedirectToAction("Index", "Products");
+               // return View("Exceptions/ProductQuantityZeroOrNotFound");
             }
         }
         [AllowAnonymous]
@@ -110,7 +112,7 @@ namespace Fitness1919.Web.Controllers
             }
             catch (Exception)
             {
-                this.ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to add your new product! Please try again later !");
+                this.ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to add your new product! Please try again later ! Or try using other data!");
                 bindingModel.Categories = await this.categoryService.AllAsync();
                 bindingModel.Brands = await this.brandService.AllAsync();
 
@@ -153,36 +155,44 @@ namespace Fitness1919.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, ProductUpdateViewModel bindingModel)
         {
-            bool categoryExists =
-                this.categoryService.CategoryExistsAsync(bindingModel.CategoryId);
-            bool brandExists =
-                this.brandService.BrandExistsAsync(bindingModel.BrandId);
-            if (!categoryExists)
-            {
-                this.ModelState.AddModelError(nameof(bindingModel.CategoryId), "Selected category does not exist!");
-            }
-            if (!brandExists)
-            {
-                this.ModelState.AddModelError(nameof(bindingModel.BrandId), "Selected brand does not exist!");
-            }
-            if (!this.ModelState.IsValid)
-            {
-                bindingModel.Categories = await this.categoryService.AllAsync();
-                bindingModel.Brands = await this.brandService.AllAsync();
-                return this.View(bindingModel);
-            }
             try
             {
-                await service.UpdateAsync(id, bindingModel);
-                return this.RedirectToAction("Index", "Products");
+                bool categoryExists =
+               this.categoryService.CategoryExistsAsync(bindingModel.CategoryId);
+                bool brandExists =
+                    this.brandService.BrandExistsAsync(bindingModel.BrandId);
+                if (!categoryExists)
+                {
+                    this.ModelState.AddModelError(nameof(bindingModel.CategoryId), "Selected category does not exist!");
+                }
+                if (!brandExists)
+                {
+                    this.ModelState.AddModelError(nameof(bindingModel.BrandId), "Selected brand does not exist!");
+                }
+                if (!this.ModelState.IsValid)
+                {
+                    bindingModel.Categories = await this.categoryService.AllAsync();
+                    bindingModel.Brands = await this.brandService.AllAsync();
+                    return this.View(bindingModel);
+                }
+                try
+                {
+                    await service.UpdateAsync(id, bindingModel);
+                    return this.RedirectToAction("Index", "Products");
+                }
+                catch (Exception)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to add your new product! Please try again later !");
+                    bindingModel.Categories = await this.categoryService.AllAsync();
+                    bindingModel.Brands = await this.brandService.AllAsync();
+
+                    return this.View(bindingModel);
+                }
             }
             catch (Exception)
             {
-                this.ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to add your new product! Please try again later !");
-                bindingModel.Categories = await this.categoryService.AllAsync();
-                bindingModel.Brands = await this.brandService.AllAsync();
-
-                return this.View(bindingModel);
+                TempData["ErrorMessage"] = "Product with the same name and description already exists!";
+                return View();
             }
         }
 

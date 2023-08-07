@@ -83,6 +83,10 @@ namespace Fitness1919.Services.Data.Interfaces
             contactToUpdate.PhoneNumber = model.PhoneNumber;
             contactToUpdate.Address = model.Address;
             contactToUpdate.Email = model.Email;
+            if (context.Contacts.Any(x => x.PhoneNumber == contactToUpdate.PhoneNumber && x.Email == contactToUpdate.Email && x.Address == contactToUpdate.Address))
+            {
+                throw new Exception();
+            }
             await context.SaveChangesAsync();
         }
     }

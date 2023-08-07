@@ -41,12 +41,14 @@ namespace Fitness1919.Web.Controllers
             }
             catch (Exception)
             {
-                return View("Exceptions/BrandExists");
+                TempData["ErrorMessage"] = "Brand with the same name already exists!";
+                return View();
             }
         }
 
         public async Task<IActionResult> Edit(int id)
         {
+
             var brand = await service.GetBrandAsync(id);
             if (brand == null)
             {
@@ -65,31 +67,40 @@ namespace Fitness1919.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, BrandUpdateViewModel bindingModel)
         {
-            if (id != bindingModel.Id)
+            try
             {
-                return NotFound();
+                if (id != bindingModel.Id)
+                {
+                    return NotFound();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        await service.UpdateAsync(id, bindingModel);
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!BrandExists(bindingModel.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(bindingModel);
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = "Brand with the same name already exists!";
+                return View();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await service.UpdateAsync(id, bindingModel);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BrandExists(bindingModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(bindingModel);
         }
         public bool BrandExists(int id)
         {

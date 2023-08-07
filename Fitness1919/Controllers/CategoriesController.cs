@@ -41,7 +41,9 @@ namespace Fitness1919.Web.Controllers
             }
             catch (Exception)
             {
-                return View("Exceptions/CategoryExists");
+                TempData["ErrorMessage"] = "Category with the same name already exists!";
+                return View();
+                //return View("Exceptions/CategoryExists");
             }
 
         }
@@ -66,31 +68,39 @@ namespace Fitness1919.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, CategoryUpdateViewModel bindingModel)
         {
-            if (id != bindingModel.Id)
+            try
             {
-                return NotFound();
-            }
+                if (id != bindingModel.Id)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    await service.UpdateAsync(id, bindingModel);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoryExists(bindingModel.Id))
+                    try
                     {
-                        return NotFound();
+                        await service.UpdateAsync(id, bindingModel);
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!CategoryExists(bindingModel.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+                return View(bindingModel);
             }
-            return View(bindingModel);
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = "Category with the same name already exists!";
+                return View();
+            }
         }
 
         public bool CategoryExists(int id)

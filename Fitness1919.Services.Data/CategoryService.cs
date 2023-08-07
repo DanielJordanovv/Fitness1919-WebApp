@@ -63,6 +63,10 @@ namespace Fitness1919.Services.Data
             Guard.ArgumentNotNull(categoryToUpdate, nameof(categoryToUpdate));
             categoryToUpdate.Id = id;
             categoryToUpdate.CategoryName = model.CategoryName;
+            if (context.Categories.Any(x => x.CategoryName == categoryToUpdate.CategoryName))
+            {
+                throw new Exception();
+            }
             await context.SaveChangesAsync();
         }
     }

@@ -21,6 +21,7 @@
     {
         <li class="nav-item"><a class="nav-link" asp-controller="Orders" asp-action="MyOrders">My orders</a></li>
     }
+    <li class="border"></li>
     @if (this.User.IsInRole("Administrator"))
     {
         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin Panel</a></li>
