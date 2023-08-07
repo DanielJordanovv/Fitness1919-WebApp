@@ -4,11 +4,12 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
+<link rel="stylesheet" href="~/css/brand/edit.css" />
+<pre></pre><pre></pre><pre></pre><pre></pre>
 <h1>Edit</h1>
 @if (TempData["ErrorMessage"] != null)
 {
-      <div class="alert alert-danger">
+    <div class="alert alert-danger">
         <p style="color:red;">@TempData["ErrorMessage"]</p>
     </div>
 }
@@ -25,13 +26,13 @@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{
