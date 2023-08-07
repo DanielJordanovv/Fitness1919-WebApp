@@ -43,7 +43,6 @@ namespace Fitness1919.Web.Controllers
             {
                 TempData["ErrorMessage"] = "Same contact already exists!";
                 return View();
-                //return View("Exceptions/ContactExists");
             }
         }
         [Authorize(Roles = "Administrator")]

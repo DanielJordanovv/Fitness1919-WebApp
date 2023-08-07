@@ -31,15 +31,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 })
      .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<Fitness1919DbContext>();
-builder.Services.AddRazorPages();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IContactService, ContactService>();
-builder.Services.AddScoped<IBrandService, BrandService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
-builder.Services.AddScoped<IFeedbackService, FeedbackService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IAdminService, AdminService>();
+
+builder.Services.AddApplicationServices(typeof(IProductService));
+
 builder.Services
                 .AddControllersWithViews()
                 .AddMvcOptions(options =>

@@ -1,4 +1,5 @@
 ﻿using Fitness1919.Data.Models;
+using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.User;
 using Griesoft.AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication;
@@ -12,12 +13,14 @@ namespace Fitness1919.Web.Controllers
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUserService userService;
 
         public UserController(SignInManager<ApplicationUser> signInManager,
-                              UserManager<ApplicationUser> userManager)
+                              UserManager<ApplicationUser> userManager, IUserService userService)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
+            this.userService = userService;
         }
 
         [HttpGet]
@@ -31,6 +34,11 @@ namespace Fitness1919.Web.Controllers
             ValidationFailedAction = ValidationFailedAction.ContinueRequest)]
         public async Task<IActionResult> Register(RegisterFormModel model)
         {
+            if (EmailExists(model.Email))
+            {
+                ModelState.AddModelError("Email", "User with this email already exists");
+                return View(model);
+            }
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -95,6 +103,10 @@ namespace Fitness1919.Web.Controllers
             }
 
             return Redirect(model.ReturnUrl ?? "/Home/Index");
+        }
+        public bool EmailExists(string email)
+        {
+            return userService.EmailExistsAsync(email);
         }
     }
 }
