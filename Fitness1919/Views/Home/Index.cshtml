@@ -3,51 +3,239 @@
 }
 
 <style>
-    body {
+  @@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+*{
+   box-sizing: border-box; 
+}
+body {
+        text-align: center;
         background-image: url('/images/Fitness1919Logo.jpg');
         background-position: center;
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: contain;
         background-color: black;
-        color: yellow;
+        color: #FFD700;
         font-family: Arial, sans-serif;
     }
+body{
+    font-family: 'Roboto', sans-serif;
+    display:flex;
+   
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    Overflow: hidden;
+    margin:0;
+}
+.container{
+    display:flex;
+    width:90vw;
+}
+.panel{
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    height:80vh;
+    border-radius: 50px;
+    color:#fff;
+    cursor:pointer;
+    flex:0.5;
+    margin:10px;
+    position:relative;
+    transition:flex 0.7s ease-in;
+}
+.panel h3{
+    font-size:24px;
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    margin:0;
+    opacity:0;
+}
 
-    .image-container {
-        text-align: right;
-    }
+.panel.active{
+    flex:1;
+}
+.panel.active h3{
+    opacity:1;
+    transition:opacity 0.3s ease-in 0.4s;
+}
 
-    container {
-        display: flex;
-        align-items: center;
+@@media (max-width:480px){
+    .container{
+        width:100vw; 
     }
-
-    .text-container {
-        flex: 1;
+    .panel:nth-of-type(4),.panel:nth-of-type(5){
+        display:none;
     }
-
-    .image-container {
-        text-align: right;
-    }
-
-    h1 {
-        
-        font-size: 36px;
-        margin-bottom: 10px;
-    }
-
-    h6 {
-        font-size: 14px;
-        margin-bottom: 10px;
-        text-align: left;
-        font-family: "Good Times", "Courier New", monospace;
-    }
+}
 </style>
 
-<div class="container">
-    <div class="text-container">
-        <div class="text-center">
-        </div>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cartes extensibles</title>
+</head>
+<body>
+   <div class="container">
+       <div class="panel active" style="background-image: url('https://i5.walmartimages.com/seo/Optimum-Nutrition-Gold-Standard-100-Whey-Protein-Powder-Vanilla-Ice-Cream-58-Servings_4f53f7c4-51d3-42e9-93c8-b489e2ef46db.bc83216509fdaccb96fada5d71ff9035.png?odnHeight=768&odnWidth=768&odnBg=FFFFFF')">
+           <h3>Protein powders</h3>
+       </div>
+       <div class="panel" style="background-image:url('https://fitfitfit.fit/cdn/shop/products/Creatine-X-500g_720x_d1da3e59-5fe7-4458-a10d-81faaa91b1c6.png?v=1640542236')">
+           <h3>Creatines</h3>
+       </div>
+       <div class="panel" style="background-image:url('https://www.transparentlabs.com/cdn/shop/products/Bulk_Black_Render.png?v=1668537322')">
+        <h3>Pre-workouts</h3>
+       </div> 
+       <div class="panel" style="background-image:url('https://nitrotiger.com/image/catalog/products/dymatize/dymatize-bcaa-2200-400-capsules.png')">
+           <h3>Amino acids</h3>
+       </div>
+       <div class="panel" style="background-image:url('https://scottyorkfitness.com/wp-content/uploads/2016/06/lifting-straps.png')">
+           <h3>Accessoaries</h3>
+       </div>
+   </div>
+
+   <script src="script.js"></script>
+</body>
+</html>
+<script>
+const panels=document.querySelectorAll('.panel')
+panels.forEach((panel)=>{//loop on every cards
+    console.log(panel)
+  panel.addEventListener("click",()=>{//add a click event
+    removeActiveClasses()
+    panel.classList.add("active");//when i click i add a class style 'active '
+  })//
+})
+function removeActiveClasses(){
+    panels.forEach((panel)=>{//when i click in other cards i remove active class on the others panel
+        panel.classList.remove("active")
+    })
+}
+</script@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+  @@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+*{
+   box-sizing: border-box; 
+}
+body {
+        text-align: center;
+        background-image: url('/images/Fitness1919Logo.jpg');
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-color: black;
+        color: #FFD700;
+        font-family: Arial, sans-serif;
+    }
+body{
+    font-family: 'Roboto', sans-serif;
+    display:flex;
+   
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    Overflow: hidden;
+    margin:0;
+}
+.container{
+    display:flex;
+    width:90vw;
+}
+.panel{
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    height:80vh;
+    border-radius: 50px;
+    color:#fff;
+    cursor:pointer;
+    flex:0.5;
+    margin:10px;
+    position:relative;
+    transition:flex 0.7s ease-in;
+}
+.panel h3{
+    font-size:24px;
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    margin:0;
+    opacity:0;
+}
+
+.panel.active{
+    flex:1;
+}
+.panel.active h3{
+    opacity:1;
+    transition:opacity 0.3s ease-in 0.4s;
+}
+
+@@media (max-width:480px){
+    .container{
+        width:100vw; 
+    }
+    .panel:nth-of-type(4),.panel:nth-of-type(5){
+        display:none;
+    }
+}
+</style>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cartes extensibles</title>
+</head>
+<body>
+   <div class="container">
+       <div class="panel active" style="background-image: url('https://i5.walmartimages.com/seo/Optimum-Nutrition-Gold-Standard-100-Whey-Protein-Powder-Vanilla-Ice-Cream-58-Servings_4f53f7c4-51d3-42e9-93c8-b489e2ef46db.bc83216509fdaccb96fada5d71ff9035.png?odnHeight=768&odnWidth=768&odnBg=FFFFFF')">
+           <h3>Protein powders</h3>
+       </div>
+       <div class="panel" style="background-image:url('https://fitfitfit.fit/cdn/shop/products/Creatine-X-500g_720x_d1da3e59-5fe7-4458-a10d-81faaa91b1c6.png?v=1640542236')">
+           <h3>Creatines</h3>
+       </div>
+       <div class="panel" style="background-image:url('https://www.transparentlabs.com/cdn/shop/products/Bulk_Black_Render.png?v=1668537322')">
+        <h3>Pre-workouts</h3>
+       </div> 
+       <div class="panel" style="background-image:url('https://nitrotiger.com/image/catalog/products/dymatize/dymatize-bcaa-2200-400-capsules.png')">
+           <h3>Amino acids</h3>
+       </div>
+       <div class="panel" style="background-image:url('https://scottyorkfitness.com/wp-content/uploads/2016/06/lifting-straps.png')">
+           <h3>Accessoaries</h3>
+       </div>
+   </div>
+
+   <script src="script.js"></script>
+</body>
+</html>
+<script>
+const panels=document.querySelectorAll('.panel')
+panels.forEach((panel)=>{//loop on every cards
+    console.log(panel)
+  panel.addEventListener("click",()=>{//add a click event
+    removeActiveClasses()
+    panel.classList.add("active");//when i click i add a class style 'active '
+  })//
+})
+function removeActiveClasses(){
+    panels.forEach((panel)=>{//when i click in other cards i remove active class on the others panel
+        panel.classList.remove("active")
+    })
+}
+</script>>
