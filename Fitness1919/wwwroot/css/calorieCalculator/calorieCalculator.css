@@ -1,0 +1,54 @@
+﻿body {
+    background-image: url("/images/Fitness1919logo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #FFD700;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    color: #FFD700;
+    text-align: center;
+}
+
+.calorieForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #FFD700;
+    border-radius: 5px;
+    background-color: black;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="number"], input[type="submit"], select {
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 2px solid #FFD700;
+    border-radius: 3px;
+    background-color: black;
+    color: #FFD700;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+#result {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    #result strong {
+        color: #FFD700;
+    }
+
+.field-validation-error {
+    color: red;
+    display: block;
+    margin-top: 5px;
+}

@@ -5,19 +5,20 @@
     ViewData["Title"] = "Create Product";
 }
 <link rel="stylesheet" href="~/css/product/productsCreate.css" asp-append-version="true" />
+    <script src="~/js/"></script>
 
 <h1>Create Product</h1>
 @if (TempData["ErrorMessage"] != null)
 {
-    <div class="alert alert-danger">
-        <p style="color:red;">@TempData["ErrorMessage"]</p>
-    </div>
+        <div class="alert alert-danger">
+            <p style="color:red;">@TempData["ErrorMessage"]</p>
+        </div>
 }
 @if (!ViewData.ModelState.IsValid)
 {
-    <div class="alert alert-danger">
-        <strong>Error:</strong> There was an error while creating the product.
-    </div>
+        <div class="alert alert-danger">
+            <strong>Error:</strong> There was an error while creating the product.
+        </div>
 }
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
@@ -52,7 +53,7 @@
                 <select asp-for="CategoryId" class="form-control">
                     @foreach (var category in Model.Categories)
                     {
-                        <option value="@category.Id">@category.CategoryName</option>
+                            <option value="@category.Id">@category.CategoryName</option>
                     }
                 </select>
                 <span asp-validation-for="CategoryId" class="small text-danger"></span>
@@ -62,7 +63,7 @@
                 <select asp-for="BrandId" class="form-control">
                     @foreach (var brand in Model.Brands)
                     {
-                        <option value="@brand.Id">@brand.BrandName</option>
+                            <option value="@brand.Id">@brand.BrandName</option>
                     }
                 </select>
                 <span asp-validation-for="BrandId" class="small text-danger"></span>
