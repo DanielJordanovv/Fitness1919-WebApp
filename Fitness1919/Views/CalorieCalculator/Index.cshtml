@@ -2,7 +2,7 @@
 @model CalorieCalculatorViewModel
 
 <h2>Calorie Calculator</h2>
-<form asp-controller="CalorieCalculator" asp-action="Calculate" method="post">
+<form class="calorieForm" asp-controller="CalorieCalculator" asp-action="Calculate" method="post">
     <label>Gender:</label>
     <input type="radio" name="Gender" value="male" checked> Male
     <input type="radio" name="Gender" value="female"> Female
@@ -16,7 +16,7 @@
     <label>Weight (kg):</label>
     <input type="number" name="Weight" min="0" max="250" value="@Model.Weight" required>
     <br />
-    <label class= "TrainingDays">Weekly Training Days:</label>
+    <label class="TrainingDays">Weekly Training Days:</label>
     <input type="number" min="0" max="7" name="WeeklyTrainingDays" value="@Model.WeeklyTrainingDays" required>
     <br />
     <label>Goal:</label>
@@ -28,82 +28,91 @@
     <br />
     <input type="submit" value="Calculate">
 </form>
-<h2>Calorie Intake Recommendation:</h2>
-@ViewBag.CalorieIntake
+
+<!-- Calorie Intake Recommendation section -->
+<div id="result">
+    @if (ViewBag.CalorieIntake != null)
+    {
+        <h2>Calorie Intake Recommendation:</h2>
+        <p>@Html.Raw(ViewBag.CalorieIntake)</p>
+    }
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(function () {
-        $('#calorieForm').submit(function (event) {
-            event.preventDefault(); 
+        $('.calorieForm').submit(function (event) {
+            event.preventDefault();
 
             $.ajax({
                 url: '@Url.Action("Calculate", "CalorieCalculator")',
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function (result) {
-                    $('#calorieForm').after(result);
+                    $('#result').html(result);
                 },
                 error: function (xhr) {
+                    console.log(xhr.responseText); // Log the error response to the browser console
                     alert('An error occurred while calculating the calories. Please try again.');
                 }
             });
         });
     });
 </script>
+
 <style>
-body {
- background-image: url("/images/Fitness1919logo.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: #FFD700;
-  font-family: Arial, sans-serif;
-}
+    body {
+        background-image: url("/images/Fitness1919logo.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: #FFD700;
+        font-family: Arial, sans-serif;
+    }
 
-h1, h2 {
-  color: #FFD700;
-  text-align:center;
-}
+    h1, h2 {
+        color: #FFD700;
+        text-align: center;
+    }
 
-form {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 2px solid #FFD700;
-  border-radius: 5px;
-  background-color: black;
-}
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 2px solid #FFD700;
+        border-radius: 5px;
+        background-color: black;
+    }
 
-label {
-  display: block;
-  margin-bottom: 5px;
-}
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
 
-input[type="number"], input[type="submit"], select {
-  padding: 5px;
-  margin-bottom: 10px;
-  border: 2px solid #FFD700;
-  border-radius: 3px;
-  background-color: black;
-  color: #FFD700;
-}
+    input[type="number"], input[type="submit"], select {
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 2px solid #FFD700;
+        border-radius: 3px;
+        background-color: black;
+        color: #FFD700;
+    }
 
-input[type="submit"] {
-  cursor: pointer;
-}
+    input[type="submit"] {
+        cursor: pointer;
+    }
 
-#result {
-  text-align: center;
-  margin-top: 20px;
-}
+    #result {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-#result strong {
-  color: #FFD700;
-}
+    #result strong {
+        color: #FFD700;
+    }
 
-.field-validation-error {
-  color: red;
-  display: block;
-  margin-top: 5px;
-}
+    .field-validation-error {
+        color: red;
+        display: block;
+        margin-top: 5px;
+    }
 </style>

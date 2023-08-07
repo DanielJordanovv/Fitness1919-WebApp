@@ -1,0 +1,7 @@
+﻿@{
+    if (!string.IsNullOrEmpty(ViewBag.CalorieIntake))
+    {
+        <h2>Calorie Intake Recommendation:</h2>
+        <p>@Html.Raw(ViewBag.CalorieIntake)</p>
+    }
+}

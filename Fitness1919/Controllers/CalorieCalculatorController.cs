@@ -23,14 +23,12 @@ namespace Fitness1919.Web.Controllers
             }
 
             double bmr = Math.Ceiling(CalculateBMR(model.Gender, model.Age, model.Height, model.Weight));
-
             double tdee = Math.Ceiling(CalculateTDEE(bmr, model.WeeklyTrainingDays));
-
             double targetCalories = Math.Ceiling(CalculateTargetCalories(tdee, model.Goal));
 
             ViewBag.CalorieIntake = $"Your daily calorie intake should be approximately: {targetCalories} calories.";
 
-            return View("Index");
+            return PartialView("CalorieResult");
         }
 
         private double CalculateBMR(string gender, int age, double height, double weight)
