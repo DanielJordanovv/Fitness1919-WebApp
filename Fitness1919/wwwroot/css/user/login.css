@@ -30,7 +30,7 @@ body {
     .login-box h2 {
         margin: 0 0 30px;
         padding: 0;
-        color: #FFD700;
+        color: white;
         text-align: center;
     }
 
@@ -108,7 +108,7 @@ body {
     border-color: #FFD700;
     background-color: transparent;
     text-align: center;
-    color: #FFD700;
+    color: white;
     font-weight: bold;
     width: 200px;
 }
@@ -141,7 +141,7 @@ body {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
-    color: #FFD700;
+    color: white;
     font-size: 16px;
     text-align: center;
     text-decoration: none;
