@@ -1,0 +1,98 @@
+﻿body {
+    background-image: url('/images/Fitness1919Logo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    color: #FFD700;
+    font-family: Arial, sans-serif;
+    position:center;
+}
+
+h1 {
+    text-align: center;
+    position:center;
+}
+
+h3 {
+    text-align: center;
+    color: #FFD700;
+    margin-top: 20px;
+    position: center;
+}
+
+h4 {
+    color: #FFD700;
+}
+
+hr {
+    border-color: #FFD700;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+.col-sm-2 {
+    font-weight: bold;
+}
+
+.col-sm-10 {
+    color: #FFD700;
+}
+
+.btn {
+    cursor: pointer;
+    padding: 4px 8px;
+    text-decoration: none;
+    border: 1px solid #FFD700;
+    border-radius: 4px;
+    background-color: #FFD700;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-danger {
+    background-color: red;
+    color: white;
+    border-color:red;
+}
+    .btn-danger:hover {
+        background-color: #FFD700;
+        color: black;
+        border-color: #FFD700;
+    }
+
+.btn-primary {
+    background-color: #FFD700;
+    color: black;
+}
+
+a.btn-primary.btn {
+    margin-right: 5px; 
+}
+
+    a.btn-primary.btn:hover {
+        background-color: black;
+        color: #FFD700; 
+    }
+
+a {
+    color: #FFD700;
+    text-decoration: blink;
+}
+
+    a:visited {
+        color: #FFD700;
+    }
+
+    a:hover {
+        color: orange;
+    }
+
+    a:active {
+        color: #FFD700;
+    }
+
+    a:focus {
+        color: #FFD700;
+    }

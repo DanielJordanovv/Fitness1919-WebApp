@@ -1,10 +1,13 @@
-﻿﻿h3 {
+﻿body{
+    margin:auto;
+}﻿
+h3 {
     color: #fff;
 }
 
 .form-control {
     color: #fff;
-    background-color: #001C30;
+    background-color: black;
     border: none;
     border-radius: 0px;
     border-bottom-left-radius: 5px;
@@ -13,7 +16,7 @@
 
     .form-control:focus {
         color: #fff;
-        background-color: #001C30;
+        background-color: black;
         border: none;
         box-shadow: 0 0 0 0.25rem #ffb703;
         border-radius: 0px;
@@ -25,7 +28,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #001C30 inset !important;
+    -webkit-box-shadow: 0 0 0 30px black inset !important;
     -webkit-text-fill-color: #fff !important;
     caret-color: #fff;
 }
@@ -39,14 +42,14 @@ input:-webkit-autofill:active {
 }
 
 .form-control:disabled, .form-control[readonly] {
-    background-color: #001C30;
+    background-color: black;
     border-radius: 0px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
 .input-group-text {
-    background-color: #001C30;
+    background-color: black;
     border: none;
     border-radius: 0px;
     border-top-right-radius: 5px;
@@ -96,3 +99,14 @@ input:-webkit-autofill:active {
         border: none;
         box-shadow: none;
     }
+.btn-link {
+    font-weight: 400;
+    color: #ffb703;
+    text-decoration:blink;
+}
+    .btn-link:hover {
+        font-weight: 400;
+        color: #fff;
+        text-decoration: blink;
+    }
+

@@ -41,7 +41,7 @@ namespace Fitness1919.Web.Controllers
             {
                 TempData["ErrorMessage"] = "The product's quantity is 0 or its not found!";
                 return RedirectToAction("Index", "Products");
-               // return View("Exceptions/ProductQuantityZeroOrNotFound");
+                // return View("Exceptions/ProductQuantityZeroOrNotFound");
             }
         }
         [AllowAnonymous]
@@ -68,20 +68,13 @@ namespace Fitness1919.Web.Controllers
 
         public async Task<IActionResult> Create()
         {
-            try
+            var productFromModel = new ProductAddViewModel()
             {
-                var productFromModel = new ProductAddViewModel()
-                {
-                    Categories = await this.categoryService.AllAsync(),
-                    Brands = await this.brandService.AllAsync()
-                };
+                Categories = await this.categoryService.AllAsync(),
+                Brands = await this.brandService.AllAsync()
+            };
 
-                return View(productFromModel);
-            }
-            catch (Exception)
-            {
-                return View("Exceptions/ProductExists");
-            }
+            return View(productFromModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

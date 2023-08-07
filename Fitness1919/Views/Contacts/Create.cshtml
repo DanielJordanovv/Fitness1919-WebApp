@@ -4,14 +4,15 @@
     ViewData["Title"] = "Create Contact";
 }
 
+<link rel="stylesheet" href="~/css/contact/create.css" asp-append-version="true" />
 <h1>Create Contact</h1>
-@if(TempData["ErrorMessage"]!=null)
+@if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
         <p style="color:red;">@TempData["ErrorMessage"]</p>
     </div>
 }
-<form asp-controller="Contacts" asp-action="Create" method="post">
+<form class="input" asp-controller="Contacts" asp-action="Create" method="post">
     <div class="form-group">
         <label asp-for="PhoneNumber">PhoneNumber:</label>
         <input asp-for="PhoneNumber" class="form-control" />
@@ -29,74 +30,6 @@
         <input asp-for="Email" class="form-control" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary" style="border-color: #8B8000; background-color: #8B8000; font-weight: bold ; color:black">Create</button>
-    <a asp-controller="Contacts" asp-action="Index" class="btn btn-secondary" style="border-color: #8B8000; background-color: #8B8000; font-weight: bold ; color:black">Cancel</a>
+    <button type="submit" class="btn btn-primary" style="border-color: #FFD700; background-color: #FFD700; font-weight: bold ; color:black">Create</button>
+    <a asp-controller="Contacts" asp-action="Index" class="btn btn-secondary" style="border-color: #FFD700; background-color: #FFD700; font-weight: bold ; color:black">Cancel</a>
 </form>
-<style>
-body {
-            background-image: url('/images/Fitness1919Logo.jpg');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-color: black;
-            color: #FFD700;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        form {
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #FFD700;
-            border-radius: 4px;
-        }
-
-        .form-group {
-            margin-bottom: 10px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #FFD700;
-            border-radius: 4px;
-            color: #FFD700;
-            background-color: black;
-        }
-
-        .text-danger {
-            color: red;
-        }
-
-        .btn {
-            cursor: pointer;
-            padding: 4px 8px;
-            text-decoration: none;
-            border: 1px solid #FFD700;
-            border-radius: 4px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .btn-primary {
-            background-color: #FFD700;
-            color: black;
-        }
-
-        .btn-secondary {
-            background-color: #FFD700;
-            color: black;
-        }
-
-        .btn:hover {
-            background-color: black;
-            color: #FFD700;
-        }
-    </style>
