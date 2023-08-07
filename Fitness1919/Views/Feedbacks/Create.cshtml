@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "Create Feedback";
 }
-
+<link rel="stylesheet" href="~/css/feedback/create.css" true" />
 <h1>Create Feedback</h1>
 
-<form asp-controller="Feedbacks" asp-action="Create" method="post">
+<form class="sth" asp-controller="Feedbacks" asp-action="Create" method="post">
     <div class="form-group">
         <label asp-for="FullName">FullName:</label>
         <input asp-for="FullName" class="form-control" />
@@ -24,74 +24,8 @@
         <input asp-for="FeedBackDescription" class="form-control" />
         <span asp-validation-for="FeedBackDescription" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary" style="border-color: #8B8000; background-color: #8B8000; font-weight: bold ; color:black">Create</button>
-    <a asp-controller="Contacts" asp-action="Index" class="btn btn-secondary" style="border-color: #8B8000; background-color: #8B8000; font-weight: bold ; color:black">Cancel</a>
+    <div>
+        <button type="submit" class="btn btn-primary" style="border-color: #FFD700; background-color: #FFD700; font-weight: bold ; color:black">Create</button>
+        <a asp-controller="Feedbacks" asp-action="Index" class="btn btn-secondary" style="border-color: #FFD700; background-color: #FFD700; font-weight: bold ; color:black">Cancel</a>
+    </div>
 </form>
-<style>
-body {
-            background-image: url('/images/Fitness1919Logo.jpg');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-color: black;
-            color: yellow;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        form {
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid yellow;
-            border-radius: 4px;
-        }
-
-        .form-group {
-            margin-bottom: 10px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid yellow;
-            border-radius: 4px;
-            color: yellow;
-            background-color: black;
-        }
-
-        .text-danger {
-            color: red;
-        }
-
-        .btn {
-            cursor: pointer;
-            padding: 4px 8px;
-            text-decoration: none;
-            border: 1px solid yellow;
-            border-radius: 4px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .btn-primary {
-            background-color: yellow;
-            color: black;
-        }
-
-        .btn-secondary {
-            background-color: yellow;
-            color: black;
-        }
-
-        .btn:hover {
-            background-color: black;
-            color: yellow;
-        }
-    </style>

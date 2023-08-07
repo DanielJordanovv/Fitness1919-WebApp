@@ -3,8 +3,13 @@
 @{
     ViewData["Title"] = "All Feedbacks";
 }
-<h1>All Contacts</h1>
-<a asp-action="Create">Create New</a>
+
+<link rel="stylesheet" href="~/css/feedback/index.css"true" />
+
+<h1>All Feedbacks</h1>
+<div style="display: flex; justify-content: center; margin-bottom: 20px;">
+    <a asp-action="Create">Create New</a>
+</div>
 
 
 <table class="table">
@@ -39,71 +44,3 @@
         }
     </tbody>
 </table>
-<style>
-    h3 {
-        text-align: center;
-    }
-
-    body {
-        background-image: url('/images/Fitness1919Logo.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-color: black;
-        color: yellow; 
-    }
-
-    p {
-        text-align: center;
-    }
-
-    h1 {
-        text-align: center;
-    }
-
-    .table {
-        margin: 20px auto;
-        border-collapse: collapse;
-        width: 80%;
-    }
-
-        .table th,
-        .table td {
-            padding: 8px;
-            text-align: left;
-            color: yellow;
-        }
-
-    a {
-        color: yellow; 
-        background-color: transparent; 
-        padding: 4px 8px;
-        text-decoration: none;
-        border: 1px solid yellow; 
-        border-radius: 4px;
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-        a:hover {
-            background-color: yellow;
-            color: black; 
-        }
-
-    h1 {
-        color: yellow;
-    }
-
-    .map-container-3 {
-        overflow: hidden;
-        padding-bottom: 56.25%;
-        position: relative;
-        height: 0;
-    }
-
-        .map-container-3 iframe {
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-        }
-</style>
