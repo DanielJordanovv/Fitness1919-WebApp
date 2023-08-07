@@ -65,7 +65,7 @@ body {
 
             .register-box .user-box input:focus {
                 box-shadow: 0 0 0 2px transparent !important;
-                border-bottom: 4px solid #ffb703;
+                border-bottom: 4px solid #FFD700;
             }
 
 
@@ -106,7 +106,7 @@ body {
             border: none;
             outline: none;
             font-weight: bold;
-            background: #ffb703;
+            background: #FFD700;
             color: black;
             border-radius: 5px;
             box-shadow: 0 0 5px #FFD700, 0 0 25px #FFD700, 0 0 50px #FFD700, 0 0 100px #FFD700;

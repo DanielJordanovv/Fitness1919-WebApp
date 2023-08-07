@@ -5,7 +5,7 @@
     background-color: black;
     color: #FFD700;
     font-family: Arial, sans-serif;
-    position:center;
+    position: center;
 }
 
 h1 {
@@ -73,11 +73,11 @@ a.btn-primary.btn {
 
     a.btn-primary.btn:hover {
         background-color: black;
-        color: #FFD700; 
+        color: #FFD700;
     }
 
 a {
-    color: #FFD700;
+    color: #ffb703;
     text-decoration: blink;
 }
 

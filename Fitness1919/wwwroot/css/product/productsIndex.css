@@ -29,18 +29,16 @@ body {
     color: #FFD700;
     width: 250px;
     height: 320px;
-    margin-bottom: 20px; /* Adjust this value to increase or decrease spacing */
+    margin-bottom: 20px;
 }
 
-/* Media query for screens with a maximum width of 768px */
-@media (max-width: 768px) {
+
+@media (width: 768px) {
     .product-table {
         justify-content: center;
     }
-
-    /* Adjust the width to make the product box full screen horizontally */
     .product-box {
-        width: calc(100% - 40px); /* Subtracting 40px to account for margin and padding */
+        width: calc(100% - 40px);
     }
 }
 .product-image {
@@ -75,15 +73,15 @@ body {
     }
 
     .add-to-cart button {
-        background-color: #FFD700; 
+        background-color: #FFD700;
         color: black;
         padding: 0 15px;
-        height: 30px; 
-        border: none; 
+        height: 30px;
+        border: none;
         cursor: pointer;
     }
 
         .add-to-cart button:hover {
-            background-color: black; 
-            color: #FFD700; 
+            background-color: black;
+            color: #FFD700;
         }

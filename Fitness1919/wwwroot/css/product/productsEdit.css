@@ -4,7 +4,7 @@
     background-size: cover;
     background-color: black;
     color: #FFD700;
-    font-family: Arial, sans-serif; /* Added a default font family */
+    font-family: Arial, sans-serif;
 }
 
 .center {
@@ -20,7 +20,7 @@ h1, h4 {
     color: #FFD700;
 }
 
-/* Table styles */
+
 .table {
     margin: 20px auto;
     border-collapse: collapse;
@@ -32,10 +32,10 @@ h1, h4 {
         padding: 8px;
         text-align: left;
         color: #FFD700;
-        border: 1px solid #FFD700; /* Added a border for table cells */
+        border: 1px solid #ffb703;
     }
 
-/* Button styles */
+
 a {
     color: #FFD700;
     background-color: transparent;
@@ -57,9 +57,9 @@ a {
 }
 
 .col-md-4 {
-    max-width: 400px; /* Set a max-width for the form */
+    max-width: 400px;
     padding: 20px;
-    border: 1px solid #FFD700; /* Added a border to the form */
+    border: 1px solid #FFD700;
 }
 
 .form-group {
@@ -71,7 +71,7 @@ a {
     padding: 8px;
     border: 1px solid #FFD700;
     border-radius: 4px;
-    color: yellow;
+    color: #ffb703;
     background-color: black;
 }
 

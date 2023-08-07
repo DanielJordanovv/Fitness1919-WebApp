@@ -3,17 +3,17 @@
 }
 
 .nav-pills .nav-link:hover {
-    color: #ffb703;
+    color: #FFD700;
 }
 
 .nav-pills .nav-link.active {
-    color: #ffb703;
+    color: #FFD700;
     background-color: black;
 }
 .nav-link {
     display: block;
     padding: 0.5rem 1rem;
-    color: #ffb703;
+    color: #FFD700;
     text-decoration: none;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
