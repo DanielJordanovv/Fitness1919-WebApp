@@ -1,3 +1,83 @@
-﻿<h2>Thank You for Your Order!</h2>
-<p>Your order has been placed successfully.</p>
-<a href="/Home/Index">Return to home page?</a>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Thank You</title>
+    <style>
+        body {
+            background-image: url('/images/Fitness1919Logo.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: black;
+            color: #FFD700;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #FFD700;
+        }
+
+        .table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        .table th,
+        .table td {
+            padding: 8px;
+            text-align: left;
+            color: #FFD700;
+        }
+
+        a {
+            color: #FFD700;
+            background-color: transparent;
+            padding: 4px 8px;
+            text-decoration: none;
+            border: 1px solid #FFD700;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #FFD700;
+            color: black;
+        }
+
+        .map-container-3 {
+            overflow: hidden;
+            padding-bottom: 56.25%;
+            position: relative;
+            height: 0;
+        }
+
+        .map-container-3 iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+
+        /* Center all content */
+        .center-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-container">
+        <h2>Thank You for Your Order!</h2>
+        <p>Your order has been placed successfully.</p>
+        <a href="/Home/Index">Return to home page?</a>
+    </div>
+</body>
+</html>

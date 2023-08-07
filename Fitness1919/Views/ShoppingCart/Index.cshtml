@@ -1,15 +1,19 @@
 ﻿@using Fitness1919.Web.ViewModels.ShoppingCart
 @model ShoppingCartViewModel
 
+<link rel="stylesheet" href="~/css/shoppingCart/index.css" true" />
+<pre></pre><pre></pre>
 <h1>Shopping Cart</h1>
-@if(TempData["ErrorMessage"] != null)
+@if (TempData["ErrorMessage"] != null)
 {
     <p>@TempData["ErrorMessage"]</p>
 }
 @if (Model.Products.Count() == 0)
 {
-    <p>No products in you cart!</p>
-    <a asp-controller="Products" asp-action"Index">View all products</a>
+    <div class="center">
+        <h2>No products in you cart!</h2>
+        <a asp-controller="Products" asp-action"Index">View all products</a>
+    </div>
 }
 else
 {

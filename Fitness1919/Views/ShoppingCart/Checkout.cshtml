@@ -1,24 +1,28 @@
 ﻿@using Fitness1919.Web.ViewModels.ShoppingCart
 @model CheckoutViewModel
 
-<h2>Checkout</h2>
+<link rel="stylesheet" href="~/css/shoppingCart/checkout.css" true" />
 
-@using (Html.BeginForm("Checkout", "ShoppingCart", FormMethod.Post))
-{
-    <div>
-        @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name)
-    </div>
+<div class="center-container">
+    <h2>Checkout</h2>
 
-    <div>
-        @Html.LabelFor(m => m.Address)
-        @Html.TextBoxFor(m => m.Address)
-    </div>
+    @using (Html.BeginForm("Checkout", "ShoppingCart", FormMethod.Post))
+    {
+        <div>
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
 
-    <div>
-        @Html.LabelFor(m => m.PhoneNumber)
-        @Html.TextBoxFor(m => m.PhoneNumber)
-    </div>
+        <div>
+            @Html.LabelFor(m => m.Address)
+            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+        </div>
 
-    <input type="submit" value="Place Order" />
-}
+        <div>
+            @Html.LabelFor(m => m.PhoneNumber)
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+        </div>
+
+        <input type="submit" value="Place Order" class="btn btn-primary" />
+    }
+</div>
