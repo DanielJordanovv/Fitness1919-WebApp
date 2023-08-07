@@ -1,19 +1,26 @@
 ﻿@using Fitness1919.Web.ViewModels.Order
 @model IEnumerable<MyOrdersViewModel>
+
+<link rel="stylesheet" href="~/css/order/index.css" asp-append-version="true" />
 <!DOCTYPE html>
 <html>
+@if(!Model.Any())
+{
+    <p>No orders yet!</p>
+}
+else{
 <head>
     <title>My Orders</title>
 </head>
 <body>
     <h1>My Orders</h1>
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                 <th>Full Name</th>
+                <th>Full Name</th>
                 <th>Address</th>
                 <th>Phone Number</th>
-                <th>Created On</th> 
+                <th>Created On</th>
                 <th>Order Price</th>
             </tr>
         </thead>
@@ -24,11 +31,12 @@
                     <td>@order.Name</td>
                     <td>@order.Address</td>
                     <td>@order.PhoneNumber</td>
-                    <td>@order.CreatedOn</td> 
+                    <td>@order.CreatedOn</td>
                     <td>@order.OrderPrice.ToString("f2")</td>
                 </tr>
             }
         </tbody>
     </table>
 </body>
+}
 </html>

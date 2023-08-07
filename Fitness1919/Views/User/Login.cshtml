@@ -2,10 +2,7 @@
 @model LoginFormModel
 <link rel="stylesheet" href="~/css/user/login.css" asp-append-version="true" />
 <link rel=”stylesheet” href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="nofollow" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-@if (TempData["ErrorMessage"] != null)
-{
-    <p>@TempData["ErrorMessage"]</p>
-}
+<pre></pre><pre></pre><pre></pre>
 <div class="row">
     <div class="col-md-4">
         <section>
@@ -55,6 +52,12 @@
         </section>
     </div>
 </div>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <p style="color:red">@TempData["ErrorMessage"]</p>
+    </div>
+}
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
 }

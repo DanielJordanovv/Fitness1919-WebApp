@@ -1,8 +1,4 @@
-﻿h3 {
-    text-align: center;
-}
-
-body {
+﻿body {
     background-image: url('/images/Fitness1919Logo.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -10,18 +6,16 @@ body {
     color: #FFD700;
 }
 
-p {
-    text-align: center;
-}
-
 h1 {
     text-align: center;
+    color: #FFD700;
 }
 
 .table {
     margin: 20px auto;
-    border-collapse: collapse;
     width: 80%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
     .table th,
@@ -29,6 +23,13 @@ h1 {
         padding: 8px;
         text-align: left;
         color: #FFD700;
+        border: 1px solid #FFD700;
+    }
+
+    .table thead {
+        position: sticky;
+        top: 0;
+        background-color: black;
     }
 
 a {
@@ -44,23 +45,4 @@ a {
     a:hover {
         background-color: #FFD700;
         color: black;
-    }
-
-h1 {
-    color: #FFD700;
-}
-
-.map-container-3 {
-    overflow: hidden;
-    padding-bottom: 56.25%;
-    position: relative;
-    height: 0;
-}
-
-    .map-container-3 iframe {
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        position: absolute;
     }
