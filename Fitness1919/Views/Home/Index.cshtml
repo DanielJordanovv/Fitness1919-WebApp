@@ -1,14 +1,57 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Ysabeau+Infant:wght@1;100;200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+<header>
+    <section class="slider">
+        <ul>
+            <li>
+                <article class="center-y padding_2x">
+                    <h3 class="big title"><em>P</em>rotein <em>P</em>owder</h3>
+                    <p>Best protein powders you can find in the internet. </p>	
+                    <a asp-controller="Products" asp-action="Index"class="btn btn_3">View our products.</a>
+                </article>
+            </li>
+            <li>
+                <article class="center-y padding_2x">
+                    <h3 class="big title"><em>Creatine</em> Monohydrate.</h3>
+                    <p>100% tested creatines for the best prices.</p>	
+                    <a asp-controller="Products" asp-action="Index" class="btn btn_3">View our products.</a>
+                </article>
+            </li>
+          <li>
+                <article class="center-y padding_2x">
+                    <h3 class="big title"><em>Fitness</em> clothes.</h3>
+                    <p>The best clothes for the best gym fits.</p>	
+                    <a asp-controller="Products" asp-action="Index" class="btn btn_3">View our products.</a>
+                </article>
+            </li>
+            <aside>
+                <a asp-controller="Products" asp-action="Index"></a>
+                <a asp-controller="Products" asp-action="Index"></a>
+                <a asp-controller="Products" asp-action="Index"></a>
+            </aside>
+        </ul>
+    </section>
+    <a href="#services" class="cs-down"></a>
+</header>
+<style>
+
+*, html{
+    scroll-behavior: smooth;
 }
 
-<style>
-  @@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-*{
-   box-sizing: border-box; 
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
-body {
-        text-align: center;
+body{
         background-image: url('/images/Fitness1919Logo.jpg');
         background-position: center;
         background-attachment: fixed;
@@ -17,105 +60,445 @@ body {
         background-color: black;
         color: #FFD700;
         font-family: Arial, sans-serif;
-    }
+}
+
+:root{
+    --white:#FFF;
+    --black:#232323;
+    --lite:rgba(255,255,255,0.6);
+    --gray:rgba(1,1,1,0.6);
+    --dark:#3c3d3c;
+    --primary:#FFD700;
+    --primary_dark:#970104;
+    --primary_lite:#c24a4e;
+    --secondary:#000a17;
+    --title_font:'Outfit', sans-serif;
+}
+
+::-webkit-scrollbar {
+    height: 12px;
+    width: 8px;
+    background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: gray;
+    -webkit-box-shadow: 0px 1px 2px var(--dark);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--dark);
+}
+
+
+
 body{
-    font-family: 'Roboto', sans-serif;
-    display:flex;
-   
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    Overflow: hidden;
+    margin:0;
+    overflow-x:hidden !important;
+}
+
+a{
+    text-decoration:none !important;
+    min-width: fit-content;
+    width: fit-content;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+}
+
+a, button{
+    transition:0.5s;
+}
+
+em{
+    font-style:normal;
+    color:var(--primary_lite);
+}
+
+a, p, .btn{
+    font-size:15px;
+}
+
+p{
+    line-height:1.9em;
+    color:var(--lite);
+}
+
+a, button, input, textarea, select{
+    outline:none !important;
+}
+
+fieldset{
+    border:0;
+}
+
+h1, h2, h3, h4, h5, h6{
     margin:0;
 }
-.container{
-    display:flex;
-    width:90vw;
+
+.title, .sub_title{
+    font-family:var(--title_font);
+    font-weight:400;
+    margin:0;
 }
-.panel{
-    background-size: auto 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    height:80vh;
-    border-radius: 50px;
-    color:#fff;
-    cursor:pointer;
-    flex:0.5;
-    margin:10px;
+
+.flex, .fixed_flex{
+    display:flex;
+}
+
+.flex_content{
+    width:100%;
     position:relative;
-    transition:flex 0.7s ease-in;
 }
-.panel h3{
-    font-size:24px;
+
+.padding_1x{
+    padding:1rem;
+}
+
+.padding_2x{
+    padding:2rem;
+}
+
+.padding_3x{
+    padding:3rem;
+}
+
+.padding_4x{
+    padding:4rem;
+}
+
+.big{
+    font-size:3.5em;
+}
+
+.medium{
+    font-size:2em;
+}
+
+.small{
+    font-size:1.3em;
+}
+
+.btn{
+    padding:1rem;
+    border-radius:5px;
+    color:var(--white);
+    position:relative;
+    border:0;
+    text-align:center;
+    
+}
+
+.btn_3{
+    display:block;
+    background-color:0;
+    color:var(--white);
+    position:relative;
+    font-family:var(--default_font);
+    font-weight:400;
+    text-transform:uppercase;
+}
+
+.btn_3:before{
+    content:"";
+    border-radius:50%;
+    background-color:rgba(255,255,255,0.2);
     position:absolute;
-    bottom:20px;
-    left:20px;
-    margin:0;
-    opacity:0;
+    left:0;
+    top:50%;
+    width:40px;
+    height:40px;
+    transition:0.5s;
+    transform:translate(0%, -50%);
 }
 
-.panel.active{
-    flex:1;
-}
-.panel.active h3{
-    opacity:1;
-    transition:opacity 0.3s ease-in 0.4s;
+.btn_3:after{
+    content:"\f178";
+    font-family:"FontAwesome";
+    margin-left:5px;
 }
 
-@@media (max-width:480px){
-    .container{
-        width:100vw; 
+.btn_3:hover:before{
+    border-radius:40px;
+    width:100%;
+}
+
+@@media (max-width:920px){
+    .flex{
+        flex-wrap:wrap;
     }
-    .panel:nth-of-type(4),.panel:nth-of-type(5){
+    
+    .padding_1x, .padding_2x, .padding_3x, .padding_4x{
+        padding:1rem;
+    }
+    
+    .big{
+        font-size:1.8em;
+    }
+    
+    .medium{
+        font-size:1.3em;
+    }
+    
+    .small{
+        font-size:1.1em;
+    }
+    
+    .btn{
+        padding:0.5rem 1rem;
+    }
+    
+    a, p, .btn{
+        font-size:12px;
+    }
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+ul{
+    padding:0;
+    margin:0;
+}
+
+.slider .title{
+    font-weight:400;
+}
+
+.slider li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    transition: clip .7s ease-in-out, z-index 0s .7s;
+    clip: rect(0, 100vw, 100vh, 100vw);
+    display:flex;
+    align-items:center;
+    justify-content:left;
+}
+
+.slider li:nth-child(1){
+    background:linear-gradient(to right, rgba(1,1,1,1) 10%, rgba(1,1,1,0.8) 51%, rgba(1,1,1,0.2) 100%), url("https://static.sscontent.com/prodimg/products/124/v1211607_prozis_xtreme-whey-protein-2000-g_chocolate_newin_flavor.jpg");
+    background-size: cover;
+    background-position:top left;
+}
+
+.slider li:before{
+    content:"";
+    position:absolute;
+    top:-20px;
+    right:0;
+    width:250px;
+    height:250px;
+    background-image:url("https://i.postimg.cc/tCndD4gF/image.png");
+    background-size:100% 100%;
+    transition-delay: 1s;
+    transform: rotate(-90deg);
+    z-index:1;
+}
+
+.slider li:after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:300px;
+    height:300px;
+    background-image:url("https://i.postimg.cc/KjKbwDfR/slider-shape-2.png");
+    background-size:100% 100%;
+    transform:rotate(360deg);
+	transition: all 1.5s cubic-bezier(0,0,.2,1);
+    z-index:1;
+    background-position:center left;
+}
+
+.slider li:nth-child(2){
+    background:linear-gradient(to right, rgba(1,1,1,1) 10%, rgba(1,1,1,0.8) 51%, rgba(1,1,1,0.2) 100%), url("https://www.mensjournal.com/.image/t_share/MTk2MTM2MTU2MjQwNzQ5NzEz/1280-protein-powder-supplement.jpg");
+    background-size: cover;
+    background-position:top left;
+}
+
+.slider li:nth-child(3){
+    background:linear-gradient(to right, rgba(1,1,1,1) 10%, rgba(1,1,1,0.8) 51%, rgba(1,1,1,0.2) 100%), url("https://totalgym.com/cdn/shop/files/DSC05416_dark_2000x.jpg?v=1613760603");
+    background-size: cover;
+    background-position:top left;
+}
+
+.slider article{
+    width:60%;
+    margin-top:4rem;
+    color: #fff;
+    z-index:11;
+}
+
+.slider h3 + p {
+    display: inline-block;
+    color: var(--lite);
+    font-weight:300;
+}
+
+.slider h3, .slider h3 + p, .slider p + .btn, li:after{
+    opacity: 0;
+    transition: opacity .7s 0s, transform .5s .2s;
+    transform: translate3d(0, 50%, 0);
+}
+
+li.current h3, li.current h3 + p, li.current p + .btn, li.current:after {
+    opacity: 1;
+    transition-delay: 1s;
+    transform: translate3d(0, 0, 0);
+}
+
+.slider li:before{
+    transition: 0.5s;
+    top:-250px !important;
+}
+
+li.current:before{
+    transition-delay: 1s;
+    transform: rotate(-90deg);
+    top:-20px !important;
+}
+
+li.current {
+    z-index: 1;
+    clip: rect(0, 100vw, 100vh, 0);
+}
+
+li.prev {
+    clip: rect(0, 0, 100vh, 0);
+}
+
+.slider aside {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    text-align: center;
+    z-index: 10;
+}
+
+.slider aside a {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
+    background-color: var(--white);
+    margin: 0 0.2rem;
+    transition: transform .3s;
+}
+
+.slider em{
+    background: var(--primary);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+a.current_dot {
+    transform: scale(1.4);
+    background:var(--primary) !important;
+}
+
+@@media screen and (max-width: 920px) {
+    header{
+        height:70vh;
+        position:relative;
+    }
+    
+    .cs-down{
         display:none;
     }
+
+    .slider{
+        height:70vh;
+    }
+    
+    .slider article{
+        width:100%;
+        margin-top:2rem;
+    }
+    
+    .slider li:nth-child(2){
+        background-position:top center;
+    }
+    
+    .slider li:nth-child(3){
+        background-position:top center;
+    }
+    
+    li.current:before{
+        top:-30px;
+        right:-10px;
+    }
 }
+
 </style>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Cartes extensibles</title>
-</head>
-<body>
-   <div class="container">
-       <div class="panel active" style="background-image: url('https://i5.walmartimages.com/seo/Optimum-Nutrition-Gold-Standard-100-Whey-Protein-Powder-Vanilla-Ice-Cream-58-Servings_4f53f7c4-51d3-42e9-93c8-b489e2ef46db.bc83216509fdaccb96fada5d71ff9035.png?odnHeight=768&odnWidth=768&odnBg=FFFFFF')">
-           <h3>Protein powders</h3>
-       </div>
-       <div class="panel" style="background-image:url('https://fitfitfit.fit/cdn/shop/products/Creatine-X-500g_720x_d1da3e59-5fe7-4458-a10d-81faaa91b1c6.png?v=1640542236')">
-           <h3>Creatines</h3>
-       </div>
-       <div class="panel" style="background-image:url('https://www.transparentlabs.com/cdn/shop/products/Bulk_Black_Render.png?v=1668537322')">
-        <h3>Pre-workouts</h3>
-       </div> 
-       <div class="panel" style="background-image:url('https://nitrotiger.com/image/catalog/products/dymatize/dymatize-bcaa-2200-400-capsules.png')">
-           <h3>Amino acids</h3>
-       </div>
-       <div class="panel" style="background-image:url('https://scottyorkfitness.com/wp-content/uploads/2016/06/lifting-straps.png')">
-           <h3>Accessoaries</h3>
-       </div>
-   </div>
-
-   <script src="script.js"></script>
-</body>
-</html>
 <script>
-const panels=document.querySelectorAll('.panel')
-panels.forEach((panel)=>{//loop on every cards
-    console.log(panel)
-  panel.addEventListener("click",()=>{//add a click event
-    removeActiveClasses()
-    panel.classList.add("active");//when i click i add a class style 'active '
-  })//
-})
-function removeActiveClasses(){
-    panels.forEach((panel)=>{//when i click in other cards i remove active class on the others panel
-        panel.classList.remove("active")
-    })
+{
+  class SliderClip {
+    constructor(el) {
+      this.el = el;
+      this.Slides = Array.from(this.el.querySelectorAll('li'));
+      this.Nav = Array.from(this.el.querySelectorAll('aside a'));
+      this.totalSlides = this.Slides.length;
+      this.current = 0;
+      this.autoPlay = true; //true or false
+      this.timeTrans = 4000; //transition time in milliseconds
+      this.IndexElements = [];
+
+      for (let i = 0; i < this.totalSlides; i++) {
+        this.IndexElements.push(i);
+      }
+
+      this.setCurret();
+      this.initEvents();
+    }
+    setCurret() {
+      this.Slides[this.current].classList.add('current');
+      this.Nav[this.current].classList.add('current_dot');
+    }
+    initEvents() {
+      const self = this;
+
+      this.Nav.forEach(dot => {
+        dot.addEventListener('click', ele => {
+          ele.preventDefault();
+          this.changeSlide(this.Nav.indexOf(dot));
+        });
+      });
+
+      this.el.addEventListener('mouseenter', () => self.autoPlay = false);
+      this.el.addEventListener('mouseleave', () => self.autoPlay = true);
+
+      setInterval(function () {
+        if (self.autoPlay) {
+          self.current = self.current < self.Slides.length - 1 ? self.current + 1 : 0;
+          self.changeSlide(self.current);
+        }
+      }, this.timeTrans);
+
+    }
+    changeSlide(index) {
+
+      this.Nav.forEach(allDot => allDot.classList.remove('current_dot'));
+
+      this.Slides.forEach(allSlides => allSlides.classList.remove('prev', 'current'));
+
+      const getAllPrev = value => value < index;
+
+      const prevElements = this.IndexElements.filter(getAllPrev);
+
+      prevElements.forEach(indexPrevEle => this.Slides[indexPrevEle].classList.add('prev'));
+
+      this.Slides[index].classList.add('current');
+      this.Nav[index].classList.add('current_dot');
+    }}
+
+
+  const slider = new SliderClip(document.querySelector('.slider'));
 }
 </script>
