@@ -17,17 +17,20 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
                         <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Contacts" style="width: 40px; height: 40px; background-color:#FFD700;" />
                     </a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3703/3703429.png" alt="Products" style="width: 40px; height: 40px; background-color:#FFD700;" />
+                    </a>
                     <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Index">
                         <img src="https://cdn-icons-png.flaticon.com/512/46/46646.png" alt="Contacts" style="width: 40px; height: 40px; background-color:#FFD700;" />
-                    </a>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">
-                        <img src="https://icons.veryicon.com/png/o/education-technology/radio-and-tv-cloud/about-us-22.png" alt="Privacy" style="width: 40px; height: 40px; background-color:#FFD700;" />
                     </a>
                     <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
                         <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" style="width: 40px; height: 40px; background-color:#FFD700;" />
                     </a>
                     <a class="nav-link text-dark" asp-area="" asp-controller="CalorieCalculator" asp-action="Index">
                         <img src="https://cdn-icons-png.flaticon.com/512/4470/4470502.png" alt="Calculator" style="width: 40px; height: 40px; background-color:#FFD700;" />
+                    </a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">
+                        <img src="https://icons.veryicon.com/png/o/education-technology/radio-and-tv-cloud/about-us-22.png" alt="Privacy" style="width: 40px; height: 40px; background-color:#FFD700;" />
                     </a>
                 </div>
             </div>
@@ -39,17 +42,12 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Categories</a>
-                        </li>
-                    </ul>
                     <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search", "Products")">
                         <div class="search_text_box">
                             <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search products..." value="@ViewBag.SearchTerm">
                         </div>
                         <div class="search_button">
-                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><img src="https://icon-library.com/images/white-search-icon-png/white-search-icon-png-9.jpg"alt="Privacy" style="width: 20px;margin-top: 2px; height: 20px; background-color:transperant;" /></button>
                         </div>
                     </form>
 
@@ -60,7 +58,6 @@
             </div>
         </nav>
     </header>
-
 
 
     <div class="container">

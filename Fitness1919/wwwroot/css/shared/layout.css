@@ -45,31 +45,32 @@
 
 .left-container {
     position: absolute;
+    z-index:1000;
     top: 20px; 
     left: 20px; 
 }
 
 
 .navbar {
-    background-color: #FFD700;
-    color: black;
-    border-color: black;
+    background-color: transparent;
+    color: transparent;
+    border-color: transparent;
     height: 60px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 600px; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    z-index: 100; 
+    max-width: 600px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    border-radius: 50px;
+    border-radius: 0px;
     overflow: hidden;
-    transition: top 0.3s; 
+    transition: top 0.3s;
 }
 
 .navbar:before,
@@ -79,7 +80,7 @@
     top: 0;
     height: 100%;
     width: 20px;
-    background-color: black;
+    background-color: transparent;
 }
 
 .navbar:before {
@@ -102,6 +103,7 @@
 }
 
 .form-inline {
+    margin:auto;
     font-weight: 900;
 }
 
@@ -133,4 +135,16 @@ ul {
     margin: 0;
     top: 0;
 }
-
+.form-inline{
+    display:flex;
+}
+.search_text_box{
+    margin-top:7px;
+}
+.btn{
+    border:none;
+}
+    .btn:hover {
+        background-color: transparent;
+        border: none;
+    }

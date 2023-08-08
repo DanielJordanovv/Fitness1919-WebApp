@@ -78,7 +78,6 @@ a.btn-primary {
     }
 
 form button[type="submit"] {
-    background-color: #FFD700; 
     color: black; 
     border: none;
     padding: 8px 15px;
@@ -124,4 +123,7 @@ a {
 .center{
     text-align:center;
     position:center;
+}
+.btn{
+    background-color:transparent;
 }
