@@ -8,7 +8,7 @@
 
 <form class="sth" asp-controller="Feedbacks" asp-action="Create" method="post">
     <div class="form-group">
-        <label asp-for="FullName">FullName:</label>
+        <label asp-for="FullName">First name:</label>
         <input asp-for="FullName" class="form-control" />
         <span asp-validation-for="FullName" class="text-danger"></span>
     </div>
@@ -20,12 +20,12 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="FeedBackDescription">FeedBackDescription:</label>
+        <label asp-for="FeedBackDescription">Feedback Description:</label>
         <input asp-for="FeedBackDescription" class="form-control" />
         <span asp-validation-for="FeedBackDescription" class="text-danger"></span>
     </div>
     <div>
         <button type="submit" class="btn btn-primary" style="border-color: #FFD700; background-color: #FFD700; font-weight: bold ; color:black">Create</button>
-        <a asp-controller="Feedbacks" asp-action="Index" class="btn btn-secondary" style="border-color: #FFD700; background-color: #FFD700; font-weight: bold ; color:black">Cancel</a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary" style="border-color: #FFD700; background-color: #FFD700; font-weight: bold ; color:black">Cancel</a>
     </div>
 </form>

@@ -1,5 +1,6 @@
 ﻿using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Feedback;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fitness1919.Web.Controllers
@@ -12,7 +13,7 @@ namespace Fitness1919.Web.Controllers
         {
             this.service = service;
         }
-
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var feedbacks = await service.AllAsync();
