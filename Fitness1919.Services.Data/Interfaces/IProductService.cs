@@ -12,5 +12,6 @@ namespace Fitness1919.Services.Data.Interfaces
         Task DeleteAsync(string id);
         Task<Product> GetProductAsync(string id);
         bool ProductExistsAsync(string id);
+        Task<IEnumerable<ProductAllViewModel>> FilterAsync(string categoryFilter, string brandFilter);
     }
 }

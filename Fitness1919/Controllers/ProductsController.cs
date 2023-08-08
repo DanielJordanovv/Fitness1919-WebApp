@@ -45,10 +45,21 @@ namespace Fitness1919.Web.Controllers
             }
         }
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string categoryFilter, string brandFilter)
         {
-            var products = await service.AllAsync();
-            return View(products);
+                var products = await service.FilterAsync(categoryFilter, brandFilter);
+                var categories = await categoryService.AllAsync();
+                var brands = await brandService.AllAsync();
+
+                var viewModel = new ProductIndexViewModel
+                {
+                    Products = products,
+                    Categories = categories,
+                    Brands = brands
+                };
+
+                return View(viewModel);
+           
         }
         [AllowAnonymous]
         public async Task<IActionResult> Search(string search)

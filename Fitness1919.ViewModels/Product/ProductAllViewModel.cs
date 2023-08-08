@@ -2,6 +2,11 @@
 {
     public class ProductAllViewModel
     {
+        public ProductAllViewModel()
+        {
+            this.Categories = new List<string>();
+            this.Brands = new List<string>();
+        }
         public string Id { get; set; } = null!;
         public string Name { get; set; } = null!;
         public string Description { get; set; }
@@ -10,5 +15,7 @@
         public string img { get; set; } = null!;
         public string Category { get; set; } = null!;
         public string Brand { get; set; } = null!;
+        public List<string> Categories { get; set; }
+        public List<string> Brands { get; set; }
     }
 }

@@ -127,5 +127,33 @@ namespace Fitness1919.Services.Data
                 Brand = p.Brand.BrandName
             }).ToListAsync();
         }
+
+        public async Task<IEnumerable<ProductAllViewModel>> FilterAsync(string categoryFilter, string brandFilter)
+        {
+            var query = context.Products
+        .Where(p => !p.IsDeleted);
+
+            if (!string.IsNullOrEmpty(categoryFilter))
+            {
+                query = query.Where(p => p.Category.CategoryName == categoryFilter);
+            }
+
+            if (!string.IsNullOrEmpty(brandFilter))
+            {
+                query = query.Where(p => p.Brand.BrandName == brandFilter);
+            }
+
+            return await query.Select(p => new ProductAllViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Quantity = p.Quantity,
+                Price = p.Price,
+                img = p.img,
+                Category = p.Category.CategoryName,
+                Brand = p.Brand.BrandName
+            }).ToListAsync();
+        }
     }
 }
