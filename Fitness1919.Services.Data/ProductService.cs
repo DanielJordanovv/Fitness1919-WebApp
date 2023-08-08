@@ -97,21 +97,6 @@ namespace Fitness1919.Services.Data
             await context.SaveChangesAsync();
 
         }
-        public async Task<IEnumerable<ProductAllViewModel>> Filter(string filter)
-        {
-            Guard.ArgumentNotNull(filter, nameof(filter));
-            return await context.Products.Where(x => !x.IsDeleted && x.Category.CategoryName == filter || x.Brand.BrandName == filter).Select(p => new ProductAllViewModel
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Quantity = p.Quantity,
-                Price = p.Price,
-                img = p.img,
-                Category = p.Category.CategoryName,
-                Brand = p.Brand.BrandName
-            }).ToListAsync();
-        }
         public async Task<IEnumerable<ProductAllViewModel>> AllSearchedAsync(string search)
         {
             Guard.ArgumentNotNull(search, nameof(search));

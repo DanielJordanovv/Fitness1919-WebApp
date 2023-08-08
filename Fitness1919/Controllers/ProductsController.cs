@@ -41,7 +41,6 @@ namespace Fitness1919.Web.Controllers
             {
                 TempData["ErrorMessage"] = "The product's quantity is 0 or its not found!";
                 return RedirectToAction("Index", "Products");
-                // return View("Exceptions/ProductQuantityZeroOrNotFound");
             }
         }
         [AllowAnonymous]
@@ -69,9 +68,17 @@ namespace Fitness1919.Web.Controllers
                 return RedirectToAction("Index");
             }
             var products = await service.AllSearchedAsync(search);
+            var categories = await categoryService.AllAsync();
+            var brands = await brandService.AllAsync();
+            var viewModel = new ProductIndexViewModel
+            {
+                Products = products,
+                Categories = categories,
+                Brands = brands
+            };
             if (products.Count() > 0)
             {
-                return View("Index", products);
+                return View("Index", viewModel);
             }
             TempData[ErrorMessage] = "No products were found!";
             return View("Index");
