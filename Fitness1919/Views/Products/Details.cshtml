@@ -1,0 +1,43 @@
+﻿﻿@using Fitness1919.Web.ViewModels.Product
+@model ProductDetailsViewModel
+
+<link rel="stylesheet" href="~/css/product/Detail.css" asp-append-version="true" />
+<link rel=”stylesheet” href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="nofollow" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+<pre></pre><pre></pre><pre></pre><pre></pre>
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 22rem;"
+                 src="@Model.ImageUrl" alt="Product Image">
+        </div>
+        <div class="card col-8">
+            <p><u style="color:#ffb703; font-size:25px;">@Model.Name</u></p>
+            <p>
+                Price:
+                <b>@($"{Model.Price:f2}") BGN</b>
+            </p>
+            <p>Description: <b>@Model.Description</b></p>
+            @if (Model.Quantity > 0)
+            {
+                <p>Quantity: <b>@Model.Quantity</b></p>
+            }
+            else
+            {
+                <p>Quantity: <b>Not Available</b></p>
+            }
+            <p>Category: <b>@Model.Category</b></p>
+            <p>Brand: <b>@Model.Brand</b></p>
+            <p></p>
+            <form asp-action="AddToCart" asp-controller="ShoppingCart" method="post">
+                <input type="hidden" name="productId" value="@Model.Id" />
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" value="1" min="1" required />
+                <button type="submit">Add to Cart</button>
+            </form>
+            <form style="margin-top:30px;">
+                <a asp-action="Edit" asp-route-id="@Model.Id"><img src="/images/edit.png" width="40px" height="40px" alt="Edit"></a> |
+                <a asp-action="Delete" asp-route-id="@Model.Id"><img src="/images/delete.png" width="37px" height="37px" alt="Delete"></a>
+            </form>
+        </div>
+    </div>
+</div>

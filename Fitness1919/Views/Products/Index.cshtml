@@ -9,27 +9,27 @@
 
 <h1>Products</h1>
 <p></p>
-    <form asp-action="Index" method="get" class="filter-form">
-        <label style="color:white" for="categoryFilter">Category:</label>
-        <select id="categoryFilter" name="categoryFilter">
-            <option value="">All Categories</option>
-            @foreach (var category in Model.Categories)
-            {
-                <option value="@category.CategoryName">@category.CategoryName</option>
-            }
-        </select>
+<form asp-action="Index" method="get" class="filter-form">
+    <label style="color:white" for="categoryFilter">Category:</label>
+    <select id="categoryFilter" name="categoryFilter">
+        <option value="">All Categories</option>
+        @foreach (var category in Model.Categories)
+        {
+            <option value="@category.CategoryName">@category.CategoryName</option>
+        }
+    </select>
 
-        <label style="color:white" for="brandFilter">Brand:</label>
-        <select id="brandFilter" name="brandFilter">
-            <option value="">All Brands</option>
-            @foreach (var brand in Model.Brands)
-            {
-                <option value="@brand.BrandName">@brand.BrandName</option>
-            }
-        </select>
+    <label style="color:white" for="brandFilter">Brand:</label>
+    <select id="brandFilter" name="brandFilter">
+        <option value="">All Brands</option>
+        @foreach (var brand in Model.Brands)
+        {
+            <option value="@brand.BrandName">@brand.BrandName</option>
+        }
+    </select>
 
-        <button type="submit">Filter</button>
-    </form>
+    <button type="submit">Filter</button>
+</form>
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
@@ -49,18 +49,7 @@
                 <div>
                     @if (this.User.Identity.IsAuthenticated)
                     {
-                        <form class="add-to-cart" asp-action="AddToCart" asp-controller="Products" method="post">
-                            <input type="hidden" name="productId" value="@item.Id" />
-                            <input type="number" name="quantity" value="1" min="1" required />
-                            <button type="submit">Add to Cart</button>
-                            @if (this.User.IsInRole("Administrator"))
-                            {
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                                </td>
-                            }
-                        </form>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                     }
                 </div>
             </div>

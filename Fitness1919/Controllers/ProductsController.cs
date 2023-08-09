@@ -60,6 +60,19 @@ namespace Fitness1919.Web.Controllers
                 return View(viewModel);
            
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(string id)
+        {
+            bool productExists = ProductExists(id);
+            if (!productExists)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            ProductDetailsViewModel viewModel = await service.GetDetailsByIdAsync(id);
+            return View(viewModel);
+        }
         [AllowAnonymous]
         public async Task<IActionResult> Search(string search)
         {

@@ -112,7 +112,29 @@ namespace Fitness1919.Services.Data
                 Brand = p.Brand.BrandName
             }).ToListAsync();
         }
+        public async Task<ProductDetailsViewModel> GetDetailsByIdAsync(string id)
+        {
+            Product product = await context
+                 .Products
+                 .Include(p => p.Category)
+                 .Include(p => p.Brand)
+                 .FirstAsync(p => p.Id == id);
 
+
+            ProductDetailsViewModel model = new ProductDetailsViewModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Quantity = product.Quantity,
+                Price = product.Price,
+                ImageUrl = product.img,
+                Category = product.Category.CategoryName,
+                Brand = product.Brand.BrandName,
+
+            };
+            return model;
+        }
         public async Task<IEnumerable<ProductAllViewModel>> FilterAsync(string categoryFilter, string brandFilter)
         {
             var query = context.Products
