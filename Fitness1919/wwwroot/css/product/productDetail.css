@@ -1,0 +1,20 @@
+﻿body {
+    background-image: url('/images/Fitness1919Logo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+    color: #FFD700;
+}
+.card{
+    background-color:black
+}
+.button {
+    color: #FFD700;
+    background-color: black;
+    border: 1px solid #FFD700;
+}
+    .button:hover {
+        color: black;
+        background-color: #FFD700;
+        border: 1px solid black;
+    }

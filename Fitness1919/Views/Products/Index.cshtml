@@ -10,25 +10,25 @@
 <h1>Products</h1>
 <p></p>
 <form asp-action="Index" method="get" class="filter-form">
-    <label style="color:white" for="categoryFilter">Category:</label>
+    <label style="color:#FFD700" for="categoryFilter">Category:</label>
     <select id="categoryFilter" name="categoryFilter">
-        <option value="">All Categories</option>
+        <option class="allOption" value="">All Categories</option>
         @foreach (var category in Model.Categories)
         {
-            <option value="@category.CategoryName">@category.CategoryName</option>
+            <option class="filterValue" value="@category.CategoryName">@category.CategoryName</option>
         }
     </select>
 
-    <label style="color:white" for="brandFilter">Brand:</label>
+    <label style="color:#FFD700" for="brandFilter">Brand:</label>
     <select id="brandFilter" name="brandFilter">
-        <option value="">All Brands</option>
+        <option class="allOption" value="">All Brands</option>
         @foreach (var brand in Model.Brands)
         {
-            <option value="@brand.BrandName">@brand.BrandName</option>
+            <option class="filterValue" value="@brand.BrandName">@brand.BrandName</option>
         }
     </select>
 
-    <button type="submit">Filter</button>
+    <button class="filterButton" type="submit">Filter</button>
 </form>
 @if (TempData["ErrorMessage"] != null)
 {
@@ -49,7 +49,7 @@
                 <div>
                     @if (this.User.Identity.IsAuthenticated)
                     {
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a class="details" asp-action="Details" asp-route-id="@item.Id">Details</a>
                     }
                 </div>
             </div>

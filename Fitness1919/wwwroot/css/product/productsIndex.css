@@ -88,3 +88,49 @@ body {
     display: flex;
     flex-direction: row;
 }
+.details {
+    color: #FFD700;
+    text-decoration: none;
+    border:1px solid #FFD700;
+}
+    .details:hover {
+        color: black;
+        background-color: #FFD700;
+        text-decoration: none;
+        border: 1px solid black;
+    }
+.filterValue {
+    background-color: black;
+    color: #FFD700;
+    border-color: #FFD700;
+}
+    option:hover {
+        background-color: #FFD700;
+        color: black;
+        border-color: black;
+    }
+.filterButton {
+    border: 1px solid #FFD700;
+    background-color: black;
+    color: #FFD700;
+}
+.allOption {
+    background-color: black;
+    color: #FFD700;
+    border-color: #FFD700;
+}
+    .allOption:active {
+        background-color: #FFD700;
+        color: black;
+        border-color: black;
+    }
+#categoryFilter {
+    background-color: black;
+    color: #FFD700;
+    border-color: #FFD700;
+}
+#brandFilter {
+    background-color: black;
+    color: #FFD700;
+    border-color: #FFD700;
+}
