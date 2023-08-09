@@ -28,7 +28,7 @@ label {
     font-weight: bold;
 }
 
-.form-control {
+.form-control contact{
     width: 100%;
     padding: 8px;
     border: 1px solid #FFD700;
@@ -41,7 +41,7 @@ label {
     color: red;
 }
 
-.btn {
+.btn btn-primary {
     cursor: pointer;
     padding: 4px 8px;
     text-decoration: none;

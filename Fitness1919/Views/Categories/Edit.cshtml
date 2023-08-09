@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<link rel="stylesheet" href="~/css/brand/edit.css" />
+<link rel="stylesheet" href="~/css/category/edit.css" />
 <pre></pre><pre></pre><pre></pre><pre></pre>
 <h1>Edit</h1>
 @if (TempData["ErrorMessage"] != null)
@@ -20,7 +20,7 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="CategoryName" class="control-label"></label>
-                <input asp-for="CategoryName" class="form-control" />
+                <input asp-for="CategoryName" class="category-input" />
                 <span asp-validation-for="CategoryName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -28,7 +28,7 @@
             </div>
 
             <div>
-                <a asp-action="Index">Back to List</a>
+                <a class="cancel" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>

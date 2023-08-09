@@ -23,9 +23,6 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Index">
                         <img src="https://cdn-icons-png.flaticon.com/512/46/46646.png" alt="Contacts" style="width: 40px; height: 40px; background-color:#FFD700;" />
                     </a>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
-                        <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" style="width: 40px; height: 40px; background-color:#FFD700;" />
-                    </a>
                     <a class="nav-link text-dark" asp-area="" asp-controller="CalorieCalculator" asp-action="Index">
                         <img src="https://cdn-icons-png.flaticon.com/512/4470/4470502.png" alt="Calculator" style="width: 40px; height: 40px; background-color:#FFD700;" />
                     </a>
@@ -47,11 +44,10 @@
                             <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search products..." value="@ViewBag.SearchTerm">
                         </div>
                         <div class="search_button">
-                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><img src="https://icon-library.com/images/white-search-icon-png/white-search-icon-png-9.jpg"alt="Privacy" style="width: 20px;margin-top: 2px; height: 20px; background-color:transperant;" /></button>
+                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><img src="https://icon-library.com/images/white-search-icon-png/white-search-icon-png-9.jpg" alt="Privacy" style="width: 20px;margin-top: 2px; height: 20px; background-color:transperant;" /></button>
                         </div>
                     </form>
-
-                    <div class="login-container">
+                     <div class="login-container">
                         <partial name="_LoginPartial" />
                     </div>
                 </div>

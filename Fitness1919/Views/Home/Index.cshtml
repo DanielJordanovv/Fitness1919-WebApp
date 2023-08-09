@@ -43,6 +43,11 @@
     <pre></pre><pre></pre><pre></pre><pre></pre>
     <div class="center" style="text-align:center; position:center; ">
         <a class="center" style=" font-size: 20px;position:center; display:center; color:#FFD700;text-align:center" asp-action="Create" asp-controller="Feedbacks">Give us feedback!</a>
+        @if(User.IsInRole("Administrator"))
+        {
+            <p>-----------</p>
+             <a class="center" style=" font-size: 20px;position:center; display:center; color:#FFD700;text-align:center" asp-action="Index" asp-controller="Feedbacks"> All feedbacks</a>
+        }
     </div>
     <pre></pre><pre></pre>
     <img src="~/images/feedback-screenshot-blur.png" style="width:100%" />

@@ -63,7 +63,7 @@ a.btn-primary {
     color: #FFD700;
 }
 
-.btn {
+.btn btn-primary {
     cursor: pointer;
     padding: 4px 8px;
     text-decoration: none;

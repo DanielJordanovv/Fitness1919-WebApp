@@ -24,7 +24,7 @@
         color: #FFD700;
     }
 
-a {
+.createNew {
     color: #FFD700;
     background-color: transparent;
     padding: 4px 8px;
@@ -34,7 +34,7 @@ a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-    a:hover {
+    .createNew:hover {
         background-color: #FFD700;
         color: black;
     }

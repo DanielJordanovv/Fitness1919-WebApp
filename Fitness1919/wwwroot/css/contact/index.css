@@ -31,7 +31,7 @@ h1 {
         color: #FFD700;
     }
 
-a {
+.links {
     color: #FFD700;
     background-color: transparent;
     padding: 4px 8px;
@@ -41,7 +41,7 @@ a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-    a:hover {
+    .links:hover {
         background-color: #FFD700;
         color: black;
     }
@@ -64,3 +64,6 @@ h1 {
         width: 100%;
         position: absolute;
     }
+.logout{
+    margin-top:11px;
+}

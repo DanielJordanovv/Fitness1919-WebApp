@@ -35,7 +35,7 @@ h1, h4 {
     position: center;
 }
 
-a {
+.cancel {
     color: #FFD700;
     background-color: transparent;
     padding: 4px 8px;
@@ -45,7 +45,7 @@ a {
     transition: background-color 0.3s, color 0.3s;
 }
 
-    a:hover {
+    .cancel:hover {
         background-color: #FFD700;
         color: black;
     }
@@ -61,11 +61,11 @@ a {
     border: 1px solid #FFD700;
 }
 
-.form-group {
+.contact-input {
     margin-bottom: 10px;
 }
 
-.form-control {
+.contact-input {
     width: 100%;
     padding: 8px;
     border: 1px solid #FFD700;

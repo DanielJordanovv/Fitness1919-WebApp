@@ -19,7 +19,7 @@ h1 {
     margin: auto;
 }
 
-.btn {
+.btn-danger,.btn-primary {
     cursor: pointer;
     padding: 4px 8px;
     text-decoration: none;
@@ -56,23 +56,23 @@ a.btn-primary.btn {
         color: #FFD700;
     }
 
-a {
+.delete {
     color: #ffb703;
     text-decoration: blink;
 }
 
-    a:visited {
-        color: #FFD700;
-    }
+.delete:visited {
+    color: #FFD700;
+}
 
-    a:hover {
-        color: orange;
-    }
+.delete:hover {
+    color: orange;
+}
 
-    a:active {
-        color: #FFD700;
-    }
+.delete:active {
+    color: #FFD700;
+}
 
-    a:focus {
-        color: #FFD700;
-    }
+.delete:focus {
+    color: #FFD700;
+}

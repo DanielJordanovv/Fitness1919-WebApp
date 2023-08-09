@@ -1,5 +1,5 @@
-﻿@using Fitness1919.Data.Models
-@using Microsoft.AspNetCore.Identity
+﻿﻿@using Microsoft.AspNetCore.Identity
+@using Fitness1919.Data.Models;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
@@ -7,20 +7,29 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><img src="https://cdn-icons-png.flaticon.com/512/3106/3106773.png" width ="30" height = "30"style="margin-top: 7px;"/></a>
+            <a class="nav-link" style="color:#fff;" asp-area="" asp-controller="ShoppingCart" asp-action="Index">
+                <img src="https://flaticons.net/icon.php?slug_category=shopping&slug_icon=shopping-cart-03" width="35px" height="35px" alt="User">
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="color:#fff; font-size:25px;">
+                <img src="https://www.citypng.com/public/uploads/small/11640520536mcugphq69oclzxxksoewsuqujiccjencvsya7cozh0csv5plsxjgwyaggwevurnkhlznywqdgilzidda7jih6uxhwnvekn5j1xmd.png" width="35px" height="35px" alt="User">@User.Identity?.Name
+            </a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark"><img src="https://cdn-icons-png.flaticon.com/512/152/152534.png" width="30" height="30" /></button>
+                <button type="submit" class="nav-link btn btn-link" style="color:#fff; position:center; text-align:center;">
+                    <img src=" https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/OOjs_UI_icon_logOut-ltr-invert.svg/1024px-OOjs_UI_icon_logOut-ltr-invert.svg.png" width="35px" height="35px" alt="User">
+                </button>
             </form>
         </li>
     }
+
     else
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login"><img src="https://cdn-icons-png.flaticon.com/512/5509/5509636.png" width="30" height="30"/></a>
-        </li>
+
+        <a class="nav-link" style="color:#fff;" asp-area="" asp-controller="User" asp-action="Login">
+            <img src="https://theme.zdassets.com/theme_assets/795717/36caa0817d2c07fd46cf610c3aa4b1646254a1d4.png" width="55" height="55" alt="Cart">
+        </a>
     }
 </ul>
-
-

@@ -37,12 +37,20 @@ a {
     background-color: transparent;
     padding: 4px 8px;
     text-decoration: none;
-    border: 1px solid #FFD700;
-    border-radius: 4px;
+    border: none;
     transition: background-color 0.3s, color 0.3s;
 }
 
     a:hover {
-        background-color: #FFD700;
+        background-color: none;
         color: black;
     }
+.buttonDelete {
+    border: 1px solid #FFD700;
+}
+    .buttonDelete:hover {
+        border: 1px solid #FFD700;
+        background-color: #FFD700;
+        color:black;
+    }
+

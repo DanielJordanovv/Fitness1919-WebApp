@@ -5,6 +5,7 @@
 }
 
 <link rel="stylesheet" href="~/css/contact/create.css" asp-append-version="true" />
+<pre></pre><pre></pre><pre></pre><pre></pre>
 <h1>Create Contact</h1>
 @if (TempData["ErrorMessage"] != null)
 {
@@ -27,7 +28,7 @@
 
     <div class="form-group">
         <label asp-for="Email">Email:</label>
-        <input asp-for="Email" class="form-control" />
+        <input asp-for="Email" class="form-control contact" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary" style="border-color: #FFD700; background-color: #FFD700; font-weight: bold ; color:black">Create</button>

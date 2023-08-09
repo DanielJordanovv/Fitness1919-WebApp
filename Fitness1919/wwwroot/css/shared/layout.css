@@ -108,7 +108,7 @@
 }
 
 .login-container {
-    background-color: #FFD700;
+    background-color: transparent;
     padding: 10px;
     border-radius: 5px;
     position: fixed;
@@ -118,7 +118,7 @@
 }
 
 .login-button {
-    background-color: #FFD700;
+    background-color: transparent;
     color: black;
     border: none;
     border-radius: 50px;

@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Create Brand";
 }
-<link rel="stylesheet" href="~/css/brand/create.css" />
+<link rel="stylesheet" href="~/css/category/create.css" />
 <pre></pre><pre></pre><pre></pre><pre></pre>
 <h1>@ViewData["Title"]</h1>
 @if(TempData["ErrorMessage"]!=null)
@@ -16,7 +16,7 @@
 <form asp-controller="Brands" asp-action="Create" method="post">
     <div class="form-group">
         <label asp-for="BrandName">Name:</label>
-        <input asp-for="BrandName" class="form-control" />
+        <input asp-for="BrandName" class="category-input" />
         <span asp-validation-for="BrandName" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>

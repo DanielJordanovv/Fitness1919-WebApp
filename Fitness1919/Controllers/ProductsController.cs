@@ -64,10 +64,14 @@ namespace Fitness1919.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(string id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
             bool productExists = ProductExists(id);
             if (!productExists)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
 
             ProductDetailsViewModel viewModel = await service.GetDetailsByIdAsync(id);

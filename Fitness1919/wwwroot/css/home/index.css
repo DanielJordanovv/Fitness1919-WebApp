@@ -391,3 +391,10 @@ a.current_dot {
         right: -10px;
     }
 }
+.logout {
+    margin-top: 11px;
+}
+.btn btn-link
+{
+    margin-top:3px;
+}

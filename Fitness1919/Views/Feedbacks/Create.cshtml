@@ -4,24 +4,25 @@
     ViewData["Title"] = "Create Feedback";
 }
 <link rel="stylesheet" href="~/css/feedback/create.css" true" />
+<pre></pre><pre></pre><pre></pre><pre></pre><pre></pre>
 <h1>Create Feedback</h1>
 
 <form class="sth" asp-controller="Feedbacks" asp-action="Create" method="post">
     <div class="form-group">
         <label asp-for="FullName">First name:</label>
-        <input asp-for="FullName" class="form-control" />
+        <input asp-for="FullName" class="feedback-input" />
         <span asp-validation-for="FullName" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="City">City:</label>
-        <textarea asp-for="City" class="form-control"></textarea>
+        <textarea asp-for="City" class="feedback-input"></textarea>
         <span asp-validation-for="City" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="FeedBackDescription">Feedback Description:</label>
-        <input asp-for="FeedBackDescription" class="form-control" />
+        <input asp-for="FeedBackDescription" class="feedback-input" />
         <span asp-validation-for="FeedBackDescription" class="text-danger"></span>
     </div>
     <div>

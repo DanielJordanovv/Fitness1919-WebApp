@@ -10,7 +10,7 @@
 @if (this.User.IsInRole("Administrator"))
 {
     <p>
-        <a asp-action="Create">Create New</a>
+        <a class="links" asp-action="Create">Create New</a>
     </p>
 }
 
@@ -45,8 +45,8 @@
                 @if (this.User.IsInRole("Administrator"))
                 {
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a class="links" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a class="links" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </td>
                 }
             </tr>

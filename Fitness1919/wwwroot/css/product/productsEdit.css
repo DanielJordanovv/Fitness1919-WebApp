@@ -36,7 +36,7 @@ h1, h4 {
     }
 
 
-a {
+.btn btn-secondary {
     color: #FFD700;
     background-color: transparent;
     padding: 4px 8px;
@@ -62,11 +62,11 @@ a {
     border: 1px solid #FFD700;
 }
 
-.form-group {
+.product-control {
     margin-bottom: 10px;
 }
 
-.form-control {
+.product-control {
     width: 100%;
     padding: 8px;
     border: 1px solid #FFD700;

@@ -40,7 +40,7 @@ hr {
     color: #FFD700;
 }
 
-.btn {
+.btn btn-danger{
     cursor: pointer;
     padding: 4px 8px;
     text-decoration: none;
