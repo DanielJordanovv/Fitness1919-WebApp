@@ -3,11 +3,6 @@ using Fitness1919.Data.Models;
 using Fitness1919.Web.ViewModels.Contact;
 using Guards;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness1919.Services.Data.Interfaces
 {
