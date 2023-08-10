@@ -30,7 +30,6 @@ namespace Fitness1919.Tests.Services.Data
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var cartService = new ShoppingCartService(context);
                 var userId = Guid.NewGuid();
                 var productId = "1";
@@ -39,10 +38,8 @@ namespace Fitness1919.Tests.Services.Data
                 context.Products.Add(new Product { Id = productId, Name = "Product 1", Quantity = 10, Description = "test", img = ".", Price = 100 });
                 context.SaveChanges();
 
-                // Act
                 await cartService.AddProductToCartAsync(userId, productId, quantity);
 
-                // Assert
                 var cartItem = context.ShoppingCartProducts.FirstOrDefault();
                 Assert.IsNotNull(cartItem);
                 Assert.AreEqual(userId, cartItem.UserId);
@@ -55,13 +52,11 @@ namespace Fitness1919.Tests.Services.Data
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var cartService = new ShoppingCartService(context);
                 var userId = Guid.NewGuid();
                 var productId = "1";
                 var quantity = 2;
 
-                // Act & Assert
                 Assert.ThrowsAsync<ProductNotFoundException>(
                     async () => await cartService.AddProductToCartAsync(userId, productId, quantity));
             }
@@ -71,7 +66,6 @@ namespace Fitness1919.Tests.Services.Data
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var cartService = new ShoppingCartService(context);
                 var userId = Guid.NewGuid();
                 var productId = "1";
@@ -87,10 +81,8 @@ namespace Fitness1919.Tests.Services.Data
                     PhoneNumber = "+359123456789"
                 };
 
-                // Act
                 await cartService.CheckoutAsync(userId, model);
 
-                // Assert
                 var order = context.Orders.FirstOrDefault();
                 var cartItem = context.ShoppingCartProducts.FirstOrDefault();
 
@@ -107,7 +99,6 @@ namespace Fitness1919.Tests.Services.Data
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var cartService = new ShoppingCartService(context);
                 var userId = Guid.NewGuid();
                 var model = new CheckoutViewModel
@@ -117,7 +108,6 @@ namespace Fitness1919.Tests.Services.Data
                     PhoneNumber = "+359123456789"
                 };
 
-                // Act & Assert
                 Assert.ThrowsAsync<EmptyShoppingCartException>(
                     async () => await cartService.CheckoutAsync(userId, model));
             }
@@ -127,7 +117,6 @@ namespace Fitness1919.Tests.Services.Data
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var cartService = new ShoppingCartService(context);
                 var userId = Guid.NewGuid();
                 var productId = "1";
@@ -136,10 +125,8 @@ namespace Fitness1919.Tests.Services.Data
                 context.ShoppingCartProducts.Add(new ShoppingCart { UserId = userId, ProductId = productId, Quantity = 2 });
                 context.SaveChanges();
 
-                // Act
                 var cartViewModel = cartService.GetShoppingCartAsync(userId);
 
-                // Assert
                 Assert.IsNotNull(cartViewModel);
                 Assert.AreEqual(userId, cartViewModel.UserId);
                 Assert.AreEqual(1, cartViewModel.Products.Count());
@@ -150,7 +137,6 @@ namespace Fitness1919.Tests.Services.Data
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var cartService = new ShoppingCartService(context);
                 var userId = Guid.NewGuid();
                 var productId = "1";
@@ -159,10 +145,8 @@ namespace Fitness1919.Tests.Services.Data
                 context.ShoppingCartProducts.Add(new ShoppingCart { UserId = userId, ProductId = productId, Quantity = 2 });
                 context.SaveChanges();
 
-                // Act
                 await cartService.RemoveProductFromCartAsync(userId, productId);
 
-                // Assert
                 var cartItem = context.ShoppingCartProducts.FirstOrDefault();
                 Assert.IsNull(cartItem);
             }

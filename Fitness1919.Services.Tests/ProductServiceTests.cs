@@ -29,7 +29,6 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var productService = new ProductService(context);
                 var model = new ProductAddViewModel
                 {
@@ -42,10 +41,8 @@ namespace Fitness1919.Tests.Services
                     BrandId = 1
                 };
 
-                // Act
                 await productService.CreateAsync(model);
 
-                // Assert
                 Assert.AreEqual(1, context.Products.Count());
             }
         }
@@ -55,13 +52,11 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", });
                 context.SaveChanges();
                 var productService = new ProductService(context);
                 var model = new ProductAddViewModel { Name = "Product 1" };
 
-                // Act & Assert
                 Assert.ThrowsAsync<Exception>(
                     async () => await productService.CreateAsync(model));
             }
@@ -94,10 +89,8 @@ namespace Fitness1919.Tests.Services
                 context.SaveChanges();
                 var productService = new ProductService(context);
 
-                // Act
                 var products = await productService.AllSearchedAsync("Product 1");
 
-                // Assert
                 Assert.AreEqual(1, products.Count());
             }
         }
@@ -107,16 +100,13 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false, Category = new Category { CategoryName = "Category 1" }, Brand = new Brand { BrandName = "Brand 1" } });
                 context.Products.Add(new Product { Id = "2", Name = "Product 2", Description = "test", img = ".", IsDeleted = false, Category = new Category { CategoryName = "Category 2" }, Brand = new Brand { BrandName = "Brand 2" } });
                 context.SaveChanges();
                 var productService = new ProductService(context);
 
-                // Act
                 var products = await productService.FilterAsync("Category 1", "Brand 1");
 
-                // Assert
                 Assert.AreEqual(1, products.Count());
             }
         }
@@ -126,15 +116,12 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false, Category = new Category { CategoryName = "Category 1" }, Brand = new Brand { BrandName = "Brand 1" } });
                 context.SaveChanges();
                 var productService = new ProductService(context);
 
-                // Act
                 var productDetails = await productService.GetDetailsByIdAsync("1");
 
-                // Assert
                 Assert.AreEqual("Product 1", productDetails.Name);
                 Assert.AreEqual("Category 1", productDetails.Category);
                 Assert.AreEqual("Brand 1", productDetails.Brand);
@@ -146,15 +133,12 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false });
                 context.SaveChanges();
                 var productService = new ProductService(context);
 
-                // Act
                 await productService.DeleteAsync("1");
 
-                // Assert
                 var product = context.Products.FirstOrDefault(p => p.Id == "1");
                 Assert.IsTrue(product.IsDeleted);
             }
@@ -165,10 +149,8 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var productService = new ProductService(context);
 
-                // Act & Assert
                 Assert.ThrowsAsync<ArgumentNullException>(
                     async () => await productService.DeleteAsync("1"));
             }
@@ -179,7 +161,6 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false });
                 context.SaveChanges();
                 var productService = new ProductService(context);
@@ -194,14 +175,11 @@ namespace Fitness1919.Tests.Services
                     BrandId = 2
                 };
 
-                // Act
                 await productService.UpdateAsync("1", model);
 
-                // Assert
                 var updatedProduct = context.Products.FirstOrDefault(p => p.Id == "1");
                 Assert.AreEqual("Updated Product", updatedProduct.Name);
                 Assert.AreEqual(20, updatedProduct.Quantity);
-                // ... similar assertions for other properties
             }
         }
 
@@ -210,11 +188,9 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var productService = new ProductService(context);
                 var model = new ProductUpdateViewModel { Name = "Updated Product" };
 
-                // Act & Assert
                 Assert.ThrowsAsync<ArgumentNullException>(
                     async () => await productService.UpdateAsync("1", model));
             }
@@ -225,14 +201,12 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", Quantity = 0, img = ".", IsDeleted = false });
                 context.Products.Add(new Product { Id = "2", Name = "Product 2", Description = "test", Quantity = 0, img = ".", IsDeleted = false });
                 context.SaveChanges();
                 var productService = new ProductService(context);
                 var model = new ProductUpdateViewModel { Name = "Product 2", Description = "test", Quantity = 0, img = "." };
 
-                // Act & Assert
                 Assert.ThrowsAsync<Exception>(
                     async () => await productService.UpdateAsync("1", model));
             }
@@ -243,15 +217,12 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false });
                 context.SaveChanges();
                 var productService = new ProductService(context);
 
-                // Act
                 var product = await productService.GetProductAsync("1");
 
-                // Assert
                 Assert.IsNotNull(product);
                 Assert.AreEqual("Product 1", product.Name);
             }
@@ -262,13 +233,10 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var productService = new ProductService(context);
 
-                // Act
                 var product = await productService.GetProductAsync("1");
 
-                // Assert
                 Assert.IsNull(product);
             }
         }
@@ -278,15 +246,12 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ". ", IsDeleted = false });
                 context.SaveChanges();
                 var productService = new ProductService(context);
 
-                // Act
                 var exists = productService.ProductExistsAsync("1");
 
-                // Assert
                 Assert.IsTrue(exists);
             }
         }
@@ -296,13 +261,10 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                // Arrange
                 var productService = new ProductService(context);
 
-                // Act
                 var exists = productService.ProductExistsAsync("1");
 
-                // Assert
                 Assert.IsFalse(exists);
             }
         }

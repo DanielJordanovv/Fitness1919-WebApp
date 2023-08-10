@@ -27,7 +27,7 @@ namespace Fitness1919.Web.Controllers
             orders = orders.OrderByDescending(x => x.CreatedOn).ToList();
             return View(orders);
         }
-        private Guid GetUserId()
+        public Guid GetUserId()
         {
             string userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (Guid.TryParse(userIdString, out Guid userId))
