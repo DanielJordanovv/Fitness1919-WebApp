@@ -16,6 +16,7 @@ namespace Fitness1919.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var orders = await service.All();
+            orders = orders.OrderByDescending(x => x.CreatedOn).ToList();
             return View(orders);
         }
         [AllowAnonymous]
@@ -23,6 +24,7 @@ namespace Fitness1919.Web.Controllers
         {
             Guid userId = GetUserId();
             var orders = await service.My(userId.ToString());
+            orders = orders.OrderByDescending(x => x.CreatedOn).ToList();
             return View(orders);
         }
         private Guid GetUserId()
