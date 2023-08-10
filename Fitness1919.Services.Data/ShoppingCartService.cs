@@ -62,9 +62,9 @@ namespace Fitness1919.Services.Data
                 .Include(x=>x.Product)
                 .Where(x => x.UserId == userId && !x.IsCheckout);
 
-            if (cart == null)
+            if (cart.Select(x => x.Product).Count() == 0)
             {
-                throw new NotFoundShoppingCartException();
+                throw new EmptyShoppingCartException();
             }
             var order = new Order
             {

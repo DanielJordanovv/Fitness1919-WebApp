@@ -14,175 +14,297 @@ namespace Fitness1919.Tests.Services
     [TestFixture]
     public class ProductServiceTests
     {
-        private Fitness1919DbContext dbContext;
-        private ProductService productService;
+        private DbContextOptions<Fitness1919DbContext> options;
 
         [SetUp]
         public void Setup()
         {
-            var options = new DbContextOptionsBuilder<Fitness1919DbContext>()
+            options = new DbContextOptionsBuilder<Fitness1919DbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-                .Options;
-            dbContext = new Fitness1919DbContext(options);
-            productService = new ProductService(dbContext);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            dbContext.Dispose();
+            .Options;
         }
 
         [Test]
-        public async Task CreateAsync_Should_CreateNewProduct_When_ValidModelIsProvided()
+        public async Task CreateAsync_ShouldAddProductToDatabase_WhenValidModel()
         {
-            var model = new ProductAddViewModel
+            using (var context = new Fitness1919DbContext(options))
             {
-                Name = "Product1",
-                Description = "Product1 description",
-                Quantity = 2,
-                Price = 10,
-                img = "asdaksdadksad.com",
-                CategoryId = 1,
-                BrandId = 1
-            };
+                // Arrange
+                var productService = new ProductService(context);
+                var model = new ProductAddViewModel
+                {
+                    Name = "Product 1",
+                    Description = "Description",
+                    Quantity = 10,
+                    Price = 100,
+                    img = "image.jpg",
+                    CategoryId = 1,
+                    BrandId = 1
+                };
 
-            await productService.CreateAsync(model);
-            var createdProduct = await dbContext.Products.FirstOrDefaultAsync();
+                // Act
+                await productService.CreateAsync(model);
 
-            Assert.NotNull(createdProduct);
-        }
-        [Test]
-        public async Task DeleteAsync_Should_SetIsDeleted_ToTrue_When_ValidIdIsProvided()
-        {
-            var product = new Product
-            {
-                Id = "1",
-                Name = "Product1",
-                Description = "Product1 description",
-                Quantity = 2,
-                Price = 10,
-                IsDeleted = false,
-                img = "asdaksdadksad.com",
-                CategoryId = 1,
-                BrandId = 1
-            };
-            await dbContext.Products.AddAsync(product);
-            await dbContext.SaveChangesAsync();
-
-            await productService.DeleteAsync("1");
-            var deletedProduct = await dbContext.Products.FirstOrDefaultAsync(p => p.Id == "1");
-
-            Assert.NotNull(deletedProduct);
-            Assert.True(deletedProduct.IsDeleted);
+                // Assert
+                Assert.AreEqual(1, context.Products.Count());
+            }
         }
 
         [Test]
-        public async Task GetProductAsync_Should_ReturnProduct_When_ValidIdIsProvided()
+        public void CreateAsync_ShouldThrowException_WhenProductAlreadyExists()
         {
-            var product = new Product
+            using (var context = new Fitness1919DbContext(options))
             {
-                Id = "1",
-                Name = "Product1",
-                Description = "Product1 description",
-                Quantity = 2,
-                Price = 10,
-                IsDeleted = false,
-                img = "asdaksdadksad.com",
-                CategoryId = 1,
-                BrandId = 1
-            };
-            await dbContext.Products.AddAsync(product);
-            await dbContext.SaveChangesAsync();
+                // Arrange
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", });
+                context.SaveChanges();
+                var productService = new ProductService(context);
+                var model = new ProductAddViewModel { Name = "Product 1" };
 
-            var result = await productService.GetProductAsync("1");
-
-            Assert.NotNull(result);
-            Assert.AreEqual("1", result.Id);
+                // Act & Assert
+                Assert.ThrowsAsync<Exception>(
+                    async () => await productService.CreateAsync(model));
+            }
         }
 
         [Test]
-        public async Task ProductExistsAsync_Should_ReturnTrue_When_ValidIdIsProvided()
+        public async Task AllAsync_ShouldReturnAllNonDeletedProducts()
         {
-            var product = new Product
+            using (var context = new Fitness1919DbContext(options))
             {
-                Id = "1",
-                Name = "Product1",
-                Description = "Product1 description",
-                Quantity = 2,
-                Price = 10,
-                IsDeleted = false,
-                img = "asdaksdadksad.com",
-                CategoryId = 1,
-                BrandId = 1
-            };
-            await dbContext.Products.AddAsync(product);
-            await dbContext.SaveChangesAsync();
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false, Category = new Category { CategoryName = "Category 1" }, Brand = new Brand { BrandName = "Brand 1" } });
+                context.Products.Add(new Product { Id = "2", Name = "Product 2", Description = "test", img = ".", IsDeleted = true, Category = new Category { CategoryName = "Category 1" }, Brand = new Brand { BrandName = "Brand 1" } });
+                context.SaveChanges();
+                var productService = new ProductService(context);
 
-            var result = productService.ProductExistsAsync("1");
+                var products = await productService.AllAsync();
 
-            Assert.True(result);
+                Assert.AreEqual(1, products.Count());
+            }
+
         }
 
         [Test]
-        public async Task UpdateAsync_Should_UpdateProduct_When_ValidIdAndModelAreProvided()
+        public async Task AllSearchedAsync_ShouldReturnProductsMatchingSearch()
         {
-            var product = new Product
+            using (var context = new Fitness1919DbContext(options))
             {
-                Id = "1",
-                Name = "Product1",
-                Description = "Product1 description",
-                Quantity = 2,
-                Price = 10,
-                IsDeleted = false,
-                img = "asdaksdadksad.com",
-                CategoryId = 1,
-                BrandId = 1
-            };
-            await dbContext.Products.AddAsync(product);
-            await dbContext.SaveChangesAsync();
-            var updateModel = new ProductUpdateViewModel
-            {
-                Id = "1",
-                Name = "Product2",
-                Description = "Product1 description one",
-                Quantity = 4,
-                Price = 10,
-                img = "asdaksdadksad.com",
-                CategoryId = 1,
-                BrandId = 1
-            };
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false, Category = new Category { CategoryName = "Category 1" }, Brand = new Brand { BrandName = "Brand 1" } });
+                context.Products.Add(new Product { Id = "2", Name = "Product 2", Description = "test", img = ".", IsDeleted = false, Category = new Category { CategoryName = "Category 1" }, Brand = new Brand { BrandName = "Brand 1" } });
+                context.SaveChanges();
+                var productService = new ProductService(context);
 
-            await productService.UpdateAsync("1", updateModel);
-            var updatedProduct = await dbContext.Products.FindAsync("1");
+                // Act
+                var products = await productService.AllSearchedAsync("Product 1");
 
-            Assert.NotNull(updatedProduct);
-            Assert.AreEqual(updateModel.Name, updatedProduct.Name);
-            Assert.AreEqual(updateModel.Description, updatedProduct.Description);
-            Assert.AreEqual(updateModel.Quantity, updatedProduct.Quantity);
+                // Assert
+                Assert.AreEqual(1, products.Count());
+            }
         }
 
         [Test]
-        public async Task GetDetailsByIdAsync_Should_ReturnProductDetails_When_ValidIdIsProvided()
+        public async Task FilterAsync_ShouldReturnFilteredProducts()
         {
-            var product = new Product
+            using (var context = new Fitness1919DbContext(options))
             {
-                Id = "1",
-                Name = "Product One",
-                Description = "Product3 description three",
-                Quantity = 2,
-                Price = 10,
-                img = "asdaksdadksad.com",
-                Category = new Category { CategoryName = "Category" },
-                Brand = new Brand { BrandName = "Brand" }
-            };
-            await dbContext.Products.AddAsync(product);
-            await dbContext.SaveChangesAsync();
+                // Arrange
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false, Category = new Category { CategoryName = "Category 1" }, Brand = new Brand { BrandName = "Brand 1" } });
+                context.Products.Add(new Product { Id = "2", Name = "Product 2", Description = "test", img = ".", IsDeleted = false, Category = new Category { CategoryName = "Category 2" }, Brand = new Brand { BrandName = "Brand 2" } });
+                context.SaveChanges();
+                var productService = new ProductService(context);
 
-            var result = await productService.GetDetailsByIdAsync("1");
+                // Act
+                var products = await productService.FilterAsync("Category 1", "Brand 1");
 
-            Assert.NotNull(result);
-            Assert.AreEqual("1", result.Id);
+                // Assert
+                Assert.AreEqual(1, products.Count());
+            }
+        }
+
+        [Test]
+        public async Task GetDetailsByIdAsync_ShouldReturnProductDetails()
+        {
+            using (var context = new Fitness1919DbContext(options))
+            {
+                // Arrange
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false, Category = new Category { CategoryName = "Category 1" }, Brand = new Brand { BrandName = "Brand 1" } });
+                context.SaveChanges();
+                var productService = new ProductService(context);
+
+                // Act
+                var productDetails = await productService.GetDetailsByIdAsync("1");
+
+                // Assert
+                Assert.AreEqual("Product 1", productDetails.Name);
+                Assert.AreEqual("Category 1", productDetails.Category);
+                Assert.AreEqual("Brand 1", productDetails.Brand);
+            }
+        }
+
+        [Test]
+        public async Task DeleteAsync_ShouldSoftDeleteProduct_WhenValidId()
+        {
+            using (var context = new Fitness1919DbContext(options))
+            {
+                // Arrange
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false });
+                context.SaveChanges();
+                var productService = new ProductService(context);
+
+                // Act
+                await productService.DeleteAsync("1");
+
+                // Assert
+                var product = context.Products.FirstOrDefault(p => p.Id == "1");
+                Assert.IsTrue(product.IsDeleted);
+            }
+        }
+
+        [Test]
+        public void DeleteAsync_ShouldThrowException_WhenProductNotFound()
+        {
+            using (var context = new Fitness1919DbContext(options))
+            {
+                // Arrange
+                var productService = new ProductService(context);
+
+                // Act & Assert
+                Assert.ThrowsAsync<ArgumentNullException>(
+                    async () => await productService.DeleteAsync("1"));
+            }
+        }
+
+        [Test]
+        public async Task UpdateAsync_ShouldUpdateProduct_WhenValidIdAndModel()
+        {
+            using (var context = new Fitness1919DbContext(options))
+            {
+                // Arrange
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false });
+                context.SaveChanges();
+                var productService = new ProductService(context);
+                var model = new ProductUpdateViewModel
+                {
+                    Name = "Updated Product",
+                    Description = "Updated Description",
+                    Quantity = 20,
+                    Price = 200,
+                    img = "updated.jpg",
+                    CategoryId = 2,
+                    BrandId = 2
+                };
+
+                // Act
+                await productService.UpdateAsync("1", model);
+
+                // Assert
+                var updatedProduct = context.Products.FirstOrDefault(p => p.Id == "1");
+                Assert.AreEqual("Updated Product", updatedProduct.Name);
+                Assert.AreEqual(20, updatedProduct.Quantity);
+                // ... similar assertions for other properties
+            }
+        }
+
+        [Test]
+        public void UpdateAsync_ShouldThrowException_WhenProductNotFound()
+        {
+            using (var context = new Fitness1919DbContext(options))
+            {
+                // Arrange
+                var productService = new ProductService(context);
+                var model = new ProductUpdateViewModel { Name = "Updated Product" };
+
+                // Act & Assert
+                Assert.ThrowsAsync<ArgumentNullException>(
+                    async () => await productService.UpdateAsync("1", model));
+            }
+        }
+
+        [Test]
+        public void UpdateAsync_ShouldThrowException_WhenProductWithSameDetailsExists()
+        {
+            using (var context = new Fitness1919DbContext(options))
+            {
+                // Arrange
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", Quantity = 0, img = ".", IsDeleted = false });
+                context.Products.Add(new Product { Id = "2", Name = "Product 2", Description = "test", Quantity = 0, img = ".", IsDeleted = false });
+                context.SaveChanges();
+                var productService = new ProductService(context);
+                var model = new ProductUpdateViewModel { Name = "Product 2", Description = "test", Quantity = 0, img = "." };
+
+                // Act & Assert
+                Assert.ThrowsAsync<Exception>(
+                    async () => await productService.UpdateAsync("1", model));
+            }
+        }
+
+        [Test]
+        public async Task GetProductAsync_ShouldReturnNonDeletedProduct_WhenValidId()
+        {
+            using (var context = new Fitness1919DbContext(options))
+            {
+                // Arrange
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", IsDeleted = false });
+                context.SaveChanges();
+                var productService = new ProductService(context);
+
+                // Act
+                var product = await productService.GetProductAsync("1");
+
+                // Assert
+                Assert.IsNotNull(product);
+                Assert.AreEqual("Product 1", product.Name);
+            }
+        }
+
+        [Test]
+        public async Task GetProductAsync_ShouldReturnNull_WhenProductNotFound()
+        {
+            using (var context = new Fitness1919DbContext(options))
+            {
+                // Arrange
+                var productService = new ProductService(context);
+
+                // Act
+                var product = await productService.GetProductAsync("1");
+
+                // Assert
+                Assert.IsNull(product);
+            }
+        }
+
+        [Test]
+        public void ProductExistsAsync_ShouldReturnTrue_WhenProductExists()
+        {
+            using (var context = new Fitness1919DbContext(options))
+            {
+                // Arrange
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ". ", IsDeleted = false });
+                context.SaveChanges();
+                var productService = new ProductService(context);
+
+                // Act
+                var exists = productService.ProductExistsAsync("1");
+
+                // Assert
+                Assert.IsTrue(exists);
+            }
+        }
+
+        [Test]
+        public void ProductExistsAsync_ShouldReturnFalse_WhenProductDoesNotExist()
+        {
+            using (var context = new Fitness1919DbContext(options))
+            {
+                // Arrange
+                var productService = new ProductService(context);
+
+                // Act
+                var exists = productService.ProductExistsAsync("1");
+
+                // Assert
+                Assert.IsFalse(exists);
+            }
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Fitness1919.Services.Data
                 CategoryId = model.CategoryId,
                 BrandId = model.BrandId
             };
-            if (context.Products.Any(x => x.Name == product.Name && x.Description == product.Description))
+            if (context.Products.Any(x => x.Name == product.Name))
             {
                 throw new Exception();
             }
