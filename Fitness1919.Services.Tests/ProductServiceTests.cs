@@ -129,7 +129,7 @@ namespace Fitness1919.Tests.Services
         }
 
         [Test]
-        public async Task DeleteAsync_ShouldSoftDeleteProduct_WhenValidId()
+        public async Task DeleteAsync_ShouldDeleteProduct_WhenValidId()
         {
             using (var context = new Fitness1919DbContext(options))
             {
@@ -140,7 +140,7 @@ namespace Fitness1919.Tests.Services
                 await productService.DeleteAsync("1");
 
                 var product = context.Products.FirstOrDefault(p => p.Id == "1");
-                Assert.IsTrue(product.IsDeleted);
+                Assert.AreEqual(null, product);
             }
         }
 

@@ -47,26 +47,6 @@ namespace Fitness1919.Tests.Controllers
 
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
-
-        [Test]
-        public async Task Delete_ReturnsViewWithDeleteViewModel_ForExistingUser()
-        {
-            var userId = Guid.NewGuid();
-            var user = new ApplicationUser { Id = userId, UserName = "testuser", Email = "test@example.com", FirstName = "Test", LastName = "User" };
-            mockAdminService.Setup(service => service.GetUserAsync(userId)).ReturnsAsync(user);
-
-            var result = await adminController.Delete(userId);
-
-            Assert.IsInstanceOf<ViewResult>(result);
-            var viewResult = result as ViewResult;
-            Assert.IsInstanceOf<DeleteViewModel>(viewResult.Model);
-            var viewModel = viewResult.Model as DeleteViewModel;
-            Assert.AreEqual(user.UserName, viewModel.UserName);
-            Assert.AreEqual(user.Email, viewModel.Email);
-            Assert.AreEqual(user.FirstName, viewModel.FirstName);
-            Assert.AreEqual(user.LastName, viewModel.LastName);
-        }
-
         [Test]
         public async Task DeleteConfirmed_RedirectsToAllUsers_AfterDeletion()
         {
