@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Fitness1919.Data;
@@ -52,7 +51,7 @@ namespace Fitness1919.Tests.Services
         {
             using (var context = new Fitness1919DbContext(options))
             {
-                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = ".", });
+                context.Products.Add(new Product { Id = "1", Name = "Product 1", Description = "test", img = "." });
                 context.SaveChanges();
                 var productService = new ProductService(context);
                 var model = new ProductAddViewModel { Name = "Product 1" };
@@ -76,7 +75,6 @@ namespace Fitness1919.Tests.Services
 
                 Assert.AreEqual(1, products.Count());
             }
-
         }
 
         [Test]

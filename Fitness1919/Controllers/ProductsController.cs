@@ -263,7 +263,7 @@ namespace Fitness1919.Web.Controllers
         {
             return service.ProductExistsAsync(id);
         }
-        private Guid GetUserId()
+        public Guid GetUserId()
         {
             string userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (Guid.TryParse(userIdString, out Guid userId))

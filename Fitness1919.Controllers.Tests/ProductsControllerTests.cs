@@ -1,8 +1,6 @@
 ﻿using Fitness1919.Data.Models;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.Controllers;
-using Fitness1919.Web.ViewModels.Brand;
-using Fitness1919.Web.ViewModels.Category;
 using Fitness1919.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,21 +8,20 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Fitness1919.Controllers.Tests
 {
     [TestFixture]
-    public class ProductsControllerTests
+    public class ProductControllerTests
     {
         private Mock<IProductService> productServiceMock;
         private Mock<ICategoryService> categoryServiceMock;
         private Mock<IBrandService> brandServiceMock;
-        private Mock<IShoppingCartService> shoppingCartServiceMock;
-        private ProductsController controller;
+        private Mock<IShoppingCartService> shoppingcartServiceMock;
+
+        private ProductsController productController;
 
         [SetUp]
         public void Setup()
@@ -32,128 +29,302 @@ namespace Fitness1919.Controllers.Tests
             productServiceMock = new Mock<IProductService>();
             categoryServiceMock = new Mock<ICategoryService>();
             brandServiceMock = new Mock<IBrandService>();
-            shoppingCartServiceMock = new Mock<IShoppingCartService>();
-            controller = new ProductsController(
+            shoppingcartServiceMock = new Mock<IShoppingCartService>();
+
+            productController = new ProductsController(
                 productServiceMock.Object,
                 categoryServiceMock.Object,
                 brandServiceMock.Object,
-                shoppingCartServiceMock.Object
-            );
+                shoppingcartServiceMock.Object);
         }
 
         [Test]
-        public async Task AddToCart_WithValidData_ShouldRedirectToProductsIndex()
+        public async Task Index_ReturnsCorrectViewAndViewModel()
         {
-            string productId = "someProductId";
-            int quantity = 1;
-            Guid userId = Guid.NewGuid();
-
-            controller.ControllerContext = new ControllerContext
+            var products = new List<ProductAllViewModel>
             {
-                HttpContext = new DefaultHttpContext
-                {
-                    User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, userId.ToString())
-                    }))
-                }
+                new ProductAllViewModel { Id = "1", Name = "Product 1" },
+                new ProductAllViewModel { Id = "2", Name = "Product 2" }
             };
+            productServiceMock.Setup(s => s.FilterAsync(null, null)).ReturnsAsync(products);
 
-            shoppingCartServiceMock
-                .Setup(s => s.AddProductToCartAsync(userId, productId, quantity))
-                .Returns(Task.CompletedTask);
-
-            var result = await controller.AddToCart(productId, quantity) as RedirectToActionResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("Index", result.ActionName);
-            Assert.AreEqual("Products", result.ControllerName);
-        }
-        [Test]
-        public async Task Create_WithValidModel_ShouldRedirectToProductsIndex()
-        {
-            var bindingModel = new ProductAddViewModel();
-            var userId = Guid.NewGuid();
-
-            controller.ControllerContext = new ControllerContext
-            {
-                HttpContext = new DefaultHttpContext
-                {
-                    User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, userId.ToString())
-                    }))
-                }
-            };
-
-            categoryServiceMock.Setup(c => c.CategoryExistsAsync(bindingModel.CategoryId)).Returns(true);
-            brandServiceMock.Setup(b => b.BrandExistsAsync(bindingModel.BrandId)).Returns(true);
-            productServiceMock.Setup(p => p.CreateAsync(bindingModel)).Returns(Task.CompletedTask);
-
-            var result = await controller.Create(bindingModel) as RedirectToActionResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("Index", result.ActionName);
-            Assert.AreEqual("Products", result.ControllerName);
-        }
-
-        [Test]
-        public async Task Edit_WithValidModel_ShouldRedirectToProductsIndex()
-        {
-            string productId = "someProductId";
-            var bindingModel = new ProductUpdateViewModel();
-
-            categoryServiceMock.Setup(c => c.CategoryExistsAsync(bindingModel.CategoryId)).Returns(true);
-            brandServiceMock.Setup(b => b.BrandExistsAsync(bindingModel.BrandId)).Returns(true);
-            productServiceMock.Setup(p => p.UpdateAsync(productId, bindingModel)).Returns(Task.CompletedTask);
-
-            var result = await controller.Edit(productId, bindingModel) as RedirectToActionResult;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual("Index", result.ActionName);
-            Assert.AreEqual("Products", result.ControllerName);
-        }
-
-        
-
-        [Test]
-        public async Task Create_WithNonExistentCategory_ShouldAddModelError()
-        {
-            var bindingModel = new ProductAddViewModel();
-            categoryServiceMock.Setup(c => c.CategoryExistsAsync(bindingModel.CategoryId)).Returns(false);
-
-            var result = await controller.Create(bindingModel) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.ViewData.ModelState.ContainsKey(nameof(bindingModel.CategoryId)));
-        }
-
-        [Test]
-        public async Task Create_WithNonExistentBrand_ShouldAddModelError()
-        {
-            var bindingModel = new ProductAddViewModel();
-            categoryServiceMock.Setup(c => c.CategoryExistsAsync(bindingModel.CategoryId)).Returns(true);
-            brandServiceMock.Setup(b => b.BrandExistsAsync(bindingModel.BrandId)).Returns(false);
-
-            var result = await controller.Create(bindingModel) as ViewResult;
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.ViewData.ModelState.ContainsKey(nameof(bindingModel.BrandId)));
-        }
-        [Test]
-        public async Task Index_ReturnsViewWithViewModel()
-        {
-            var controller = new ProductsController(productServiceMock.Object, categoryServiceMock.Object, brandServiceMock.Object, null);
-
-            var products = new List<ProductAllViewModel>();
-            productServiceMock.Setup(service => service.FilterAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(products);
-            categoryServiceMock.Setup(service => service.AllAsync()).ReturnsAsync(new List<CategoryAllViewModel>());
-            brandServiceMock.Setup(service => service.AllAsync()).ReturnsAsync(new List<BrandAllViewModel>());
-
-            var result = await controller.Index(null, null) as ViewResult;
+            var result = await productController.Index(null, null) as ViewResult;
 
             Assert.NotNull(result);
             Assert.IsInstanceOf<ProductIndexViewModel>(result.Model);
+            var viewModel = result.Model as ProductIndexViewModel;
+            Assert.AreEqual(products, viewModel.Products);
+        }
+
+        [Test]
+        public async Task Search_WithValidSearch_ReturnsCorrectViewAndViewModel()
+        {
+            var products = new List<ProductAllViewModel>
+            {
+                new ProductAllViewModel { Id = "1", Name = "Product 1" },
+                new ProductAllViewModel { Id = "2", Name = "Product 2" }
+            };
+            productServiceMock.Setup(s => s.AllSearchedAsync("Product")).ReturnsAsync(products);
+
+            var result = await productController.Search("Product") as ViewResult;
+
+            Assert.NotNull(result);
+            Assert.IsInstanceOf<ProductIndexViewModel>(result.Model);
+            var viewModel = result.Model as ProductIndexViewModel;
+            Assert.AreEqual(products, viewModel.Products);
+        }
+
+        [Test]
+        public async Task Search_WithEmptySearch_RedirectsToIndex()
+        {
+            var result = await productController.Search(null) as RedirectToActionResult;
+
+            Assert.NotNull(result);
+            Assert.AreEqual("Index", result.ActionName);
+        }
+
+        [Test]
+        public async Task Details_WithValidId_ReturnsCorrectViewModel()
+        {
+            string productId = "validProductId";
+            var expectedViewModel = new ProductDetailsViewModel();
+
+            productServiceMock.Setup(service => service.ProductExistsAsync(productId))
+                              .Returns(true);
+
+            productServiceMock.Setup(service => service.GetDetailsByIdAsync(productId))
+                              .ReturnsAsync(expectedViewModel);
+
+            var result = await productController.Details(productId) as ViewResult;
+
+            Assert.NotNull(result);
+            Assert.IsInstanceOf<ViewResult>(result);
+            Assert.AreSame(expectedViewModel, result.Model);
+        }
+
+        [Test]
+        public async Task Details_WithInvalidId_ReturnsNotFound()
+        {
+            string productId = "invalidProductId";
+            productServiceMock.Setup(service => service.GetDetailsByIdAsync(productId))
+                              .ReturnsAsync((ProductDetailsViewModel)null); // Simulating null return
+
+            var result = await productController.Details(productId) as NotFoundResult;
+
+            Assert.NotNull(result);
+            Assert.IsInstanceOf<NotFoundResult>(result);
+        }
+
+        [Test]
+        public async Task Create_WithValidModelState_ReturnsRedirectToIndex()
+        {
+            var bindingModel = new ProductAddViewModel
+            {
+                Name = "New Product",
+                CategoryId = 1,
+                BrandId = 1
+            };
+
+            categoryServiceMock.Setup(s => s.CategoryExistsAsync(bindingModel.CategoryId))
+                              .Returns(true);
+            brandServiceMock.Setup(s => s.BrandExistsAsync(bindingModel.BrandId))
+                              .Returns(true);
+            productServiceMock.Setup(s => s.CreateAsync(bindingModel))
+                              .Returns(Task.CompletedTask);
+
+            var result = await productController.Create(bindingModel) as RedirectToActionResult;
+
+            Assert.NotNull(result);
+            Assert.AreEqual("Index", result.ActionName);
+            productServiceMock.Verify(s => s.CreateAsync(It.IsAny<ProductAddViewModel>()), Times.Once);
+            categoryServiceMock.Verify(s => s.CategoryExistsAsync(bindingModel.CategoryId), Times.Once);
+            brandServiceMock.Verify(s => s.BrandExistsAsync(bindingModel.BrandId), Times.Once);
+
+        }
+
+        [Test]
+        public async Task Create_WithInvalidModelState_ReturnsViewWithErrors()
+        {
+            var bindingModel = new ProductAddViewModel
+            {
+                Name = "New Product",
+                CategoryId = 1,
+                BrandId = 1
+            };
+            productController.ModelState.AddModelError("Name", "Name is required");
+
+            var result = await productController.Create(bindingModel) as ViewResult;
+
+            Assert.NotNull(result);
+            Assert.False(productController.ModelState.IsValid);
+            productServiceMock.Verify(s => s.CreateAsync(It.IsAny<ProductAddViewModel>()), Times.Never);
+        }
+
+        [Test]
+        public async Task Edit_WithValidId_ReturnsCorrectViewModel()
+        {
+            var product = new Product { Id = "1", Name = "Product 1" };
+            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync(product);
+
+            var result = await productController.Edit("1") as ViewResult;
+
+            Assert.NotNull(result);
+            Assert.IsInstanceOf<ProductUpdateViewModel>(result.Model);
+        }
+
+        [Test]
+        public async Task Edit_WithInvalidId_ReturnsNotFound()
+        {
+            productServiceMock.Setup(s => s.GetProductAsync("1"));
+
+            var result = await productController.Edit("1") as NotFoundResult;
+
+            Assert.NotNull(result);
+        }
+
+        [Test]
+        public async Task Edit_WithValidModelAndValidId_ReturnsRedirectToIndex()
+        {
+            var bindingModel = new ProductUpdateViewModel
+            {
+                Name = "New Product",
+                CategoryId = 1,
+                BrandId = 1
+            };
+
+            categoryServiceMock.Setup(s => s.CategoryExistsAsync(bindingModel.CategoryId))
+                              .Returns(true);
+            brandServiceMock.Setup(s => s.BrandExistsAsync(bindingModel.BrandId))
+                              .Returns(true);
+            productServiceMock.Setup(s => s.UpdateAsync("1", bindingModel))
+                              .Returns(Task.CompletedTask);
+
+            var result = await productController.Edit("1", bindingModel) as RedirectToActionResult;
+
+            Assert.NotNull(result);
+            Assert.AreEqual("Index", result.ActionName);
+            productServiceMock.Verify(s => s.UpdateAsync("1", It.IsAny<ProductUpdateViewModel>()), Times.Once);
+            categoryServiceMock.Verify(s => s.CategoryExistsAsync(bindingModel.CategoryId), Times.Once);
+            brandServiceMock.Verify(s => s.BrandExistsAsync(bindingModel.BrandId), Times.Once);
+        }
+
+        [Test]
+        public async Task Edit_WithInvalidModelState_ReturnsViewWithErrors()
+        {
+            var bindingModel = new ProductUpdateViewModel
+            {
+                Id = "1",
+                Name = "Updated Product",
+                CategoryId = 1,
+                BrandId = 1
+            };
+            productController.ModelState.AddModelError("Name", "Name is required");
+
+            var result = await productController.Edit("1", bindingModel) as ViewResult;
+
+            Assert.NotNull(result);
+            Assert.False(productController.ModelState.IsValid);
+            productServiceMock.Verify(s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<ProductUpdateViewModel>()), Times.Never);
+        }
+
+        [Test]
+        public async Task Delete_WithValidId_ReturnsCorrectViewAndViewModel()
+        {
+            var product = new Product
+            {
+                Id = "1",
+                Name = "Product 1",
+                Description = "Description",
+                Quantity = 10,
+                Price = 100.00m,
+                img = "image.jpg",
+                CategoryId = 1,
+                BrandId = 1
+            };
+            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync(product);
+
+            var result = await productController.Delete("1") as ViewResult;
+
+            Assert.NotNull(result);
+            Assert.IsInstanceOf<ProductDeleteViewModel>(result.Model);
+            var viewModel = result.Model as ProductDeleteViewModel;
+            Assert.AreEqual(product.Id, viewModel.Id);
+            Assert.AreEqual(product.Name, viewModel.Name);
+            Assert.AreEqual(product.Description, viewModel.Description);
+            Assert.AreEqual(product.Quantity, viewModel.Quantity);
+            Assert.AreEqual(product.Price, viewModel.Price);
+            Assert.AreEqual(product.img, viewModel.img);
+
+        }
+
+        [Test]
+        public async Task Delete_WithInvalidId_ReturnsNotFound()
+        {
+            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync((Product)null);
+
+            var result = await productController.Delete("1") as NotFoundResult;
+
+            Assert.NotNull(result);
+        }
+
+        [Test]
+        public async Task DeleteConfirmed_WithValidId_ReturnsRedirectToIndex()
+        {
+            productServiceMock.Setup(s => s.DeleteAsync("1")).Returns(Task.CompletedTask);
+
+            var result = await productController.DeleteConfirmed("1") as RedirectToActionResult;
+
+            Assert.NotNull(result);
+            Assert.AreEqual("Index", result.ActionName);
+        }
+
+        [Test]
+        public void ProductExists_WithExistingProductId_ReturnsTrue()
+        {
+            productServiceMock.Setup(s => s.ProductExistsAsync("1")).Returns(true);
+
+            var result = productController.ProductExists("1");
+
+            Assert.True(result);
+        }
+
+        [Test]
+        public void ProductExists_WithNonExistingProductId_ReturnsFalse()
+        {
+            productServiceMock.Setup(s => s.ProductExistsAsync("1")).Returns(false);
+
+            var result = productController.ProductExists("1");
+
+            Assert.False(result);
+        }
+
+        [Test]
+        public void GetUserId_WithValidUserId_ReturnsUserId()
+        {
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
+            }));
+            productController.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext { User = user }
+            };
+
+            var result = productController.GetUserId();
+
+            Assert.IsInstanceOf<Guid>(result);
+        }
+
+        [Test]
+        public void GetUserId_WithInvalidUserId_ThrowsException()
+        {
+            var user = new ClaimsPrincipal(new ClaimsIdentity());
+            productController.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext { User = user }
+            };
+
+            Assert.Throws<InvalidOperationException>(() => productController.GetUserId());
         }
     }
 }
