@@ -60,6 +60,7 @@ namespace Fitness1919.Services.Data
             var product = await context.Products.FindAsync(id);
             Guard.ArgumentNotNull(product, nameof(product));
             product.IsDeleted = true;
+            context.Products.Remove(product);
             await context.SaveChangesAsync();
         }
 
