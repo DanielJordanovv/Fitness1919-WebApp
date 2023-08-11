@@ -4,25 +4,32 @@
 <link rel="stylesheet" href="~/css/shoppingCart/checkout.css" true" />
 
 <div class="center-container">
-    <h2>Checkout</h2>
-
-    @using (Html.BeginForm("Checkout", "ShoppingCart", FormMethod.Post))
+    @if (TempData["ErrorMessage"] != null)
     {
-        <div>
-            @Html.LabelFor(m => m.Name)
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-        </div>
+        <p>@TempData["ErrorMessage"]</p>
+    }
+    else
+    {
+        <h2>Checkout</h2>
 
-        <div>
-            @Html.LabelFor(m => m.Address)
-            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
-        </div>
+        @using (Html.BeginForm("Checkout", "ShoppingCart", FormMethod.Post))
+        {
+            <div>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            </div>
 
-        <div>
-            @Html.LabelFor(m => m.PhoneNumber)
-            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-        </div>
+            <div>
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+            </div>
 
-        <input type="submit" value="Place Order" class="btn btn-primary" />
+            <div>
+                @Html.LabelFor(m => m.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+            </div>
+
+            <input type="submit" value="Place Order" class="btn btn-primary" />
+        }
     }
 </div>

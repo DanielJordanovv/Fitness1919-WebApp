@@ -25,7 +25,7 @@ namespace Fitness1919.Services.Data
             var cart = context.ShoppingCartProducts.FirstOrDefault(x => x.UserId == userId && x.ProductId == productId && !x.IsCheckout);
             var product = context.Products.FirstOrDefault(x => x.Id == productId);
 
-            if (product == null || product.Quantity ==0)
+            if (product == null || product.Quantity == 0)
             {
                 throw new ProductNotFoundException();
             }
@@ -55,13 +55,16 @@ namespace Fitness1919.Services.Data
             }
             await context.SaveChangesAsync();
         }
-        public async Task CheckoutAsync(Guid userId,CheckoutViewModel model)
+        public async Task CheckoutAsync(Guid userId, CheckoutViewModel model)
         {
             Guard.ArgumentNotNull(userId, nameof(userId));
             var cart = context.ShoppingCartProducts
-                .Include(x=>x.Product)
+                .Include(x => x.Product)
                 .Where(x => x.UserId == userId && !x.IsCheckout);
-
+            if (cart.Any(x => x.Product.IsDeleted))
+            {
+                throw new Exception();
+            }
             if (cart.Select(x => x.Product).Count() == 0)
             {
                 throw new EmptyShoppingCartException();

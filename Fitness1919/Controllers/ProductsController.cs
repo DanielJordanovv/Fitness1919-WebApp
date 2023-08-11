@@ -46,19 +46,19 @@ namespace Fitness1919.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index(string categoryFilter, string brandFilter)
         {
-                var products = await service.FilterAsync(categoryFilter, brandFilter);
-                var categories = await categoryService.AllAsync();
-                var brands = await brandService.AllAsync();
+            var products = await service.FilterAsync(categoryFilter, brandFilter);
+            var categories = await categoryService.AllAsync();
+            var brands = await brandService.AllAsync();
 
-                var viewModel = new ProductIndexViewModel
-                {
-                    Products = products,
-                    Categories = categories,
-                    Brands = brands
-                };
+            var viewModel = new ProductIndexViewModel
+            {
+                Products = products,
+                Categories = categories,
+                Brands = brands
+            };
 
-                return View(viewModel);
-           
+            return View(viewModel);
+
         }
         [HttpGet]
         [AllowAnonymous]

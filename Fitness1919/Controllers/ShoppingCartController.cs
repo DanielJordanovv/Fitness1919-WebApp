@@ -1,4 +1,5 @@
 ﻿using Fitness1919.Data.Models;
+using Fitness1919.Services.Data.Exceptions;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.ShoppingCart;
 using Microsoft.AspNetCore.Authorization;
@@ -63,14 +64,28 @@ namespace Fitness1919.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout(CheckoutViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Guid userId = GetUserId();
-                await shoppingCartService.CheckoutAsync(userId, model);
+                if (ModelState.IsValid)
+                {
+                    Guid userId = GetUserId();
+                    await shoppingCartService.CheckoutAsync(userId, model);
 
-                return RedirectToAction("ThankYou", "ShoppingCart");
+                    return RedirectToAction("ThankYou", "ShoppingCart");
+                }
+                return View();
             }
-            return View();
+            catch (EmptyShoppingCartException x)
+            {
+                TempData["ErrorMessage"] = x.Message;
+                return View();
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = "The cart products are not aveliable";
+                return View();
+            }
+           
         }
 
         [HttpPost]
