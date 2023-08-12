@@ -4,17 +4,17 @@ Fitness1919 is my defense web application project for ASP.NET Core course at Sof
 At Fitness1919, the products are specially selected so that our customers can get the best macronutrients to help build muscle mass or lose weight, or just enjoy the quality of our products.
 
 🔨 Built With
-ASP.NET Core 6.0 MVC
-Bootstrap
-NUnit
-HTML
-HTML5
-CSS
-JS
-ASP.NET Core Areas
-MSSQL Server
-FavIcon
-🤡ChatGPT🤡
+ ASP.NET Core 6.0 MVC,
+ Bootstrap,
+ NUnit,
+ HTML,
+ HTML5,
+ CSS,
+ JS,
+ ASP.NET Core Areas,
+ MSSQL Server,
+ FavIcon,
+ 🤡ChatGPT🤡
 
 👑Admin Panel👑
 ![image](https://github.com/DanielJordanovv/Fitness1919-WebApp/assets/114871054/d2e8098e-ea19-4c17-9d98-3757942371b8)
