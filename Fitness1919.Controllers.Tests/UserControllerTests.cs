@@ -90,7 +90,7 @@ namespace Fitness1919.Controllers.Tests
                 Password = "password123"
             };
 
-            mockUserService.Setup(s => s.EmailExistsAsync(model.Email)).Returns(false);
+            mockUserService.Setup(s => s.UsernameExistsAsync(model.Email)).Returns(false);
             mockUserManager.Setup(u => u.CreateAsync(It.IsAny<ApplicationUser>(), model.Password))
                            .ReturnsAsync(IdentityResult.Success);
             mockSignInManager.Setup(s => s.SignInAsync(It.IsAny<ApplicationUser>(), false, null))
@@ -110,7 +110,7 @@ namespace Fitness1919.Controllers.Tests
                 Email = "existingemail@example.com"
             };
 
-            mockUserService.Setup(s => s.EmailExistsAsync(model.Email)).Returns(true);
+            mockUserService.Setup(s => s.UsernameExistsAsync(model.Email)).Returns(true);
 
             var result = await userController.Register(model) as ViewResult;
 
@@ -137,7 +137,7 @@ namespace Fitness1919.Controllers.Tests
         public void EmailExists_ValidEmail_ReturnsTrue()
         {
             var email = "existingemail@example.com";
-            mockUserService.Setup(s => s.EmailExistsAsync(email)).Returns(true);
+            mockUserService.Setup(s => s.UsernameExistsAsync(email)).Returns(true);
 
             var result = userController.EmailExists(email);
 
@@ -147,7 +147,7 @@ namespace Fitness1919.Controllers.Tests
         public void EmailExists_NonExistingEmail_ReturnsFalse()
         {
             var email = "nonexistingemail@example.com";
-            mockUserService.Setup(s => s.EmailExistsAsync(email)).Returns(false);
+            mockUserService.Setup(s => s.UsernameExistsAsync(email)).Returns(false);
 
             var result = userController.EmailExists(email);
 

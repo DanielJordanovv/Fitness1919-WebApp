@@ -94,7 +94,7 @@ namespace Fitness1919.Web.Controllers
             }
 
             var result =
-                await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
 
             if (!result.Succeeded)
             {
@@ -106,7 +106,7 @@ namespace Fitness1919.Web.Controllers
         }
         public bool EmailExists(string email)
         {
-            return userService.EmailExistsAsync(email);
+            return userService.UsernameExistsAsync(email);
         }
     }
 }

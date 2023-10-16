@@ -40,7 +40,7 @@ namespace Fitness1919.Tests.Services.Data
             {
                 var userService = new UserService(context);
 
-                var result = userService.EmailExistsAsync("john@example.com");
+                var result = userService.UsernameExistsAsync("john@example.com");
 
                 Assert.IsTrue(result);
             }
@@ -57,7 +57,7 @@ namespace Fitness1919.Tests.Services.Data
             {
                 var userService = new UserService(context);
 
-                var result = userService.EmailExistsAsync("jane@example.com");
+                var result = userService.UsernameExistsAsync("jane@example.com");
 
                 Assert.IsFalse(result);
             }

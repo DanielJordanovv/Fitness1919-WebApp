@@ -2,6 +2,6 @@
 {
     public interface IUserService
     {
-         bool EmailExistsAsync(string email);
+         bool UsernameExistsAsync(string email);
     }
 }

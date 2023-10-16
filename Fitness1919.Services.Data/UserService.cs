@@ -11,10 +11,10 @@ namespace Fitness1919.Services.Data
         {
             this.context = contex;
         }
-        public bool EmailExistsAsync(string email)
+        public bool UsernameExistsAsync(string email)
         {
             Guard.ArgumentNotNull(email, nameof(email));
-            return context.Users.Any(x => x.Email == email);
+            return context.Users.Any(x => x.UserName == email);
         }
     }
 }
