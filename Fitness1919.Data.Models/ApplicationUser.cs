@@ -18,5 +18,9 @@ namespace Fitness1919.Data.Models
         [MinLength(LastNameMinLength)]
         [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; }
+        [Required]
+        [MinLength(AddressMinLength)]
+        [MaxLength(AddressMaxLength)]
+        public string Address { get; set; }
     }
 }

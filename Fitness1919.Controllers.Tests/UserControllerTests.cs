@@ -42,13 +42,13 @@ namespace Fitness1919.Controllers.Tests
         {
             var model = new LoginFormModel
             {
-                Email = "email@abv.com",
+                Username = "email@abv.com",
                 Password = "password123",
                 RememberMe = false,
                 ReturnUrl = "/ReturnUrl"
             };
 
-            mockSignInManager.Setup(s => s.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false))
+            mockSignInManager.Setup(s => s.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false))
                              .ReturnsAsync(Microsoft.AspNetCore.Identity.SignInResult.Success);
 
             var result = await userController.Login(model) as RedirectResult;

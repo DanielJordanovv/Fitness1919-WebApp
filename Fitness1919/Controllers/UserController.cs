@@ -47,7 +47,8 @@ namespace Fitness1919.Web.Controllers
             ApplicationUser user = new ApplicationUser()
             {
                 FirstName = model.FirstName,
-                LastName = model.LastName
+                LastName = model.LastName,
+                Address = model.Address
             };
 
             await userManager.SetEmailAsync(user, model.Email);
@@ -94,7 +95,7 @@ namespace Fitness1919.Web.Controllers
             }
 
             var result =
-                await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
 
             if (!result.Succeeded)
             {

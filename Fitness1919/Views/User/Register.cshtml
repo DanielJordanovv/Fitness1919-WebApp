@@ -35,6 +35,12 @@
                 </div>
                 <p></p>
                 <div class="user-box">
+                    <input asp-for="Address" class="form-control" aria-required="true" />
+                    <label asp-for="Address" class="form-label"></label>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <p></p>
+                <div class="user-box">
                     <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" />
                     <label asp-for="Password"></label>
                     <span asp-validation-for="Password" class="text-danger"></span>

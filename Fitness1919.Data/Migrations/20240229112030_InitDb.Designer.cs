@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitness1919.Data.Migrations
 {
     [DbContext(typeof(Fitness1919DbContext))]
-    [Migration("20230802122802_CreateDb")]
-    partial class CreateDb
+    [Migration("20240229112030_InitDb")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
