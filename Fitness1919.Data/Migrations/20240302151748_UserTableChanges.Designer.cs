@@ -4,6 +4,7 @@ using Fitness1919.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitness1919.Data.Migrations
 {
     [DbContext(typeof(Fitness1919DbContext))]
-    partial class Fitness1919DbContextModelSnapshot : ModelSnapshot
+    [Migration("20240302151748_UserTableChanges")]
+    partial class UserTableChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,33 +121,6 @@ namespace Fitness1919.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brands");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BrandName = "Born Winner"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BrandName = "Optimum Nutrition"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BrandName = "Proof Nutrition"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            BrandName = "GymBeam"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            BrandName = "MyProtein"
-                        });
                 });
 
             modelBuilder.Entity("Fitness1919.Data.Models.Category", b =>
@@ -164,33 +139,6 @@ namespace Fitness1919.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryName = "Creatine"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryName = "Amino acids"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryName = "Vitamins"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryName = "Vegan"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryName = "Protein"
-                        });
                 });
 
             modelBuilder.Entity("Fitness1919.Data.Models.Contact", b =>
@@ -214,15 +162,6 @@ namespace Fitness1919.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Contacts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "randomId",
-                            Address = "Pernik",
-                            Email = "d.jordanov.dev@gmail.com",
-                            PhoneNumber = "+359879355833"
-                        });
                 });
 
             modelBuilder.Entity("Fitness1919.Data.Models.Feedback", b =>
@@ -306,9 +245,6 @@ namespace Fitness1919.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<decimal>("DiscountPercentage")
-                        .HasColumnType("decimal(18,6)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");

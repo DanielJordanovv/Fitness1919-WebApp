@@ -26,6 +26,10 @@ namespace Fitness1919.Data.Models
         [Column(TypeName = PriceColumnType)]
         [Range(typeof(decimal), PriceMinValue, PriceMaxValue, ErrorMessage = PriceErrorMessage)]
         public decimal Price { get; set; }
+        [Required]
+        [Column(TypeName = DiscountColumnType)]
+        [Range(typeof(decimal),DiscountMinValue, DiscountMaxValue,ErrorMessage = DiscountErrorMessage)]
+        public decimal DiscountPercentage { get; set; }
         public bool IsDeleted { get; set; }
         [Required]
         [MaxLength(ImageUrlMaxLength)]

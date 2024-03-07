@@ -84,6 +84,11 @@ namespace Fitness1919.Web.Controllers
             {
                 return RedirectToAction("Index");
             }
+            var notSearcherProducts = await service.AllAsync();
+            if (!notSearcherProducts.Any(x=>x.Name.ToLower().Contains(search.ToLower())))
+            {
+                return RedirectToAction("Index");
+            }
             var products = await service.AllSearchedAsync(search);
             var categories = await categoryService.AllAsync();
             var brands = await brandService.AllAsync();

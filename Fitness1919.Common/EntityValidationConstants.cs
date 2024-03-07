@@ -31,6 +31,11 @@
             public const string PriceColumnType = "decimal(18, 6)";
             public const string PriceErrorMessage = "The price must be between 0 and 500.";
 
+            public const string DiscountMinValue = "0";
+            public const string DiscountMaxValue = "100";
+            public const string DiscountColumnType = "decimal(18, 6)";
+            public const string DiscountErrorMessage = "The discount must be between 0 and 100.";
+
             public const int QuantityMinRange = 0;
             public const int QuantityMaxRange = 100;
             public const string QuantityErrorMessage = "The quantity must be between 0 and 100.";
