@@ -107,7 +107,7 @@ namespace Fitness1919.Web.Controllers
         }
         public bool EmailExists(string email)
         {
-            return userService.EmailExistsAsync(email);
+            return userService.UsernameExistsAsync(email);
         }
     }
 }
