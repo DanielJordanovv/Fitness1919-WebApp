@@ -36,5 +36,9 @@ namespace Fitness1919.Web.ViewModels.User
         [Required]
         [StringLength(40,ErrorMessage ="The address should be between 5 and 40 letters long.",MinimumLength =5)]
         public string Address { get; set; } = null!;
+        [Phone]
+        [Required]
+        [RegularExpression(PhoneNumberExpression, ErrorMessage = PhoneNumberErrorMessage)]
+        public string PhoneNumber { get; set; }
     }
 }

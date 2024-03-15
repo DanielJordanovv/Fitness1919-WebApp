@@ -1,5 +1,7 @@
 ﻿using Fitness1919.Services.Data.Interfaces;
+using Fitness1919.Web.ViewModels.Product;
 using Fitness1919.Web.ViewModels.User;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +11,12 @@ namespace Fitness1919.Web.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService service;
+        private readonly IProductService productService;
 
-        public AdminController(IAdminService service)
+        public AdminController(IAdminService service, IProductService productService)
         {
             this.service = service;
+            this.productService = productService;
         }
         public IActionResult Index()
         {
@@ -24,7 +28,33 @@ namespace Fitness1919.Web.Controllers
             var users = await service.AllUsersAsync();
             return View(users);
         }
-
+        public async Task<IActionResult> AllDeletedProducts()
+        {
+            var products = await productService.AllDeletedProducts();
+            return View(products);
+        }
+        public async Task<IActionResult> RecoverProduct(string id)
+        {
+            var product = await productService.GetDeletedProductAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            var viewModel = new ProductAllViewModel
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Quantity = product.Quantity,
+                Price = product.Price
+            };
+            return View(viewModel);
+        }
+        [HttpPost, ActionName("RecoverProduct")]
+        public async Task<IActionResult> RecoverProductConfirm(string id)
+        {
+            await productService.RecoverAsync(id);
+            return RedirectToAction("AllDeletedProducts");
+        }
         public async Task<IActionResult> Delete(Guid id)
         {
             var user = await service.GetUserAsync(id);

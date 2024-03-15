@@ -13,14 +13,14 @@ namespace Fitness1919.Data.Models
         [Required]
         [MinLength(FirstNameMinLength)]
         [MaxLength(FirstNameMaxLength)]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = null!;
         [Required]
         [MinLength(LastNameMinLength)]
         [MaxLength(LastNameMaxLength)]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = null!;
         [Required]
         [MinLength(AddressMinLength)]
         [MaxLength(AddressMaxLength)]
-        public string Address { get; set; }
+        public string Address { get; set; } = null!;
     }
 }

@@ -178,7 +178,7 @@ h1, h2, h3, h4, h5, h6 {
         width: 100%;
     }
 
-@@media (max-width:920px) {
+@media (max-width:920px) {
     .flex {
         flex-wrap: wrap;
     }
@@ -359,7 +359,7 @@ a.current_dot {
     background: var(--primary) !important;
 }
 
-@@media screen and (max-width: 920px) {
+@media screen and (max-width: 920px) {
     header {
         height: 70vh;
         position: relative;

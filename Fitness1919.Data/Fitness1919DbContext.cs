@@ -15,13 +15,13 @@ namespace Fitness1919.Data
         public Fitness1919DbContext()
         {
         }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Brand> Brands { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<ShoppingCart> ShoppingCartProducts { get; set; }
-        public DbSet<Feedback> Feedbacks { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Category> Categories { get; set; } = null!;
+        public DbSet<Brand> Brands { get; set; } = null!;
+        public DbSet<Contact> Contacts { get; set; } = null!;
+        public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<ShoppingCart> ShoppingCartProducts { get; set; } = null!;
+        public DbSet<Feedback> Feedbacks { get; set; } = null!;
+        public DbSet<Order> Orders { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder builder)
         {
             Assembly configAssembly = Assembly.GetAssembly(typeof(Fitness1919DbContext)) ??

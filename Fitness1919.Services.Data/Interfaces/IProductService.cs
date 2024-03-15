@@ -8,6 +8,9 @@ namespace Fitness1919.Services.Data.Interfaces
         Task<IEnumerable<ProductAllViewModel>> AllAsync();
         Task<IEnumerable<ProductAllViewModel>> AllSearchedAsync(string search);
         Task<ProductDetailsViewModel> GetDetailsByIdAsync(string id);
+        Task RecoverAsync(string id);
+        Task<Product> GetDeletedProductAsync(string id);
+        Task<IEnumerable<ProductAllViewModel>> AllDeletedProducts();
         Task CreateAsync(ProductAddViewModel model);
         Task UpdateAsync(string id, ProductUpdateViewModel model);
         Task DeleteAsync(string id);

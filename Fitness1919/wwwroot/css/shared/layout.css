@@ -4,9 +4,10 @@
     bottom: 0;
     width: 100%;
 }
+
 .page-content {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 .left-container {
@@ -22,7 +23,7 @@
 
 .leftside {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Changed from column to row */
     align-items: flex-start;
 }
 
@@ -31,9 +32,9 @@
         align-items: flex-start;
         text-decoration: none;
         color: inherit;
-        margin-bottom: 10px;
+        margin-right: 10px; /* Changed from margin-bottom to margin-right */
         padding: 1px;
-        border:none;
+        border: none;
     }
 
         .leftside a img {
@@ -45,11 +46,10 @@
 
 .left-container {
     position: absolute;
-    z-index:1000;
-    top: 20px; 
-    left: 20px; 
+    z-index: 1000;
+    top: 20px;
+    left: 20px;
 }
-
 
 .navbar {
     background-color: transparent;
@@ -73,25 +73,25 @@
     transition: top 0.3s;
 }
 
-.navbar:before,
-.navbar:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 20px;
-    background-color: transparent;
-}
+    .navbar:before,
+    .navbar:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 20px;
+        background-color: transparent;
+    }
 
-.navbar:before {
-    left: -10px;
-    transform: skewX(45deg);
-}
+    .navbar:before {
+        left: -10px;
+        transform: skewX(45deg);
+    }
 
-.navbar:after {
-    right: -10px;
-    transform: skewX(-45deg);
-}
+    .navbar:after {
+        right: -10px;
+        transform: skewX(-45deg);
+    }
 
 .navbar-brand {
     padding: 10px;
@@ -103,7 +103,7 @@
 }
 
 .form-inline {
-    margin:auto;
+    margin: auto;
     font-weight: 900;
 }
 
@@ -135,16 +135,30 @@ ul {
     margin: 0;
     top: 0;
 }
-.form-inline{
-    display:flex;
+
+.form-inline {
+    display: flex;
 }
-.search_text_box{
-    margin-top:7px;
+
+.search_text_box {
+    margin-top: 7px;
 }
-.btn{
-    border:none;
+
+.btn {
+    border: none;
 }
+
     .btn:hover {
         background-color: transparent;
         border: none;
     }
+
+/* Media Query for devices smaller than 900px */
+@media (max-width: 900px) {
+    .leftside {
+        flex-direction: row; /* Change back to row for smaller devices */
+    }
+    h1{
+        margin-top:5rem;
+    }
+}

@@ -1,26 +1,19 @@
-﻿h1 {
-    text-align: center;
-    color: #FFD700;
-}
-body {
+﻿body {
     background-color: black;
     margin: 0;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('/images/Fitness1919Logo.jpg'); 
-    background-repeat: no-repeat;
-    background-size: cover;
+    overflow-x: auto;
 }
 
 .product-table {
-    display: grid;
-}
-.product-table {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center; /* Center align product boxes */
+    gap: 20px; /* Add gap between products */
 }
 
 .product-box {
@@ -28,19 +21,12 @@ body {
     padding: 10px;
     color: #FFD700;
     width: 250px;
-    height: 320px;
-    margin-bottom: 20px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-
-@media (width: 768px) {
-    .product-table {
-        justify-content: center;
-    }
-    .product-box {
-        width: calc(100% - 40px);
-    }
-}
 .product-image {
     max-width: 100%;
     height: 200px;
@@ -56,79 +42,51 @@ body {
     margin-top: 5px;
 }
 
-.add-to-cart {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-}
-
-    .add-to-cart input[name="quantity"] {
-        width: 50px;
-        height: 30px;
-        background-color: transparent;
-        color: #FFD700;
-        padding: 5px;
-        border: none;
-        text-align: center;
-    }
-
-    .add-to-cart button {
-        background-color: #FFD700;
-        color: black;
-        height: 30px;
-        border: none;
-        cursor: pointer;
-    }
-
-        .add-to-cart button:hover {
-            background-color: black;
-            color: #FFD700;
-        }
-.form-inline my-2 my-lg-0 {
-    display: flex;
-    flex-direction: row;
-}
 .details {
     color: #FFD700;
     text-decoration: none;
-    border:1px solid #FFD700;
+    border: 1px solid #FFD700;
+    margin-top: auto; /* Push details link to the bottom */
 }
+
     .details:hover {
         color: black;
         background-color: #FFD700;
         text-decoration: none;
         border: 1px solid black;
     }
+
 .filterValue {
     background-color: black;
     color: #FFD700;
     border-color: #FFD700;
 }
-    option:hover {
+
+    .filterValue:hover {
         background-color: #FFD700;
         color: black;
         border-color: black;
     }
+
 .filterButton {
     border: 1px solid #FFD700;
     background-color: black;
     color: #FFD700;
 }
+
 .allOption {
     background-color: black;
     color: #FFD700;
     border-color: #FFD700;
 }
-    .allOption:active {
+
+    .allOption:hover {
         background-color: #FFD700;
         color: black;
         border-color: black;
     }
-#categoryFilter {
-    background-color: black;
-    color: #FFD700;
-    border-color: #FFD700;
-}
+
+#categoryFilter,
 #brandFilter {
     background-color: black;
     color: #FFD700;

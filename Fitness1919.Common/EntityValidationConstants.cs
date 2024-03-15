@@ -74,6 +74,9 @@
 
             public const int PasswordMinLength = 1;
             public const int PasswordMaxLength = 25;
+
+            public const string PhoneNumberExpression = @"\+359\d{9}";
+            public const string PhoneNumberErrorMessage = "The Phone number should be in the following format: +359 000 000 000";
         }
         public static class Order
         {

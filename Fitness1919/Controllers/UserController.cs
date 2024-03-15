@@ -48,7 +48,8 @@ namespace Fitness1919.Web.Controllers
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Address = model.Address
+                Address = model.Address,
+                PhoneNumber = model.PhoneNumber
             };
 
             await userManager.SetEmailAsync(user, model.Email);

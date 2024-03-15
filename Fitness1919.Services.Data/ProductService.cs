@@ -62,11 +62,34 @@ namespace Fitness1919.Services.Data
             product.IsDeleted = true;
             await context.SaveChangesAsync();
         }
+        public async Task RecoverAsync(string id)
+        {
+            Guard.ArgumentNotNullOrEmpty(id, nameof(id));
+            var product = await context.Products.FindAsync(id);
+            product.IsDeleted = false;
+            await context.SaveChangesAsync();
+        }
+        public async Task<IEnumerable<ProductAllViewModel>> AllDeletedProducts()
+        {
+            return await context.Products.Where(x => x.IsDeleted).Select(p => new ProductAllViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Quantity = p.Quantity,
+                Price = p.Price
+            }).ToListAsync();
+        }
 
         public async Task<Product> GetProductAsync(string id)
         {
             Guard.ArgumentNotNull(id, nameof(id));
             Product product = await context.Products.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
+            return product;
+        }public async Task<Product> GetDeletedProductAsync(string id)
+        {
+            Guard.ArgumentNotNull(id, nameof(id));
+            Product product = await context.Products.FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted);
             return product;
         }
 
