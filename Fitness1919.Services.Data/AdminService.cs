@@ -14,9 +14,21 @@ namespace Fitness1919.Services.Data
         {
             this.context = context;
         }
+
+        public async Task<IEnumerable<RegisterFormModel>> AllDeletedUsers()
+        {
+            return await context.Users.Where(x => x.IsDeleted).Select(u => new RegisterFormModel
+            {
+                UserId = u.Id,
+                Email = u.Email,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+            }).ToListAsync();
+        }
+
         public async Task<IEnumerable<RegisterFormModel>> AllUsersAsync()
         {
-            return await context.Users.Select(u => new RegisterFormModel
+            return await context.Users.Where(x=>!x.IsDeleted).Select(u => new RegisterFormModel
             {
                 UserId = u.Id,
                 Email = u.Email,
@@ -30,14 +42,29 @@ namespace Fitness1919.Services.Data
             var user = await context.Users.FindAsync(id);
             if (user != null)
             {
-                context.Users.Remove(user);
+                user.IsDeleted = true;
                 await context.SaveChangesAsync();
             }
         }
         public async Task<ApplicationUser> GetUserAsync(Guid id)
         {
-            ApplicationUser user = await context.Users.FindAsync(id);
+            ApplicationUser user = await context.Users.FirstOrDefaultAsync(x=>x.Id == id && !x.IsDeleted);
             return user;
+        }
+        public async Task<ApplicationUser> GetDeletedUserAsync(Guid id)
+        {
+            ApplicationUser user = await context.Users.FirstOrDefaultAsync(x=>x.Id == id && x.IsDeleted);
+            return user;
+        }
+
+        public async Task RecoverUser(Guid id)
+        {
+            var user = await context.Users.FindAsync(id);
+            if (user != null)
+            {
+                user.IsDeleted = false;
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

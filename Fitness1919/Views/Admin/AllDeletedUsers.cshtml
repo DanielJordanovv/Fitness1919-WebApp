@@ -1,0 +1,47 @@
+﻿@using Fitness1919.Web.ViewModels.User
+@model IEnumerable<RegisterFormModel>
+
+@{
+    ViewData["Title"] = "All deleted users";
+}
+<link rel="stylesheet" href="~/css/admin/index.css" true" />
+<pre></pre>
+<pre></pre>
+<pre></pre>
+<pre></pre>
+<h1>All deleted users</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    <a class="buttonDelete" asp-action="RecoverUser" asp-controller="Admin" asp-route-id="@item.UserId">Recover</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

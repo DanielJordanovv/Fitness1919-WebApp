@@ -14,6 +14,7 @@ namespace Fitness1919.Tests.Controllers
     [TestFixture]
     public class AdminControllerTests
     {
+        private Mock<IProductService> mockProductService;
         private Mock<IAdminService> mockAdminService;
         private AdminController adminController;
 
@@ -21,7 +22,7 @@ namespace Fitness1919.Tests.Controllers
         public void Setup()
         {
             mockAdminService = new Mock<IAdminService>();
-            adminController = new AdminController(mockAdminService.Object);
+            adminController = new AdminController(mockAdminService.Object, mockProductService.Object);
         }
 
         [Test]

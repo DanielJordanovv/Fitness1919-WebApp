@@ -1,0 +1,18 @@
+﻿@using Fitness1919.Web.ViewModels.User
+@model RegisterFormModel
+
+@{
+    ViewData["Title"] = "Recover";
+}
+<link rel="stylesheet" href="~/css/admin/delete.css" true" />
+<pre></pre><pre></pre><pre></pre><pre></pre><pre></pre>
+<h1>Recover</h1>
+
+<h3>Are you sure you want to recover this?</h3>
+<div class="center">
+    <form asp-action="RecoverUser">
+        <input type="hidden" asp-for="UserId" />
+        <input type="submit" value="RecoverUser" class="btn btn-danger" /> |
+    </form>
+    <a class="delete" asp-action="AllDeletedUsers">Back to List</a>
+</div>

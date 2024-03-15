@@ -28,6 +28,11 @@ namespace Fitness1919.Web.Controllers
             var users = await service.AllUsersAsync();
             return View(users);
         }
+        public async Task<IActionResult> AllDeletedUsers()
+        {
+            var users = await service.AllDeletedUsers();
+            return View(users);
+        }
         public async Task<IActionResult> AllDeletedProducts()
         {
             var products = await productService.AllDeletedProducts();
@@ -77,6 +82,30 @@ namespace Fitness1919.Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             await service.DeleteAsync(id);
+            return RedirectToAction(nameof(AllUsers));
+        }
+        public async Task<IActionResult> RecoverUser(Guid id)
+        {
+            var user = await service.GetDeletedUserAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new RegisterFormModel
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost, ActionName("RecoverUser")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RecoverUserConfirmed(Guid id)
+        {
+            await service.RecoverUser(id);
             return RedirectToAction(nameof(AllUsers));
         }
     }

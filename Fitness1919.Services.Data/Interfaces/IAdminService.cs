@@ -8,5 +8,8 @@ namespace Fitness1919.Services.Data.Interfaces
         Task<IEnumerable<RegisterFormModel>> AllUsersAsync();
         Task DeleteAsync(Guid id);
         Task<ApplicationUser> GetUserAsync(Guid id);
+        Task<ApplicationUser> GetDeletedUserAsync(Guid id);
+        Task<IEnumerable<RegisterFormModel>> AllDeletedUsers();
+        Task RecoverUser(Guid id);
     }
 }

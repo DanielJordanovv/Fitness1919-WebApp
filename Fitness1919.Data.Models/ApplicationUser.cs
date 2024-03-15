@@ -22,5 +22,6 @@ namespace Fitness1919.Data.Models
         [MinLength(AddressMinLength)]
         [MaxLength(AddressMaxLength)]
         public string Address { get; set; } = null!;
+        public bool IsDeleted { get; set; }
     }
 }
