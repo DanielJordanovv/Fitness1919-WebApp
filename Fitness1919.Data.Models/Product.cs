@@ -30,8 +30,6 @@ namespace Fitness1919.Data.Models
         [Column(TypeName = DiscountColumnType)]
         [Range(typeof(decimal),DiscountMinValue, DiscountMaxValue,ErrorMessage = DiscountErrorMessage)]
         public decimal DiscountPercentage { get; set; }
-        //prop for Taste
-        //prop for Weight
         public bool IsDeleted { get; set; }
         [Required]
         [MaxLength(ImageUrlMaxLength)]

@@ -4,6 +4,7 @@ using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Product;
 using Guards;
 using Microsoft.EntityFrameworkCore;
+using static Fitness1919.Common.EntityValidationConstants;
 
 namespace Fitness1919.Services.Data
 {
@@ -18,16 +19,21 @@ namespace Fitness1919.Services.Data
         public async Task CreateAsync(ProductAddViewModel model)
         {
             Guard.ArgumentNotNull(model, nameof(model));
-            var product = new Product
+            var product = new Fitness1919.Data.Models.Product
             {
                 Name = model.Name,
                 Description = model.Description,
                 Quantity = model.Quantity,
                 Price = model.Price,
+                DiscountPercentage = model.DiscountPercentage,
                 img = model.img,
                 CategoryId = model.CategoryId,
                 BrandId = model.BrandId
             };
+            if (product.DiscountPercentage != 0)
+            {
+                product.Price = product.Price - product.Price * product.DiscountPercentage / 100;
+            }
             if (context.Products.Any(x => x.Name == product.Name))
             {
                 throw new Exception();
@@ -81,15 +87,16 @@ namespace Fitness1919.Services.Data
             }).ToListAsync();
         }
 
-        public async Task<Product> GetProductAsync(string id)
+        public async Task<Fitness1919.Data.Models.Product> GetProductAsync(string id)
         {
             Guard.ArgumentNotNull(id, nameof(id));
-            Product product = await context.Products.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
+            Fitness1919.Data.Models.Product product = await context.Products.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
             return product;
-        }public async Task<Product> GetDeletedProductAsync(string id)
+        }
+        public async Task<Fitness1919.Data.Models.Product> GetDeletedProductAsync(string id)
         {
             Guard.ArgumentNotNull(id, nameof(id));
-            Product product = await context.Products.FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted);
+            Fitness1919.Data.Models.Product product = await context.Products.FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted);
             return product;
         }
 
@@ -106,14 +113,31 @@ namespace Fitness1919.Services.Data
             var productToUpdate = await context.Products.FindAsync(id);
 
             Guard.ArgumentNotNull(productToUpdate, nameof(productToUpdate));
+            if (productToUpdate.Price != model.Price)
+            {
+                productToUpdate.Price = model.Price;
+                productToUpdate.DiscountPercentage = 0;
+            }
+            else
+            {
+                if (productToUpdate.DiscountPercentage != model.DiscountPercentage)
+                {
+                    productToUpdate.Price = productToUpdate.Price / (1 - (productToUpdate.DiscountPercentage / 100));
+                    productToUpdate.Price = productToUpdate.Price - productToUpdate.Price * model.DiscountPercentage / 100;
+                }
+                else
+                {
+                    productToUpdate.Price = model.Price;
+                }
+                productToUpdate.DiscountPercentage = model.DiscountPercentage;
+            }
             productToUpdate.Name = model.Name;
             productToUpdate.Description = model.Description;
             productToUpdate.Quantity = model.Quantity;
-            productToUpdate.Price = model.Price;
             productToUpdate.img = model.img;
             productToUpdate.CategoryId = model.CategoryId;
             productToUpdate.BrandId = model.BrandId;
-            if (context.Products.Any(x => x.Name == productToUpdate.Name && x.Description == productToUpdate.Description && x.Quantity == productToUpdate.Quantity))
+            if (context.Products.Any(x => x.Name == productToUpdate.Name && x.Description == productToUpdate.Description && x.Quantity == productToUpdate.Quantity && x.DiscountPercentage == productToUpdate.DiscountPercentage && x.Price == productToUpdate.Price))
             {
                 throw new Exception();
             }
@@ -137,7 +161,7 @@ namespace Fitness1919.Services.Data
         }
         public async Task<ProductDetailsViewModel> GetDetailsByIdAsync(string id)
         {
-            Product product = await context
+            Fitness1919.Data.Models.Product product = await context
                  .Products
                  .Include(p => p.Category)
                  .Include(p => p.Brand)

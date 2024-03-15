@@ -30,6 +30,11 @@ namespace Fitness1919.Web.ViewModels.Product
         [Range(typeof(decimal), PriceMinValue, PriceMaxValue, ErrorMessage = PriceErrorMessage)]
         public decimal Price { get; set; }
         [Required]
+        [Column(TypeName = DiscountColumnType)]
+        [Range(typeof(decimal), DiscountMinValue, DiscountMaxValue, ErrorMessage = DiscountErrorMessage)]
+        [Display(Name = "Discount Percentage")]
+        public decimal DiscountPercentage { get; set; }
+        [Required]
         [Display(Name = "Image url")]
         [MaxLength(ImageUrlMaxLength)]
         public string img { get; set; } = null!;

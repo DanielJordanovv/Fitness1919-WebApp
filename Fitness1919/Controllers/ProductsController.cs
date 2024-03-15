@@ -174,6 +174,7 @@ namespace Fitness1919.Web.Controllers
                 Description = product.Description,
                 Quantity = product.Quantity,
                 Price = product.Price,
+                DiscountPercentage = product.DiscountPercentage,
                 img = product.img,
                 CategoryId = product.CategoryId,
                 BrandId = product.BrandId
