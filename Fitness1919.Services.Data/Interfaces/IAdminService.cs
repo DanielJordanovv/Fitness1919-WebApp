@@ -11,5 +11,6 @@ namespace Fitness1919.Services.Data.Interfaces
         Task<ApplicationUser> GetDeletedUserAsync(Guid id);
         Task<IEnumerable<RegisterFormModel>> AllDeletedUsers();
         Task RecoverUser(Guid id);
+       
     }
 }

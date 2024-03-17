@@ -1,5 +1,6 @@
 ﻿using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Product;
+using Fitness1919.Web.ViewModels.Statistics;
 using Fitness1919.Web.ViewModels.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -12,11 +13,13 @@ namespace Fitness1919.Web.Controllers
     {
         private readonly IAdminService service;
         private readonly IProductService productService;
+        private readonly IStatisticsService statisticsService;
 
-        public AdminController(IAdminService service, IProductService productService)
+        public AdminController(IAdminService service, IProductService productService, IStatisticsService statisticsService)
         {
             this.service = service;
             this.productService = productService;
+            this.statisticsService = statisticsService;
         }
         public IActionResult Index()
         {
@@ -107,6 +110,17 @@ namespace Fitness1919.Web.Controllers
         {
             await service.RecoverUser(id);
             return RedirectToAction(nameof(AllUsers));
+        }
+        public async Task<IActionResult> Statistics()
+        {
+            var model = new StatisticsViewModel();
+
+            model.CountProducts = await statisticsService.GetProductsCount();
+            model.CountOrders = await statisticsService.GetOrderCount();
+            model.CountClients = await statisticsService.GetUserCount();
+            model.SumOrders = await statisticsService.GetTotalOrderSum();
+
+            return View(model);
         }
     }
 }

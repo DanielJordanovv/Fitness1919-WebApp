@@ -66,5 +66,14 @@ namespace Fitness1919.Services.Data
                 await context.SaveChangesAsync();
             }
         }
+
+        public async Task<int> GetUserCount()
+        {
+            return await context.Users.Where(x=>!x.IsDeleted).CountAsync();
+        } 
+        public async Task<int> GetOrderCount()
+        {
+            return await context.Orders.CountAsync();
+        }
     }
 }

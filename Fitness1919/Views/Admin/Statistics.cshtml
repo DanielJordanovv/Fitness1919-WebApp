@@ -1,0 +1,48 @@
+﻿@using Fitness1919.Web.ViewModels.Statistics;
+@model StatisticsViewModel
+@{
+    ViewData["Title"] = "Statistics";
+}
+<h4 class="text-center">Statistics</h4>
+<div class="text-center">
+    <div class="col-xl-8">
+        <div class="card-group pb-0">
+            <div class="card-columns text-center">
+            </div>
+        </div>
+        <table class="table table-striped " style="width:150%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CountClients)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CountProducts)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CountOrders)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SumOrders)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.CountClients)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CountProducts)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CountOrders)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.SumOrders)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
