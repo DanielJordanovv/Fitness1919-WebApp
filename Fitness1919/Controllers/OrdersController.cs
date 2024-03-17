@@ -9,15 +9,22 @@ namespace Fitness1919.Web.Controllers
     public class OrdersController : Controller
     {
         private readonly IOrderService service;
-        public OrdersController(IOrderService service)
+        private readonly IShoppingCartService shopCartService;
+        public OrdersController(IOrderService service, IShoppingCartService shopCartService)
         {
             this.service = service;
+            this.shopCartService = shopCartService;
         }
         public async Task<IActionResult> Index()
         {
             var orders = await service.All();
             orders = orders.OrderByDescending(x => x.CreatedOn).ToList();
             return View(orders);
+        }
+        public async Task<IActionResult> OrderDetails(string id)
+        {
+            var items = await shopCartService.ReturnOrderItems(id);
+            return View(items);
         }
         [AllowAnonymous]
         public async Task<IActionResult> MyOrders()

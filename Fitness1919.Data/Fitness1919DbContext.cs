@@ -15,13 +15,14 @@ namespace Fitness1919.Data
         public Fitness1919DbContext()
         {
         }
-        public DbSet<Category> Categories { get; set; } = null!;
-        public DbSet<Brand> Brands { get; set; } = null!;
-        public DbSet<Contact> Contacts { get; set; } = null!;
-        public DbSet<Product> Products { get; set; } = null!;
-        public DbSet<ShoppingCart> ShoppingCartProducts { get; set; } = null!;
-        public DbSet<Feedback> Feedbacks { get; set; } = null!;
-        public DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<Brand> Brands { get; set; } = null!;
+        public virtual DbSet<Contact> Contacts { get; set; } = null!;
+        public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<ShoppingCart> ShoppingCartProducts { get; set; } = null!;
+        public virtual DbSet<OrderItems> OrdersItems { get; set; } = null!;
+        public virtual DbSet<Feedback> Feedbacks { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder builder)
         {
             Assembly configAssembly = Assembly.GetAssembly(typeof(Fitness1919DbContext)) ??
@@ -33,6 +34,7 @@ namespace Fitness1919.Data
             SeedContacts(builder);
 
             builder.Entity<Order>().Property(e => e.OrderPrice).HasPrecision(18, 6);
+            builder.Entity<OrderItems>().Property(p => p.Price).HasPrecision(18, 6);
 
             base.OnModelCreating(builder);
         }

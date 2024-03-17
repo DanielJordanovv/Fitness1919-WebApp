@@ -1,4 +1,6 @@
-﻿<link rel="stylesheet" href="~/css/order/index.css" asp-append-version="true" />
+﻿@using Fitness1919.Web.ViewModels.Order;
+@model IEnumerable<AllOrdersViewModel>
+<link rel="stylesheet" href="~/css/order/index.css" asp-append-version="true" />
 
 <!DOCTYPE html>
 <html>
@@ -16,6 +18,7 @@
                 <th>Phone Number</th>
                 <th>Created On</th> 
                 <th>Order Price</th>
+                <th>Products</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +30,7 @@
                     <td>@order.PhoneNumber</td>
                     <td>@order.CreatedOn</td> 
                     <td>@order.OrderPrice.ToString("f2")</td>
+                    <td><a asp-action="OrderDetails" asp-route-id="@order.Id">Details</a></td>
                 </tr>
             }
         </tbody>

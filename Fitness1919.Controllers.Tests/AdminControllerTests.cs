@@ -16,13 +16,14 @@ namespace Fitness1919.Tests.Controllers
     {
         private Mock<IProductService> mockProductService;
         private Mock<IAdminService> mockAdminService;
+        private Mock<IStatisticsService> statisticsService;
         private AdminController adminController;
 
         [SetUp]
         public void Setup()
         {
             mockAdminService = new Mock<IAdminService>();
-            adminController = new AdminController(mockAdminService.Object, mockProductService.Object);
+            adminController = new AdminController(mockAdminService.Object, mockProductService.Object, statisticsService.Object);
         }
 
         [Test]

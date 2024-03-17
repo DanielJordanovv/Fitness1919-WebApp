@@ -19,13 +19,14 @@ namespace Fitness1919.Controllers.Tests
     public class OrdersControllerTests
     {
         private Mock<IOrderService> mockOrderService;
+        private Mock<IShoppingCartService> mockShoppingCartService;
         private OrdersController orderController;
 
         [SetUp]
         public void Setup()
         {
             mockOrderService = new Mock<IOrderService>();
-            orderController = new OrdersController(mockOrderService.Object);
+            orderController = new OrdersController(mockOrderService.Object,mockShoppingCartService.Object);
         }
 
         [Test]

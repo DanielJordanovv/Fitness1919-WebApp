@@ -1,4 +1,5 @@
 ﻿using Fitness1919.Data.Models;
+using Fitness1919.Web.ViewModels.Order;
 using Fitness1919.Web.ViewModels.ShoppingCart;
 
 namespace Fitness1919.Services.Data.Interfaces
@@ -10,5 +11,6 @@ namespace Fitness1919.Services.Data.Interfaces
         Task RemoveProductFromCartAsync(Guid userId, string productId);
         Task CheckoutAsync(Guid userId, CheckoutViewModel model);
         Task RemoveAllProducts(Guid userId);
+        Task<IEnumerable<OrderItems>> ReturnOrderItems(string id);
     }
 }

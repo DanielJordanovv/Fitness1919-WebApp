@@ -5,6 +5,8 @@ using Fitness1919.Web.ViewModels.ShoppingCart;
 using Microsoft.EntityFrameworkCore;
 using Guards;
 using Fitness1919.Services.Data.Exceptions;
+using Fitness1919.Web.ViewModels.Order;
+using Fitness1919.Data.Migrations;
 
 namespace Fitness1919.Services.Data
 {
@@ -69,7 +71,7 @@ namespace Fitness1919.Services.Data
             {
                 throw new EmptyShoppingCartException();
             }
-            var order = new Order
+            var order = new Fitness1919.Data.Models.Order
             {
                 CreatedOn = DateTime.Now,
                 ShoppingCarts = cart.ToList(),
@@ -78,7 +80,18 @@ namespace Fitness1919.Services.Data
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber,
                 OrderPrice = cart.Select(x => x.Product.Price).Sum(),
+                OrdersItems = new HashSet<OrderItems>()
             };
+            foreach (var item in cart)
+            {
+                order.OrdersItems.Add(new OrderItems
+                {
+                    ProductId = item.Product.Id,
+                    Quantity = item.Product.Quantity,
+                    Price = item.Product.Price,
+                    OrderId = order.Id,
+                });
+            }
             foreach (var c in cart)
             {
                 c.IsCheckout = true;
@@ -87,7 +100,10 @@ namespace Fitness1919.Services.Data
             await context.Orders.AddAsync(order);
             await context.SaveChangesAsync();
         }
-
+        public async Task<IEnumerable<OrderItems>> ReturnOrderItems(string id)
+        {
+            return await context.OrdersItems.Include(x=>x.Product).Where(x => x.OrderId == id).ToListAsync();
+        }
         public ShoppingCartViewModel GetShoppingCartAsync(Guid userId)
         {
             Guard.ArgumentNotNull(userId, nameof(userId));

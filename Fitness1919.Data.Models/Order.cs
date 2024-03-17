@@ -32,5 +32,6 @@ namespace Fitness1919.Data.Models
         [Range(typeof(decimal), OrderPriceMin, OrderPriceMax)]
         public decimal OrderPrice { get; set; }
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+        public virtual ICollection<OrderItems> OrdersItems { get; set; }
     }
 }
