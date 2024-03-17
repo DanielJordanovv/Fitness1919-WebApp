@@ -87,7 +87,7 @@ namespace Fitness1919.Services.Data
                 order.OrdersItems.Add(new OrderItems
                 {
                     ProductId = item.Product.Id,
-                    Quantity = item.Product.Quantity,
+                    Quantity = item.Quantity,
                     Price = item.Product.Price,
                     OrderId = order.Id,
                 });

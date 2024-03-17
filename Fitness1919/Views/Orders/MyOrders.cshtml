@@ -23,6 +23,7 @@ else{
                 <th>Phone Number</th>
                 <th>Created On</th>
                 <th>Order Price</th>
+                <th>Products</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@ else{
                     <td>@order.PhoneNumber</td>
                     <td>@order.CreatedOn</td>
                     <td>@order.OrderPrice.ToString("f2")</td>
+                    <td><a asp-action="OrderDetails" asp-route-id="@order.Id">Details</a></td>
                 </tr>
             }
         </tbody>
