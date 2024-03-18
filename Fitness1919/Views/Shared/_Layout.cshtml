@@ -11,27 +11,26 @@
 </head>
 <body>
     <header>
-        <div class="page-content">
-            <div class="left-container">
-                <div class="leftside">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
-                        <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Contacts" style="width: 40px; height: 40px; background-color:#FFD700;" />
-                    </a>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3703/3703429.png" alt="Products" style="width: 40px; height: 40px; background-color:#FFD700;" />
-                    </a>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Index">
-                        <img src="https://cdn-icons-png.flaticon.com/512/46/46646.png" alt="Contacts" style="width: 40px; height: 40px; background-color:#FFD700;" />
-                    </a>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="CalorieCalculator" asp-action="Index">
-                        <img src="https://cdn-icons-png.flaticon.com/512/4470/4470502.png" alt="Calculator" style="width: 40px; height: 40px; background-color:#FFD700;" />
-                    </a>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">
-                        <img src="https://icons.veryicon.com/png/o/education-technology/radio-and-tv-cloud/about-us-22.png" alt="Privacy" style="width: 40px; height: 40px; background-color:#FFD700;" />
-                    </a>
-                </div>
-            </div>
+        @*         <nav>
+        <div class="navbar">
+        <div class="container nav-container">
+        <input class="checkbox" type="checkbox" name="" id="" />
+        <div class="hamburger-lines">
+        <span class="line line1"></span>
+        <span class="line line2"></span>
+        <span class="line line3"></span>
         </div>
+        <div class="menu-items">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">about</a></li>
+        <li><a href="#">blogs</a></li>
+        <li><a href="#">portfolio</a></li>
+        <li><a href="#">contact</a></li>
+        </div>
+        </div>
+        </div>
+        </nav> *@
+
         <!-- Navbar -->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -39,17 +38,35 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search", "Products")">
-                        <div class="search_text_box">
-                            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search products..." value="@ViewBag.SearchTerm">
+                    <div class="navbar">
+                        <div class="container nav-container">
+                            <input class="checkbox" type="checkbox" name="" id="" />
+                            <div class="hamburger-lines">
+                                <span class="line line1"></span>
+                                <span class="line line2"></span>
+                                <span class="line line3"></span>
+                            </div>
+                            <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search", "Products")">
+                                <div class="search_text_box">
+                                    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search products..." value="@ViewBag.SearchTerm">
+                                </div>
+                                <div class="search_button">
+                                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><img src="https://icon-library.com/images/white-search-icon-png/white-search-icon-png-9.jpg" alt="Privacy" style="width: 20px;margin-top: 2px; height: 20px;" /></button>
+                                </div>
+                            </form>
+                            <div class="login-container">
+                                <partial name="_LoginPartial" />
+                            </div>
+                            <div class="menu-items">
+                                <a asp-controller="Home" asp-action="Index">Home</a>
+                                <a asp-controller="Products" asp-action="Index">Products</a>
+                                <a asp-controller="Contacts" asp-action="Index">Contacts</a>
+                                <a asp-controller="CalorieCalculator" asp-action="Index">Calorie Calculator</a>
+                                <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </div>
                         </div>
-                        <div class="search_button">
-                            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><img src="https://icon-library.com/images/white-search-icon-png/white-search-icon-png-9.jpg" alt="Privacy" style="width: 20px;margin-top: 2px; height: 20px; background-color:transperant;" /></button>
-                        </div>
-                    </form>
-                     <div class="login-container">
-                        <partial name="_LoginPartial" />
                     </div>
+
                 </div>
             </div>
         </nav>

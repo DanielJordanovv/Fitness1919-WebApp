@@ -2,7 +2,7 @@
     background-color: black;
     margin: 0;
     padding: 20px;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -96,6 +96,3 @@
     border-color: #FFD700;
 }
 
-main{
-    margin-top:50%;
-}
