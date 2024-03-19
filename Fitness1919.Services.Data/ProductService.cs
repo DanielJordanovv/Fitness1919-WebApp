@@ -198,13 +198,21 @@ namespace Fitness1919.Services.Data
             }
             if (!string.IsNullOrEmpty(order))
             {
-                if (order == "asc")
+                if (order == "pasc")
                 {
                     query = query.OrderBy(x => x.Price);
                 }
-                else
+                else if(order == "pdesc")
                 {
                     query = query.OrderByDescending(x => x.Price);
+                }
+                else if(order == "nasc")
+                {
+                    query = query.OrderBy(x => x.Name);
+                }
+                else
+                {
+                    query = query.OrderByDescending(x => x.Name);
                 }
             }
 
