@@ -53,7 +53,7 @@
         {
             <div class="product-box">
                 <img class="product-image" src="@item.img" alt="Image" />
-                <div class="product-description">@Html.DisplayFor(modelItem => item.Description)</div>
+                <div class="product-description">@Html.DisplayFor(modelItem => item.Name)</div>
                 <div class="product-price">Price: @Html.DisplayFor(modelItem => item.Price) lv</div>
                 <div>
                     @if (this.User.Identity.IsAuthenticated)
