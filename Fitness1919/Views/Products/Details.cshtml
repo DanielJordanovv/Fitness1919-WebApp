@@ -28,16 +28,23 @@
             <p>Category: <b>@Model.Category</b></p>
             <p>Brand: <b>@Model.Brand</b></p>
             <p></p>
-            <form asp-action="AddToCart" asp-controller="ShoppingCart" method="post">
-                <input type="hidden" name="productId" value="@Model.Id" />
-                <label for="quantity">Quantity:</label>
-                <input type="number" name="quantity" value="1" min="1" required />
-                <button class="button" type="submit">Add to Cart</button>
-            </form>
-            <form style="margin-top:30px;">
-                <a asp-action="Edit" asp-route-id="@Model.Id"><img src="/images/edit.png" style="width:40px; height:40px; background-color:#FFD700" alt="Edit"></a> |
-                <a asp-action="Delete" asp-route-id="@Model.Id"><img src="/images/delete.png" style="width:37px; height:37px; background-color:#FFD700" alt="Delete"></a>
-            </form>
+            @if (Model.Quantity != 0)
+            {
+                <form asp-action="AddToCart" asp-controller="ShoppingCart" method="post">
+                    <input type="hidden" name="productId" value="@Model.Id" />
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" value="1" min="1" required />
+                    <button class="button" type="submit">Add to Cart</button>
+                </form>
+            }
+            @if (this.User.IsInRole("Administrator"))
+            {
+                <form style="margin-top:30px;">
+                    <a asp-action="Edit" asp-route-id="@Model.Id"><img src="/images/edit.png" style="width:40px; height:40px; background-color:#FFD700" alt="Edit"></a> |
+                    <a asp-action="Delete" asp-route-id="@Model.Id"><img src="/images/delete.png" style="width:37px; height:37px; background-color:#FFD700" alt="Delete"></a>
+                </form>
+            }
+
         </div>
     </div>
 </div>

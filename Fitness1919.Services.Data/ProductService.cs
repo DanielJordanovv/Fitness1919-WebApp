@@ -182,7 +182,7 @@ namespace Fitness1919.Services.Data
             };
             return model;
         }
-        public async Task<IEnumerable<ProductAllViewModel>> FilterAsync(string categoryFilter, string brandFilter)
+        public async Task<IEnumerable<ProductAllViewModel>> FilterAsync(string categoryFilter, string brandFilter, string order)
         {
             var query = context.Products
         .Where(p => !p.IsDeleted);
@@ -195,6 +195,17 @@ namespace Fitness1919.Services.Data
             if (!string.IsNullOrEmpty(brandFilter))
             {
                 query = query.Where(p => p.Brand.BrandName == brandFilter);
+            }
+            if (!string.IsNullOrEmpty(order))
+            {
+                if (order == "asc")
+                {
+                    query = query.OrderBy(x => x.Price);
+                }
+                else
+                {
+                    query = query.OrderByDescending(x => x.Price);
+                }
             }
 
             return await query.Select(p => new ProductAllViewModel

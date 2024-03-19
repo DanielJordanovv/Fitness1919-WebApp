@@ -23,7 +23,7 @@
     border: 1px solid #ccc;
     padding: 10px;
     color: #FFD700;
-    width: 250px;
+    width: 230px;
     height: 380px;
     display: flex;
     flex-direction: column;
@@ -59,40 +59,25 @@
         border: 1px solid black;
     }
 
-/*.filterValue {
-    background-color: black;
-    color: #FFD700;
-    border-color: #FFD700;
-}
-
-    .filterValue:hover {
-        background-color: #FFD700;
-        color: black;
-        border-color: black;
-    }
-
-.filterButton {
-    border: 1px solid #FFD700;
-    background-color: black;
-    color: #FFD700;
-}
-
-.allOption {
-    background-color: black;
-    color: #FFD700;
-    border-color: #FFD700;
-}
-
-    .allOption:hover {
-        background-color: #FFD700;
-        color: black;
-        border-color: black;
-    }*/
-
 #categoryFilter,
-#brandFilter {
+#brandFilter,
+#orderBy {
     background-color: black;
     color: #FFD700;
     border-color: #FFD700;
 }
+.filterButton {
+    background-color: black;
+    color: #FFD700;
+    border-color: #FFD700;
+}
+.filterButton:hover {
+    background-color: #FFD700;
+    color: black;
+    border-color: black;
+}
+h1 {
+    color: #FFD700;
+}
+
 

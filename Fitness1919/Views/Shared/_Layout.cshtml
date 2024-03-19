@@ -11,26 +11,6 @@
 </head>
 <body>
     <header>
-        @*         <nav>
-        <div class="navbar">
-        <div class="container nav-container">
-        <input class="checkbox" type="checkbox" name="" id="" />
-        <div class="hamburger-lines">
-        <span class="line line1"></span>
-        <span class="line line2"></span>
-        <span class="line line3"></span>
-        </div>
-        <div class="menu-items">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">about</a></li>
-        <li><a href="#">blogs</a></li>
-        <li><a href="#">portfolio</a></li>
-        <li><a href="#">contact</a></li>
-        </div>
-        </div>
-        </div>
-        </nav> *@
-
         <!-- Navbar -->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -40,21 +20,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="navbar">
                         <div class="container nav-container">
-                            <input class="checkbox" type="checkbox" name="" id="" />
-                            <div class="hamburger-lines">
-                                <span class="line line1"></span>
-                                <span class="line line2"></span>
-                                <span class="line line3"></span>
+                            <input class="checkbox" type="checkbox" name="" id="" style="z-index:210;"/>
+                            <div class="hamburger-lines" style="z-index:200;">
+                                <span class="line line1" style="z-index:200;"></span>
+                                <span class="line line2" style="z-index:200;"></span>
+                                <span class="line line3" style="z-index:200;"></span>
                             </div>
-                            <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search", "Products")">
-                                <div class="search_text_box">
-                                    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search products..." value="@ViewBag.SearchTerm">
-                                </div>
-                                <div class="search_button">
-                                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><img src="https://icon-library.com/images/white-search-icon-png/white-search-icon-png-9.jpg" alt="Privacy" style="width: 20px;margin-top: 2px; height: 20px;" /></button>
-                                </div>
-                            </form>
-                            <div class="login-container">
+                            <div class="login-container" style="display:flex;flex-direction:row;">
+                                <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search", "Products")" style="padding-top:11.2px;margin-right:25px;">
+                                    <div class="search_text_box">
+                                        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search products..." value="@ViewBag.SearchTerm">
+                                    </div>
+                                    <div class="search_button">
+                                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><img src="https://icon-library.com/images/white-search-icon-png/white-search-icon-png-9.jpg" alt="Privacy" style="width: 20px; height: 20px;" /></button>
+                                    </div>
+                                </form>
                                 <partial name="_LoginPartial" />
                             </div>
                             <div class="menu-items">

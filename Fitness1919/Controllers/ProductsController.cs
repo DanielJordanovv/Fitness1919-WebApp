@@ -44,9 +44,9 @@ namespace Fitness1919.Web.Controllers
             }
         }
         [AllowAnonymous]
-        public async Task<IActionResult> Index(string categoryFilter, string brandFilter)
+        public async Task<IActionResult> Index(string categoryFilter, string brandFilter, string orderBy)
         {
-            var products = await service.FilterAsync(categoryFilter, brandFilter);
+            var products = await service.FilterAsync(categoryFilter, brandFilter, orderBy);
             var categories = await categoryService.AllAsync();
             var brands = await brandService.AllAsync();
 

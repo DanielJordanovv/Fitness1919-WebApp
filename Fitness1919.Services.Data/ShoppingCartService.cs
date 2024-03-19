@@ -67,6 +67,10 @@ namespace Fitness1919.Services.Data
             {
                 throw new Exception();
             }
+            if (cart.Any(x=>x.Product.Quantity <= 0))
+            {
+                throw new Exception();
+            }
             if (cart.Select(x => x.Product).Count() == 0)
             {
                 throw new EmptyShoppingCartException();
