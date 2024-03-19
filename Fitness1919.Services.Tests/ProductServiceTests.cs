@@ -103,7 +103,7 @@ namespace Fitness1919.Tests.Services
                 context.SaveChanges();
                 var productService = new ProductService(context);
 
-                var products = await productService.FilterAsync("Category 1", "Brand 1");
+                var products = await productService.FilterAsync("Category 1", "Brand 1","asc");
 
                 Assert.AreEqual(1, products.Count());
             }

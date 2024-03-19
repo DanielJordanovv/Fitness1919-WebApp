@@ -46,9 +46,9 @@ namespace Fitness1919.Controllers.Tests
                 new ProductAllViewModel { Id = "1", Name = "Product 1" },
                 new ProductAllViewModel { Id = "2", Name = "Product 2" }
             };
-            productServiceMock.Setup(s => s.FilterAsync(null, null)).ReturnsAsync(products);
+            productServiceMock.Setup(s => s.FilterAsync(null, null,null)).ReturnsAsync(products);
 
-            var result = await productController.Index(null, null) as ViewResult;
+            var result = await productController.Index(null, null, null) as ViewResult;
 
             Assert.NotNull(result);
             Assert.IsInstanceOf<ProductIndexViewModel>(result.Model);

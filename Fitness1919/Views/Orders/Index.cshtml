@@ -30,7 +30,7 @@
                     <td>@order.PhoneNumber</td>
                     <td>@order.CreatedOn</td> 
                     <td>@order.OrderPrice.ToString("f2")</td>
-                    <td><a asp-action="OrderDetails" asp-route-id="@order.Id">Details</a></td>
+                    <td><a asp-action="OrderDetails" asp-route-id="@order.Id" class="orderDetails">Details</a></td>
                 </tr>
             }
         </tbody>

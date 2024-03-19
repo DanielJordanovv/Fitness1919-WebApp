@@ -31,4 +31,17 @@ h1 {
         top: 0;
         background-color: black;
     }
+.orderDetails {
+    color: #FFD700;
+    background-color: transparent;
+    padding: 4px 8px;
+    text-decoration: none;
+    border: 1px solid #FFD700;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
 
+    .orderDetails:hover {
+        background-color: #FFD700;
+        color: black;
+    }
