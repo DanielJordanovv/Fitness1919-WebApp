@@ -16,19 +16,19 @@
 <form class="input" asp-controller="Contacts" asp-action="Create" method="post">
     <div class="form-group">
         <label asp-for="PhoneNumber">PhoneNumber:</label>
-        <input asp-for="PhoneNumber" class="form-control" />
+        <input asp-for="PhoneNumber" class="form-input" />
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Address">Address:</label>
-        <textarea asp-for="Address" class="form-control"></textarea>
+        <textarea asp-for="Address" class="form-input"></textarea>
         <span asp-validation-for="Address" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Email">Email:</label>
-        <input asp-for="Email" class="form-control contact" />
+        <input asp-for="Email" class="form-input" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary" style="border-color: #FFD700; background-color: #FFD700; font-weight: bold ; color:black">Create</button>

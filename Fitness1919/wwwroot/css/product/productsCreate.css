@@ -28,7 +28,7 @@ h1 {
         color: #FFD700;
     }
 
-a {
+.cancelAction {
     color: #FFD700;
     background-color: transparent;
     padding: 4px 8px;
@@ -38,20 +38,20 @@ a {
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
-    a:hover {
+    .cancelAction:hover {
         background-color: black;
         color: #ffb703;
         border-color: black;
     }
 
-    button[type="submit"],
-    a.btn-secondary {
-        background-color: #FFD700;
-        color: black;
-        border-color: #FFD700;
-    }
+.createBtn,
+.cancelAction.btn-secondary {
+    background-color: #FFD700;
+    color: black;
+    border-color: #FFD700;
+}
 
-        button[type="submit"]:hover,
+        .createBtn:hover,
         a.btn-secondary:hover {
             background-color: black;
             color: #FFD700;
@@ -61,7 +61,7 @@ a {
 label {
     color: #FFD700;
 }
-.form-control {
+.form-input {
     width: 100%;
     padding: 8px;
     border: 1px solid #FFD700;
