@@ -82,7 +82,7 @@ namespace Fitness1919.Web.Controllers
             }
             catch (Exception)
             {
-                TempData["ErrorMessage"] = "The cart products are not aveliable";
+                TempData["ErrorMessage"] = "The cart products are not available";
                 return View();
             }
            
