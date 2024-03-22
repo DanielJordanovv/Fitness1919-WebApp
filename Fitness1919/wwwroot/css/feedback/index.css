@@ -11,15 +11,15 @@
     height: 100vh; /* This will make the container take the full viewport height */
 }
 
-.table {
+.fbtable {
     margin: 20px auto;
     border-collapse: collapse;
     width: 80%;
     text-align: center; /* Center the table content */
 }
 
-    .table th,
-    .table td {
+    .fbtable th,
+    .fbtable td {
         padding: 8px;
         color: #FFD700;
     }
