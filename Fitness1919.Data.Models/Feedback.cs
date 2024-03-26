@@ -11,7 +11,7 @@ namespace Fitness1919.Data.Models
         public string FullName { get; set; }
         [StringLength(CityMaxLength, ErrorMessage = CityErrorMessage, MinimumLength = CityMinLength)]
         public string City { get; set; }
-        [MinLength(DescriptionMinLength, ErrorMessage = "The description must be at least 2 letters long.")]
+        [MinLength(DescriptionMinLength, ErrorMessage = DescriptionErrorMessage)]
         public string  FeedBackDescription { get; set; }
     }
 }
