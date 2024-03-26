@@ -229,7 +229,6 @@ namespace Fitness1919.Web.Controllers
                 return View();
             }
         }
-
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)

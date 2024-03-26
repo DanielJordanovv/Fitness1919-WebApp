@@ -7,6 +7,7 @@ using Guards;
 using Fitness1919.Services.Data.Exceptions;
 using Fitness1919.Web.ViewModels.Order;
 using Fitness1919.Data.Migrations;
+using Fitness1919.Web.ViewModels.OrderItems;
 
 namespace Fitness1919.Services.Data
 {
@@ -104,9 +105,18 @@ namespace Fitness1919.Services.Data
             await context.Orders.AddAsync(order);
             await context.SaveChangesAsync();
         }
-        public async Task<IEnumerable<OrderItems>> ReturnOrderItems(string id)
+        public async Task<IEnumerable<OrderItemsViewModel>> ReturnOrderItems(string id)
         {
-            return await context.OrdersItems.Include(x=>x.Product).Where(x => x.OrderId == id).ToListAsync();
+            return await context.OrdersItems.Include(x=>x.Product).Select(x=>new OrderItemsViewModel
+            {
+                Id = x.Id,
+                Product = x.Product,
+                Quantity = x.Quantity,
+                Price = x.Price,
+                Order = x.Order,
+                ProductId = x.ProductId,
+                OrderId = x.OrderId
+            }).Where(x => x.OrderId == id).ToListAsync();
         }
         public ShoppingCartViewModel GetShoppingCartAsync(Guid userId)
         {

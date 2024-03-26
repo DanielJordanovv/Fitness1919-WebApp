@@ -8,7 +8,7 @@ namespace Fitness1919.Services.Data.Interfaces
         Task<IEnumerable<BrandAllViewModel>> AllAsync();
         Task AddAsync(BrandAddViewModel model);
         Task UpdateAsync(int id, BrandUpdateViewModel model);
-        Task<Brand> GetBrandAsync(int id);
+        Task<BrandAllViewModel> GetBrandAsync(int id);
         bool BrandExistsAsync(int id);
     }
 }

@@ -54,7 +54,6 @@ namespace Fitness1919.Tests.Services.Data
             Assert.AreEqual(feedbackModel.FullName, feedback.FullName);
             Assert.AreEqual(feedbackModel.City, feedback.City);
             Assert.AreEqual(feedbackModel.FeedBackDescription, feedback.FeedBackDescription);
-            Assert.AreEqual(DateTime.Today, feedback.FeedbackSubbmitTime);
         }
 
         [Test]
@@ -62,8 +61,8 @@ namespace Fitness1919.Tests.Services.Data
         {
             var feedbacks = new List<Feedback>
             {
-                new Feedback { Id = 1, FullName = "John Doe", City = "New York", FeedBackDescription = "Great service!", FeedbackSubbmitTime = DateTime.Today },
-                new Feedback { Id = 2, FullName = "Jane Smith", City = "Los Angeles", FeedBackDescription = "Excellent experience!", FeedbackSubbmitTime = DateTime.Today }
+                new Feedback { Id = 1, FullName = "John Doe", City = "New York", FeedBackDescription = "Great service!"},
+                new Feedback { Id = 2, FullName = "Jane Smith", City = "Los Angeles", FeedBackDescription = "Excellent experience!" }
             };
             dbContext.Feedbacks.AddRange(feedbacks);
             await dbContext.SaveChangesAsync();

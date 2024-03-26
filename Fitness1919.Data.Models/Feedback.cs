@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿    using System.ComponentModel.DataAnnotations;
 using static Fitness1919.Common.EntityValidationConstants.FeedBack;
 
 namespace Fitness1919.Data.Models
@@ -13,6 +13,5 @@ namespace Fitness1919.Data.Models
         public string City { get; set; }
         [MinLength(DescriptionMinLength, ErrorMessage = "The description must be at least 2 letters long.")]
         public string  FeedBackDescription { get; set; }
-        public DateTime FeedbackSubbmitTime { get; set; }
     }
 }

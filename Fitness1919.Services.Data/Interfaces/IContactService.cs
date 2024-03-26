@@ -9,7 +9,7 @@ namespace Fitness1919.Services.Data.Interfaces
         Task AddAsync(ContactAddViewModel model);
         Task UpdateAsync(string id, ContactUpdateViewModel model);
         Task DeleteAsync(string id);
-        Task<Contact> GetContactAsync(string id);
+        Task<ContactAllViewModel> GetContactAsync(string id);
         bool ContactExistsAsync(string id);
     }
 }

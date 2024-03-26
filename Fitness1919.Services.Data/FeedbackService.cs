@@ -22,7 +22,6 @@ namespace Fitness1919.Services.Data
                 FullName = model.FullName,
                 City = model.City,
                 FeedBackDescription = model.FeedBackDescription,
-                FeedbackSubbmitTime = DateTime.Today
             };
 
             await context.AddAsync(feedback);
@@ -37,7 +36,6 @@ namespace Fitness1919.Services.Data
                 FullName = p.FullName,
                 City = p.City,
                 FeedBackDescription = p.FeedBackDescription,
-                FeedbackSubbmitTime = p.FeedbackSubbmitTime
             }).ToListAsync();
         }
     }

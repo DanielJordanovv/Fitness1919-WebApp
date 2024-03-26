@@ -8,7 +8,7 @@ namespace Fitness1919.Services.Data.Interfaces
         Task<IEnumerable<CategoryAllViewModel>> AllAsync();
         Task AddAsync(CategoryAddViewModel model);
         Task UpdateAsync(int id, CategoryUpdateViewModel model);
-        Task<Category> GetCategoryAsync(int id);
+        Task<CategoryAllViewModel> GetCategoryAsync(int id);
         bool CategoryExistsAsync(int id);
     }
 }

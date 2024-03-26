@@ -8,11 +8,11 @@ namespace Fitness1919.Web.ViewModels.Order
     {
         public OrderDetailsViewModel()
         {
-            this.OrderItems = new HashSet<OrderItems>();
+            this.OrderItems = new HashSet<Data.Models.OrderItems>();
         }
         public string OrderId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public virtual ICollection<OrderItems> OrderItems { get; set; }
+        public virtual ICollection<Data.Models.OrderItems> OrderItems { get; set; }
     }
 }

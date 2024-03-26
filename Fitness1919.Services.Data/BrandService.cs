@@ -42,10 +42,14 @@ namespace Fitness1919.Services.Data
             }).ToListAsync();
         }
 
-        public async Task<Brand> GetBrandAsync(int id)
+        public async Task<BrandAllViewModel> GetBrandAsync(int id)
         {
             Guard.ArgumentNotNull(id, nameof(id));
-            Brand brand = await context.Brands.FindAsync(id);
+            BrandAllViewModel brand = await context.Brands.Select(x=> new BrandAllViewModel
+            {
+                Id = x.Id,
+                BrandName = x.BrandName
+            }).FirstOrDefaultAsync(x=>x.Id == id);
             return brand;
         }
 

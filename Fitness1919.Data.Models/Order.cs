@@ -18,7 +18,7 @@ namespace Fitness1919.Data.Models
         [StringLength(FullNameMaxLenght,ErrorMessage = FullNameMessage,MinimumLength =FullNameMinLenght)]
         public string FullName { get; set; }
         [Required]
-        [StringLength(AddressMaxLenght, ErrorMessage = AddressMessage, MinimumLength = AddressMaxLenght)]
+        [StringLength(AddressMaxLenght, ErrorMessage = AddressMessage, MinimumLength = AddressMinLenght)]
         public string Address { get; set; }
         [Phone]
         [Required]

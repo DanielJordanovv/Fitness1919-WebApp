@@ -54,10 +54,16 @@ namespace Fitness1919.Services.Data.Interfaces
             await context.SaveChangesAsync();
         }
 
-        public async Task<Contact> GetContactAsync(string id)
+        public async Task<ContactAllViewModel> GetContactAsync(string id)
         {
             Guard.ArgumentNotNull(id, nameof(id));
-            Contact contact = await context.Contacts.FindAsync(id);
+            ContactAllViewModel contact = await context.Contacts.Select(x => new ContactAllViewModel
+            { 
+                Id = x.Id,
+                PhoneNumber = x.PhoneNumber,
+                Address = x.Address,
+                Email = x.Email
+            }).FirstOrDefaultAsync(x => x.Id == id);
             return contact;
         }
 

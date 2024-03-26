@@ -42,10 +42,14 @@ namespace Fitness1919.Services.Data
             }).ToListAsync();
         }
 
-        public async Task<Category> GetCategoryAsync(int id)
+        public async Task<CategoryAllViewModel> GetCategoryAsync(int id)
         {
             Guard.ArgumentNotNull(id, nameof(id));
-            Category category = await context.Categories.FindAsync(id);
+            CategoryAllViewModel category = await context.Categories.Select(x => new CategoryAllViewModel 
+            {
+                Id = x.Id,
+                CategoryName = x.CategoryName
+            }).FirstOrDefaultAsync(x => x.Id == id);
             return category;
         }
 

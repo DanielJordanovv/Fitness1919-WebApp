@@ -164,7 +164,7 @@ namespace Fitness1919.Controllers.Tests
         public async Task Edit_WithValidId_ReturnsCorrectViewModel()
         {
             var product = new Product { Id = "1", Name = "Product 1" };
-            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync(product);
+            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync(ProductAllViewModel);
 
             var result = await productController.Edit("1") as ViewResult;
 
@@ -241,7 +241,7 @@ namespace Fitness1919.Controllers.Tests
                 CategoryId = 1,
                 BrandId = 1
             };
-            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync(product);
+            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync(ProductAllViewModel);
 
             var result = await productController.Delete("1") as ViewResult;
 
@@ -260,7 +260,7 @@ namespace Fitness1919.Controllers.Tests
         [Test]
         public async Task Delete_WithInvalidId_ReturnsNotFound()
         {
-            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync((Product)null);
+            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync((ProductAllViewModel)null);
 
             var result = await productController.Delete("1") as NotFoundResult;
 

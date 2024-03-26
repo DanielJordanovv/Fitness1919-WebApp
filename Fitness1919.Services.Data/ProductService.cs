@@ -4,7 +4,6 @@ using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.Product;
 using Guards;
 using Microsoft.EntityFrameworkCore;
-using static Fitness1919.Common.EntityValidationConstants;
 
 namespace Fitness1919.Services.Data
 {
@@ -87,16 +86,40 @@ namespace Fitness1919.Services.Data
             }).ToListAsync();
         }
 
-        public async Task<Fitness1919.Data.Models.Product> GetProductAsync(string id)
+        public async Task<ProductAllViewModel> GetProductAsync(string id)
         {
             Guard.ArgumentNotNull(id, nameof(id));
-            Fitness1919.Data.Models.Product product = await context.Products.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
+            ProductAllViewModel product = await context.Products.Select(x=> new ProductAllViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                DiscountPercentage = x.DiscountPercentage,
+                img = x.img,
+                Quantity = x.Quantity,
+                Price = x.Price,
+                IsDeleted = x.IsDeleted,
+                BrandId = x.BrandId,
+                CategoryId = x.CategoryId
+            }).FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
             return product;
         }
-        public async Task<Fitness1919.Data.Models.Product> GetDeletedProductAsync(string id)
+        public async Task<ProductAllViewModel> GetDeletedProductAsync(string id)
         {
             Guard.ArgumentNotNull(id, nameof(id));
-            Fitness1919.Data.Models.Product product = await context.Products.FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted);
+            ProductAllViewModel product = await context.Products.Select(x=> new ProductAllViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                DiscountPercentage = x.DiscountPercentage,
+                img = x.img,
+                Quantity = x.Quantity,
+                Price = x.Price,
+                IsDeleted = x.IsDeleted,
+                BrandId = x.BrandId,
+                CategoryId = x.CategoryId
+            }).FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted);
             return product;
         }
 
@@ -161,7 +184,7 @@ namespace Fitness1919.Services.Data
         }
         public async Task<ProductDetailsViewModel> GetDetailsByIdAsync(string id)
         {
-            Fitness1919.Data.Models.Product product = await context
+            Product product = await context
                  .Products
                  .Include(p => p.Category)
                  .Include(p => p.Brand)

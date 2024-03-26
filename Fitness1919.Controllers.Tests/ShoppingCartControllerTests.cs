@@ -1,6 +1,7 @@
 ﻿using Fitness1919.Data.Models;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.Controllers;
+using Fitness1919.Web.ViewModels.Product;
 using Fitness1919.Web.ViewModels.ShoppingCart;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +47,7 @@ namespace Fitness1919.Controllers.Tests
             int quantity = 1;
             Guid userId = Guid.NewGuid();
             var product = new Product();
-            mockProductService.Setup(p => p.GetProductAsync(productId)).ReturnsAsync(product);
+            mockProductService.Setup(p => p.GetProductAsync(productId)).ReturnsAsync(ProductAllViewModel);
 
             var result = await controller.AddToCart(productId, quantity);
 
@@ -113,7 +114,7 @@ namespace Fitness1919.Controllers.Tests
             string productId = "invalidProductId";
             int quantity = 1;
             Guid userId = Guid.NewGuid();
-            mockProductService.Setup(p => p.GetProductAsync(productId)).ReturnsAsync((Product?)null);
+            mockProductService.Setup(p => p.GetProductAsync(productId)).ReturnsAsync((ProductAllViewModel?)null);
 
             var result = await controller.AddToCart(productId, quantity);
 
