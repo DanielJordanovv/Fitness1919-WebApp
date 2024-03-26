@@ -163,8 +163,8 @@ namespace Fitness1919.Controllers.Tests
         [Test]
         public async Task Edit_WithValidId_ReturnsCorrectViewModel()
         {
-            var product = new Product { Id = "1", Name = "Product 1" };
-            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync(ProductAllViewModel);
+            var product = new ProductAllViewModel { Id = "1", Name = "Product 1" };
+            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync(product);
 
             var result = await productController.Edit("1") as ViewResult;
 
@@ -230,7 +230,7 @@ namespace Fitness1919.Controllers.Tests
         [Test]
         public async Task Delete_WithValidId_ReturnsCorrectViewAndViewModel()
         {
-            var product = new Product
+            var product = new ProductAllViewModel
             {
                 Id = "1",
                 Name = "Product 1",
@@ -241,7 +241,7 @@ namespace Fitness1919.Controllers.Tests
                 CategoryId = 1,
                 BrandId = 1
             };
-            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync(ProductAllViewModel);
+            productServiceMock.Setup(s => s.GetProductAsync("1")).ReturnsAsync(product);
 
             var result = await productController.Delete("1") as ViewResult;
 

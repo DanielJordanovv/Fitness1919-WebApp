@@ -61,7 +61,7 @@ namespace Fitness1919.Controllers.Tests
         public async Task Edit_GET_WithValidId_ReturnsView()
         {
             var brandId = 1;
-            var brand = new Brand { Id = brandId, BrandName = "Test Brand" };
+            var brand = new BrandAllViewModel { Id = brandId, BrandName = "Test Brand" };
             mockBrandService.Setup(service => service.GetBrandAsync(brandId)).ReturnsAsync(brand);
 
             var result = await brandController.Edit(brandId);

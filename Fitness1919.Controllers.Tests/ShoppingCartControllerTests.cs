@@ -46,8 +46,8 @@ namespace Fitness1919.Controllers.Tests
             string productId = "validProductId";
             int quantity = 1;
             Guid userId = Guid.NewGuid();
-            var product = new Product();
-            mockProductService.Setup(p => p.GetProductAsync(productId)).ReturnsAsync(ProductAllViewModel);
+            var product = new ProductAllViewModel();
+            mockProductService.Setup(p => p.GetProductAsync(productId)).ReturnsAsync(product);
 
             var result = await controller.AddToCart(productId, quantity);
 

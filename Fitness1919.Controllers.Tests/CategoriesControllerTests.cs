@@ -63,7 +63,7 @@ namespace Fitness1919.Tests.Controllers
         public async Task Edit_GET_WithValidId_ReturnsView()
         {
             var categoryId = 1;
-            var category = new Category { Id = categoryId, CategoryName = "Test Category" };
+            var category = new CategoryAllViewModel { Id = categoryId, CategoryName = "Test Category" };
             mockCategoryService.Setup(service => service.GetCategoryAsync(categoryId)).ReturnsAsync(category);
 
             var result = await categoryController.Edit(categoryId);

@@ -64,7 +64,7 @@ namespace Fitness1919.Controllers.Tests
         public async Task Edit_GET_WithValidId_ReturnsView()
         {
             var contactId = "123";
-            var contact = new Contact { Id = contactId, PhoneNumber = "12345", Address = "Test Address", Email = "test@example.com" };
+            var contact = new ContactAllViewModel { Id = contactId, PhoneNumber = "12345", Address = "Test Address", Email = "test@example.com" };
             mockContactService.Setup(service => service.GetContactAsync(contactId)).ReturnsAsync(contact);
 
             var result = await contactController.Edit(contactId);
@@ -92,7 +92,7 @@ namespace Fitness1919.Controllers.Tests
         public async Task Delete_GET_WithValidId_ReturnsView()
         {
             var contactId = "123";
-            var contact = new Contact { Id = contactId, PhoneNumber = "12345", Address = "Test Address", Email = "test@example.com" };
+            var contact = new ContactAllViewModel { Id = contactId, PhoneNumber = "12345", Address = "Test Address", Email = "test@example.com" };
             mockContactService.Setup(service => service.GetContactAsync(contactId)).ReturnsAsync(contact);
 
             var result = await contactController.Delete(contactId);
