@@ -17,19 +17,26 @@
             <div>
                 @Html.LabelFor(m => m.Name)
                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                <span asp-validation-for="Name" class="small text-danger"></span>
             </div>
 
             <div>
                 @Html.LabelFor(m => m.Address)
                 @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                <span asp-validation-for="Address" class="small text-danger"></span>
             </div>
 
             <div>
                 @Html.LabelFor(m => m.PhoneNumber)
                 @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
             </div>
 
             <input type="submit" value="Place Order" class="btn btn-primary" />
         }
     }
 </div>
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

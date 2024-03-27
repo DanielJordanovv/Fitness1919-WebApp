@@ -11,7 +11,7 @@ namespace Fitness1919.Web.ViewModels.ShoppingCart
         [Required]
         public string Address { get; set; }
         [Required]
-        [StringLength(13,ErrorMessage = "The phone number should be in either +359888888888 or 0888888888 format",MinimumLength =10)]
+        [StringLength(13,ErrorMessage = "The phone number should be in format +359888888888",MinimumLength =13)]
         public string PhoneNumber { get; set; }
     }
 }
