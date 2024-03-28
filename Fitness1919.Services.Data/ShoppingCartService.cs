@@ -63,51 +63,71 @@ namespace Fitness1919.Services.Data
             Guard.ArgumentNotNull(userId, nameof(userId));
             var cart = context.ShoppingCartProducts
                 .Include(x => x.Product)
-                .Where(x => x.UserId == userId && !x.IsCheckout);
+                .Where(x => x.UserId == userId && !x.IsCheckout)
+                .ToList(); 
+
             if (cart.Any(x => x.Product.IsDeleted))
             {
                 throw new Exception();
             }
-            if (cart.Any(x=>x.Product.Quantity <= 0))
+            if (cart.Any(x => x.Product.Quantity <= 0))
             {
                 throw new Exception();
             }
-            if (cart.Select(x => x.Product).Count() == 0)
+            if (cart.Count == 0)
             {
                 throw new EmptyShoppingCartException();
             }
+
+            decimal orderPrice = 0;
+
             var order = new Fitness1919.Data.Models.Order
             {
                 CreatedOn = DateTime.Now,
-                ShoppingCarts = cart.ToList(),
+                ShoppingCarts = cart,
                 UserId = userId,
                 FullName = model.Name,
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber,
-                OrderPrice = cart.Select(x => x.Product.Price).Sum(),
                 OrdersItems = new HashSet<OrderItems>()
             };
+
             foreach (var item in cart)
             {
+                var itemPrice = item.Product.Price * item.Quantity; 
+                orderPrice += itemPrice; 
                 order.OrdersItems.Add(new OrderItems
                 {
                     ProductId = item.Product.Id,
                     Quantity = item.Quantity,
-                    Price = item.Product.Price,
+                    Price = itemPrice,
                     OrderId = order.Id,
                 });
             }
+
+            order.OrderPrice = orderPrice;
+
             foreach (var c in cart)
             {
                 c.IsCheckout = true;
                 c.Product.Quantity -= c.Quantity;
             }
+
             await context.Orders.AddAsync(order);
             await context.SaveChangesAsync();
         }
+        public async Task<decimal> CalculateTotalOrderPrice(string id)
+        {
+            var totalPrice = await context.OrdersItems
+                .Where(x => x.OrderId == id)
+                .SumAsync(x => x.Price * x.Quantity);
+
+            return totalPrice;
+        }
+
         public async Task<IEnumerable<OrderItemsViewModel>> ReturnOrderItems(string id)
         {
-            return await context.OrdersItems.Include(x=>x.Product).Select(x=>new OrderItemsViewModel
+            return await context.OrdersItems.Include(x => x.Product).Select(x => new OrderItemsViewModel
             {
                 Id = x.Id,
                 Product = x.Product,
@@ -118,6 +138,7 @@ namespace Fitness1919.Services.Data
                 OrderId = x.OrderId
             }).Where(x => x.OrderId == id).ToListAsync();
         }
+
         public ShoppingCartViewModel GetShoppingCartAsync(Guid userId)
         {
             Guard.ArgumentNotNull(userId, nameof(userId));
