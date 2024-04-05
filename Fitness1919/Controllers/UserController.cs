@@ -110,7 +110,7 @@ namespace Fitness1919.Web.Controllers
             var result =
                 await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
 
-            if (!result.Succeeded || model.IsDeleted)
+            if (!result.Succeeded)
             {
                 TempData[ErrorMessage] = "There was an error while attempting to login!. Try again later!";
                 return View(model);
