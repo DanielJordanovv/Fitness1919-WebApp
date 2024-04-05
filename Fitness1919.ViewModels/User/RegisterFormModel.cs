@@ -40,5 +40,6 @@ namespace Fitness1919.Web.ViewModels.User
         [Required]
         [RegularExpression(PhoneNumberExpression, ErrorMessage = PhoneNumberErrorMessage)]
         public string PhoneNumber { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

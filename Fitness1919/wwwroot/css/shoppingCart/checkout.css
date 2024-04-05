@@ -37,6 +37,11 @@ label {
     background-color: black;
 }
 
+.search_text_box .form-control {
+    border: 1px solid #ffffff !important;
+    color: #ffffff !important;
+}
+
 .text-danger {
     color: red;
 }

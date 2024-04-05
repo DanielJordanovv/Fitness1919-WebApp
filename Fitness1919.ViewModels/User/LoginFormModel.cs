@@ -16,5 +16,6 @@ namespace Fitness1919.Web.ViewModels.User
         public bool RememberMe { get; set; }
 
         public string ReturnUrl { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

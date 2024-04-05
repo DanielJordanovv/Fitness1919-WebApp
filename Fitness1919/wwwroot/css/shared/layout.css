@@ -239,7 +239,7 @@ ul {
 }
 
 .form-inline {
-    display: flex;
+    display: flex !important;
 }
 
 .search_text_box {

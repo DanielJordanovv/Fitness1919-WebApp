@@ -1,10 +1,12 @@
-﻿using Fitness1919.Data.Models;
+﻿using Fitness1919.Data;
+using Fitness1919.Data.Models;
 using Fitness1919.Services.Data.Interfaces;
 using Fitness1919.Web.ViewModels.User;
 using Griesoft.AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using static Fitness1919.Common.NotificationMessagesConstants;
 
 namespace Fitness1919.Web.Controllers
@@ -14,13 +16,15 @@ namespace Fitness1919.Web.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserService userService;
-
+        private readonly Fitness1919DbContext context;
         public UserController(SignInManager<ApplicationUser> signInManager,
-                              UserManager<ApplicationUser> userManager, IUserService userService)
+                              UserManager<ApplicationUser> userManager, IUserService userService,
+                              Fitness1919DbContext context)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.userService = userService;
+            this.context = context;
         }
 
         [HttpGet]
@@ -49,7 +53,8 @@ namespace Fitness1919.Web.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Address = model.Address,
-                PhoneNumber = model.PhoneNumber
+                PhoneNumber = model.PhoneNumber,
+                IsDeleted = model.IsDeleted
             };
 
             await userManager.SetEmailAsync(user, model.Email);
@@ -94,11 +99,18 @@ namespace Fitness1919.Web.Controllers
             {
                 return View(model);
             }
+            var user = await context.Users.FirstOrDefaultAsync(x => x.UserName == model.Username);
+
+            if (user.IsDeleted)
+            {
+                TempData[ErrorMessage] = "Invalid username or password!. Try someting else!";
+                return View(model);
+            }
 
             var result =
                 await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
 
-            if (!result.Succeeded)
+            if (!result.Succeeded || model.IsDeleted)
             {
                 TempData[ErrorMessage] = "There was an error while attempting to login!. Try again later!";
                 return View(model);

@@ -13,7 +13,7 @@ namespace Fitness1919.Web.Controllers
         {
             this.service = service;
         }
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Index()
         {
             var feedbacks = await service.AllAsync();
@@ -31,7 +31,7 @@ namespace Fitness1919.Web.Controllers
             if (ModelState.IsValid)
             {
                 await service.AddAsync(bindingModel);
-                return RedirectToAction("Index", "Feedbacks");
+                return RedirectToAction("Index", "Home");
             }
             return View(bindingModel);
         }

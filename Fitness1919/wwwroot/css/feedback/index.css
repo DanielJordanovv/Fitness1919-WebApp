@@ -22,6 +22,7 @@
     .fbtable td {
         padding: 8px;
         color: #FFD700;
+        border: 1px solid #FFD700;
     }
 
 .createNew {
