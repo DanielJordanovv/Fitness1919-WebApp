@@ -1,6 +1,5 @@
 ﻿using Fitness1919.Web.ViewModels.Home;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
