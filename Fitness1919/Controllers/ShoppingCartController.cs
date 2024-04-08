@@ -45,8 +45,9 @@ namespace Fitness1919.Web.Controllers
             {
                 return NotFound();
             }
+            TempData["SuccessMessage"] = $"Product was successfully added to your cart!";
             await shoppingCartService.AddProductToCartAsync(userId, productId, quantity);
-            return RedirectToAction("Index", "Products");
+            return Redirect($"/Products/Details/{productId}");
         }
         [HttpGet]
         public IActionResult ThankYou()

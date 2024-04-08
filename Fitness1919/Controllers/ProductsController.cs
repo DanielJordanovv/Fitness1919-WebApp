@@ -34,8 +34,8 @@ namespace Fitness1919.Web.Controllers
                 Guid userId = GetUserId();
 
                 await shoppingCartService.AddProductToCartAsync(userId, productId, quantity);
-
-                return RedirectToAction("Index", "Products");
+                var product = service.GetProductAsync(productId);
+                return View() ;
             }
             catch (Exception)
             {
