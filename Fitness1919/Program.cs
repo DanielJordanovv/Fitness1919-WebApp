@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.Facebook;
-using Fitness1919.Data;
+﻿using Fitness1919.Data;
 using Fitness1919.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Fitness1919.Services.Data.Interfaces;
-using Fitness1919.Services.Data;
 using Microsoft.AspNetCore.Mvc;
 using static Fitness1919.Common.GeneralApplicationConstants;
 using Fitness1919.Web.Infrastructure.ModelBinders;
@@ -12,7 +10,6 @@ using Fitness1919.Web.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<Fitness1919DbContext>(options =>
 {
