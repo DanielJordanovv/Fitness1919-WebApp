@@ -1,6 +1,5 @@
 ﻿using Fitness1919.Web.ViewModels.CalorieCalculator;
 using Microsoft.AspNetCore.Mvc;
-using static Fitness1919.Common.NotificationMessagesConstants;
 
 namespace Fitness1919.Web.Controllers
 {
