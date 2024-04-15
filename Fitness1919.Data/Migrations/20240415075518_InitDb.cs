@@ -30,6 +30,8 @@ namespace Fitness1919.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -98,8 +100,7 @@ namespace Fitness1919.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FullName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     City = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    FeedBackDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FeedbackSubbmitTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    FeedBackDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -244,6 +245,7 @@ namespace Fitness1919.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
+                    DiscountPercentage = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     img = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
@@ -262,6 +264,34 @@ namespace Fitness1919.Data.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrdersItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,6)", precision: 18, scale: 6, nullable: false),
+                    OrderId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrdersItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrdersItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrdersItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -298,6 +328,35 @@ namespace Fitness1919.Data.Migrations
                         principalTable: "Products",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "Brands",
+                columns: new[] { "Id", "BrandName" },
+                values: new object[,]
+                {
+                    { 1, "Born Winner" },
+                    { 2, "Optimum Nutrition" },
+                    { 3, "Proof Nutrition" },
+                    { 4, "GymBeam" },
+                    { 5, "MyProtein" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CategoryName" },
+                values: new object[,]
+                {
+                    { 1, "Creatine" },
+                    { 2, "Amino acids" },
+                    { 3, "Vitamins" },
+                    { 4, "Vegan" },
+                    { 5, "Protein" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Contacts",
+                columns: new[] { "Id", "Address", "Email", "PhoneNumber" },
+                values: new object[] { "randomId", "Pernik", "d.jordanov.dev@gmail.com", "+359879355833" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -342,6 +401,16 @@ namespace Fitness1919.Data.Migrations
                 name: "IX_Orders_UserId",
                 table: "Orders",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrdersItems_OrderId",
+                table: "OrdersItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrdersItems_ProductId",
+                table: "OrdersItems",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
@@ -391,6 +460,9 @@ namespace Fitness1919.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");
+
+            migrationBuilder.DropTable(
+                name: "OrdersItems");
 
             migrationBuilder.DropTable(
                 name: "ShoppingCartProducts");

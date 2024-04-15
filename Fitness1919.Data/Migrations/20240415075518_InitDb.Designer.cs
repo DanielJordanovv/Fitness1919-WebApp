@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fitness1919.Data.Migrations
 {
     [DbContext(typeof(Fitness1919DbContext))]
-    [Migration("20240307173057_AddDiscountProductAndSeed")]
-    partial class AddDiscountProductAndSeed
+    [Migration("20240415075518_InitDb")]
+    partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,9 @@ namespace Fitness1919.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -242,9 +245,6 @@ namespace Fitness1919.Data.Migrations
                     b.Property<string>("FeedBackDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("FeedbackSubbmitTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -290,6 +290,38 @@ namespace Fitness1919.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Fitness1919.Data.Models.OrderItems", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrdersItems");
                 });
 
             modelBuilder.Entity("Fitness1919.Data.Models.Product", b =>
@@ -521,6 +553,25 @@ namespace Fitness1919.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Fitness1919.Data.Models.OrderItems", b =>
+                {
+                    b.HasOne("Fitness1919.Data.Models.Order", "Order")
+                        .WithMany("OrdersItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Fitness1919.Data.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Fitness1919.Data.Models.Product", b =>
                 {
                     b.HasOne("Fitness1919.Data.Models.Brand", "Brand")
@@ -624,6 +675,8 @@ namespace Fitness1919.Data.Migrations
 
             modelBuilder.Entity("Fitness1919.Data.Models.Order", b =>
                 {
+                    b.Navigation("OrdersItems");
+
                     b.Navigation("ShoppingCarts");
                 });
 

@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Guards;
 using Fitness1919.Services.Data.Exceptions;
 using Fitness1919.Web.ViewModels.Order;
-using Fitness1919.Data.Migrations;
 using Fitness1919.Web.ViewModels.OrderItems;
 
 namespace Fitness1919.Services.Data
