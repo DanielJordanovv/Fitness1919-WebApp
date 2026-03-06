@@ -19,6 +19,7 @@
     @if (this.User.IsInRole("Administrator"))
     {
         <li class="nav-item"><a class="nav-link" asp-controller="Orders" asp-action="Index">All orders</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Orders" asp-action="AllNew">All new orders</a></li>
     }
     else
     {

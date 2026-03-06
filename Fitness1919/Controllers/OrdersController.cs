@@ -21,7 +21,13 @@ namespace Fitness1919.Web.Controllers
             orders = orders.OrderByDescending(x => x.CreatedOn).ToList();
             return View(orders);
         }
-        [AllowAnonymous]
+        public async Task<IActionResult> AllNew()
+        {
+            var orders = await service.AllNew();
+            orders = orders.OrderByDescending(x => x.CreatedOn).ToList();
+            return View(orders);
+        }
+            [AllowAnonymous]
         public async Task<IActionResult> OrderDetails(string id)
         {
             var items = await shopCartService.ReturnOrderItems(id);

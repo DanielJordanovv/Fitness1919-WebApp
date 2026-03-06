@@ -6,6 +6,7 @@ namespace Fitness1919.Services.Data.Interfaces
     public interface IOrderService
     {
         public Task<IEnumerable<AllOrdersViewModel>> All();
+        public Task<IEnumerable<AllOrdersViewModel>> AllNew();
         public Task<IEnumerable<MyOrdersViewModel>> My(string customerId);
     }
 }

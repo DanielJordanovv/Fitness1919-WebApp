@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Users Management";
+}
+
+<h2>Users (via API)</h2>
+
+<div>
+    <input type="text" id="searchFirstName" placeholder="Search by First Name" />
+    <button onclick="searchUsers()">Search</button>
+</div>
+
+<br />
+
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody id="usersTable"></tbody>
+</table>
+
+<br />
+
+<button onclick="prevPage()">Previous</button>
+<span id="pageInfo"></span>
+<button onclick="nextPage()">Next</button>
+
+<script>
+    let currentPage = 1;
+    const pageSize = 5;
+    let totalPages = 1;
+
+    const token = "PASTE_YOUR_JWT_TOKEN_HERE";
+
+    async function loadUsers() {
+        const firstName = document.getElementById("searchFirstName").value;
+
+        const response = await fetch(
+            `/api/UsersApi/search?firstName=${firstName}&page=${currentPage}&pageSize=${pageSize}`,
+            {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+        if (!response.ok) {
+            alert("Unauthorized or error occurred");
+            return;
+        }
+
+        const data = await response.json();
+
+        totalPages = data.totalPages;
+
+        const table = document.getElementById("usersTable");
+        table.innerHTML = "";
+
+        data.users.forEach(u => {
+            table.innerHTML += `
+                    <tr>
+                        <td>${u.firstName}</td>
+                        <td>${u.lastName}</td>
+                        <td>${u.address}</td>
+                    </tr>
+                `;
+        });
+
+        document.getElementById("pageInfo").innerText =
+            `Page ${currentPage} of ${totalPages}`;
+    }
+
+    function searchUsers() {
+        currentPage = 1;
+        loadUsers();
+    }
+
+    function nextPage() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            loadUsers();
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            loadUsers();
+        }
+    }
+
+    loadUsers();
+</script>

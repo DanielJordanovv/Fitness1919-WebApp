@@ -27,6 +27,19 @@ namespace Fitness1919.Services.Data
                 ShoppingCarts = p.ShoppingCarts
             }).ToListAsync();
         }
+        public async Task<IEnumerable<AllOrdersViewModel>> AllNew()
+        {
+            return await context.Orders.Where(x => x.OrderPrice > 500).Select(p => new AllOrdersViewModel
+            {
+                Id = p.Id,
+                Name = p.FullName,
+                Address = p.Address,
+                PhoneNumber = p.PhoneNumber,
+                CreatedOn = p.CreatedOn,
+                OrderPrice = p.OrderPrice,
+                ShoppingCarts = p.ShoppingCarts
+            }).ToListAsync();
+        }
 
         public async Task<IEnumerable<MyOrdersViewModel>> My(string customerId)
         {
